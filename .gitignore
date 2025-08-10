@@ -1,0 +1,13 @@
+
+.vs/
+.vscode/
+.idea/
+
+managed_context/
+test_suite_analysis/
+
+bin/
+obj/
+
+.env
+
