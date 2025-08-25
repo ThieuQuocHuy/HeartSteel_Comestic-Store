@@ -5,6 +5,10 @@ namespace Customer
         public HomePage()
         {
             InitializeComponent();
+            // Gán sự kiện cho nút Sản phẩm
+            buttonProducts.Click += buttonProducts_Click;
+            // Gán sự kiện cho nút Đơn mua
+            buttonOrders.Click += buttonOrders_Click;
         }
 
         private void pictureBoxLogo_Click(object sender, EventArgs e)
@@ -30,6 +34,22 @@ namespace Customer
         private void pictureBox2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonProducts_Click(object? sender, EventArgs e)
+        {
+            var form = new ProductPage();
+            this.Hide();
+            form.FormClosed += (s, args) => this.Show();
+            form.Show();
+        }
+
+        private void buttonOrders_Click(object? sender, EventArgs e)
+        {
+            var form = new OrderListPage();
+            this.Hide();
+            form.FormClosed += (s, args) => this.Show();
+            form.Show();
         }
     }
 }
