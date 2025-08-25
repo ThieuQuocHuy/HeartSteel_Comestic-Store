@@ -79,7 +79,7 @@
             buttonHome.BackColor = Color.FromArgb(221, 207, 182);
             buttonHome.FlatAppearance.BorderSize = 0;
             buttonHome.FlatStyle = FlatStyle.Flat;
-            buttonHome.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            buttonHome.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             buttonHome.ForeColor = Color.White;
             buttonHome.Location = new Point(0, 180);
             buttonHome.Name = "buttonHome";
@@ -95,7 +95,7 @@
             buttonProducts.BackColor = Color.FromArgb(77, 58, 41);
             buttonProducts.FlatAppearance.BorderSize = 0;
             buttonProducts.FlatStyle = FlatStyle.Flat;
-            buttonProducts.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            buttonProducts.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             buttonProducts.ForeColor = Color.White;
             buttonProducts.Location = new Point(0, 230);
             buttonProducts.Name = "buttonProducts";
@@ -111,7 +111,7 @@
             buttonCart.BackColor = Color.FromArgb(77, 58, 41);
             buttonCart.FlatAppearance.BorderSize = 0;
             buttonCart.FlatStyle = FlatStyle.Flat;
-            buttonCart.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            buttonCart.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             buttonCart.ForeColor = Color.White;
             buttonCart.Location = new Point(0, 280);
             buttonCart.Name = "buttonCart";
@@ -127,7 +127,7 @@
             buttonOrders.BackColor = Color.FromArgb(77, 58, 41);
             buttonOrders.FlatAppearance.BorderSize = 0;
             buttonOrders.FlatStyle = FlatStyle.Flat;
-            buttonOrders.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            buttonOrders.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             buttonOrders.ForeColor = Color.White;
             buttonOrders.Location = new Point(0, 330);
             buttonOrders.Name = "buttonOrders";
@@ -152,7 +152,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.Location = new Point(237, 9);
             label1.Name = "label1";
             label1.Size = new Size(270, 28);
@@ -175,7 +175,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.Location = new Point(237, 59);
             label2.Name = "label2";
             label2.Size = new Size(463, 28);
@@ -185,7 +185,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.Location = new Point(237, 105);
             label3.Name = "label3";
             label3.Size = new Size(118, 28);
@@ -195,7 +195,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.Location = new Point(361, 105);
             label4.Name = "label4";
             label4.Size = new Size(151, 28);
