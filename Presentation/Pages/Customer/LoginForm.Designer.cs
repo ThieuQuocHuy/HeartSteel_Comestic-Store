@@ -38,9 +38,10 @@ namespace Presentation.Pages.Customer
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             panelLogin = new Panel();
-            labelSubtitle = new Label();
             buttonRegister = new Button();
+            labelSubtitle = new Label();
             buttonLogin = new Button();
             textBoxPassword = new TextBox();
             labelPassword = new Label();
@@ -69,17 +70,6 @@ namespace Presentation.Pages.Customer
             panelLogin.Size = new Size(400, 550);
             panelLogin.TabIndex = 0;
             // 
-            // labelSubtitle
-            // 
-            labelSubtitle.AutoSize = true;
-            labelSubtitle.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelSubtitle.ForeColor = Color.FromArgb(77, 58, 41);
-            labelSubtitle.Location = new Point(100, 450);
-            labelSubtitle.Name = "labelSubtitle";
-            labelSubtitle.Size = new Size(200, 23);
-            labelSubtitle.TabIndex = 7;
-            labelSubtitle.Text = "HeartSteel Cosmetic Store";
-            // 
             // buttonRegister
             // 
             buttonRegister.BackColor = Color.FromArgb(138, 80, 20);
@@ -94,6 +84,17 @@ namespace Presentation.Pages.Customer
             buttonRegister.Text = "Chưa có tài khoản? Đăng ký ngay";
             buttonRegister.UseVisualStyleBackColor = false;
             buttonRegister.Click += buttonRegister_Click;
+            // 
+            // labelSubtitle
+            // 
+            labelSubtitle.AutoSize = true;
+            labelSubtitle.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelSubtitle.ForeColor = Color.FromArgb(77, 58, 41);
+            labelSubtitle.Location = new Point(100, 450);
+            labelSubtitle.Name = "labelSubtitle";
+            labelSubtitle.Size = new Size(207, 23);
+            labelSubtitle.TabIndex = 7;
+            labelSubtitle.Text = "HeartSteel Cosmetic Store";
             // 
             // buttonLogin
             // 
@@ -127,7 +128,7 @@ namespace Presentation.Pages.Customer
             labelPassword.ForeColor = Color.FromArgb(77, 58, 41);
             labelPassword.Location = new Point(50, 300);
             labelPassword.Name = "labelPassword";
-            labelPassword.Size = new Size(100, 28);
+            labelPassword.Size = new Size(98, 28);
             labelPassword.TabIndex = 4;
             labelPassword.Text = "Mật khẩu:";
             // 
@@ -147,12 +148,13 @@ namespace Presentation.Pages.Customer
             labelUsername.ForeColor = Color.FromArgb(77, 58, 41);
             labelUsername.Location = new Point(50, 220);
             labelUsername.Name = "labelUsername";
-            labelUsername.Size = new Size(120, 28);
+            labelUsername.Size = new Size(98, 28);
             labelUsername.TabIndex = 2;
             labelUsername.Text = "Tài khoản:";
             // 
             // pictureBoxLogo
             // 
+            pictureBoxLogo.Image = (Image)resources.GetObject("pictureBoxLogo.Image");
             pictureBoxLogo.Location = new Point(150, 80);
             pictureBoxLogo.Name = "pictureBoxLogo";
             pictureBoxLogo.Size = new Size(100, 100);
@@ -167,7 +169,7 @@ namespace Presentation.Pages.Customer
             labelTitle.ForeColor = Color.FromArgb(77, 58, 41);
             labelTitle.Location = new Point(150, 20);
             labelTitle.Name = "labelTitle";
-            labelTitle.Size = new Size(100, 41);
+            labelTitle.Size = new Size(110, 41);
             labelTitle.TabIndex = 0;
             labelTitle.Text = "LOGIN";
             // 
