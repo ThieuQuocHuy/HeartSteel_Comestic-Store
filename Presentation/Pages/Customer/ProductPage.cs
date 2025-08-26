@@ -20,6 +20,11 @@ namespace Presentation.Pages.Customer
             _productService = new ProductService(new DAL.Repositories.ProductRepository());
             _cartService = new CartService();
             this.Load += ProductPage_Load;
+            
+            // Gán sự kiện cho các nút điều hướng
+            buttonHome.Click += buttonHome_Click;
+            buttonCart.Click += buttonCart_Click;
+            buttonOrders.Click += buttonOrders_Click;
         }
 
         private async void ProductPage_Load(object? sender, EventArgs e)
@@ -32,10 +37,10 @@ namespace Presentation.Pages.Customer
             try
             {
                 var products = await _productService.GetAllAsync();
-                
+
                 // Xóa các panel cũ nếu có
                 ClearProductPanels();
-                
+
                 if (products.Count > 0)
                 {
                     // Tạo panel động cho từng sản phẩm
@@ -59,6 +64,8 @@ namespace Presentation.Pages.Customer
                     };
                     flowLayoutPanelProducts.Controls.Add(emptyLabel);
                 }
+
+
             }
             catch (Exception ex)
             {
@@ -142,7 +149,7 @@ namespace Presentation.Pages.Customer
             return panel;
         }
 
-        private async void ButtonAddToCart_Click(object sender, EventArgs e)
+        private async void ButtonAddToCart_Click(object? sender, EventArgs e)
         {
             if (sender is Button button && button.Tag is int productId)
             {
@@ -155,7 +162,7 @@ namespace Presentation.Pages.Customer
             try
             {
                 var success = await _cartService.AddToCartAsync(_currentUserId, productId, quantity);
-                
+
                 if (success)
                 {
                     MessageBox.Show("Đã thêm sản phẩm vào giỏ hàng!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -176,13 +183,29 @@ namespace Presentation.Pages.Customer
             this.Close();
         }
 
-        private void buttonCart_Click(object sender, EventArgs e)
+        private void buttonCart_Click(object? sender, EventArgs e)
         {
             var cartPage = new CartPage();
             this.Hide();
             cartPage.FormClosed += (s, args) => this.Show();
             cartPage.Show();
         }
+
+        private void buttonOrders_Click(object? sender, EventArgs e)
+        {
+            var orderListPage = new OrderListPage();
+            this.Hide();
+            orderListPage.FormClosed += (s, args) => this.Show();
+            orderListPage.Show();
+        }
+
+
+
+        private void pictureBoxLogo_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
 

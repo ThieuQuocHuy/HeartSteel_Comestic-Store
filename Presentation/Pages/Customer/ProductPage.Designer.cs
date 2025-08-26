@@ -46,39 +46,35 @@ namespace Presentation.Pages.Customer
             panelSidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxMain).BeginInit();
-            flowLayoutPanelProducts.SuspendLayout();
             SuspendLayout();
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.BackColor = Color.FromArgb(237, 224, 207);
-            label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(360, 105);
+            label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(377, 105);
             label4.Name = "label4";
-            label4.Size = new Size(151, 28);
+            label4.Size = new Size(186, 29);
             label4.TabIndex = 22;
             label4.Text = "Thiều Quốc Huy";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.BackColor = Color.FromArgb(237, 224, 207);
-            label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(236, 105);
+            label3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(237, 105);
             label3.Name = "label3";
-            label3.Size = new Size(118, 28);
+            label3.Size = new Size(145, 29);
             label3.TabIndex = 21;
             label3.Text = "Khách hàng:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.BackColor = Color.FromArgb(237, 224, 207);
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(236, 59);
+            label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(237, 59);
             label2.Name = "label2";
-            label2.Size = new Size(463, 28);
+            label2.Size = new Size(555, 29);
             label2.TabIndex = 20;
             label2.Text = "Chào mừng bạn đã đến với cửa hàng của chúng tôi!";
             // 
@@ -86,7 +82,7 @@ namespace Presentation.Pages.Customer
             // 
             pictureBox1.BackColor = Color.FromArgb(237, 224, 207);
             pictureBox1.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox1.Location = new Point(199, 45);
+            pictureBox1.Location = new Point(200, 45);
             pictureBox1.Margin = new Padding(0);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(963, 105);
@@ -97,11 +93,10 @@ namespace Presentation.Pages.Customer
             // label1
             // 
             label1.AutoSize = true;
-            label1.BackColor = Color.FromArgb(237, 224, 207);
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(236, 9);
+            label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(237, 9);
             label1.Name = "label1";
-            label1.Size = new Size(270, 28);
+            label1.Size = new Size(336, 29);
             label1.TabIndex = 18;
             label1.Text = "Cửa hàng HeartSteelComestic";
             // 
@@ -116,7 +111,7 @@ namespace Presentation.Pages.Customer
             panelSidebar.Dock = DockStyle.Left;
             panelSidebar.Location = new Point(0, 0);
             panelSidebar.Name = "panelSidebar";
-            panelSidebar.Size = new Size(200, 600);
+            panelSidebar.Size = new Size(200, 544);
             panelSidebar.TabIndex = 16;
             // 
             // pictureBoxLogo
@@ -134,7 +129,7 @@ namespace Presentation.Pages.Customer
             buttonHome.BackColor = Color.FromArgb(77, 58, 41);
             buttonHome.FlatAppearance.BorderSize = 0;
             buttonHome.FlatStyle = FlatStyle.Flat;
-            buttonHome.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            buttonHome.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             buttonHome.ForeColor = Color.White;
             buttonHome.Location = new Point(0, 180);
             buttonHome.Name = "buttonHome";
@@ -148,10 +143,10 @@ namespace Presentation.Pages.Customer
             // 
             // buttonProducts
             // 
-            buttonProducts.BackColor = Color.FromArgb(138, 80, 20);
+            buttonProducts.BackColor = Color.FromArgb(221, 207, 182);
             buttonProducts.FlatAppearance.BorderSize = 0;
             buttonProducts.FlatStyle = FlatStyle.Flat;
-            buttonProducts.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            buttonProducts.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             buttonProducts.ForeColor = Color.White;
             buttonProducts.Location = new Point(0, 230);
             buttonProducts.Name = "buttonProducts";
@@ -160,13 +155,14 @@ namespace Presentation.Pages.Customer
             buttonProducts.TabIndex = 2;
             buttonProducts.Text = "Sản phẩm";
             buttonProducts.TextAlign = ContentAlignment.MiddleLeft;
+            buttonProducts.UseVisualStyleBackColor = false;
             // 
             // buttonCart
             // 
             buttonCart.BackColor = Color.FromArgb(77, 58, 41);
             buttonCart.FlatAppearance.BorderSize = 0;
             buttonCart.FlatStyle = FlatStyle.Flat;
-            buttonCart.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            buttonCart.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             buttonCart.ForeColor = Color.White;
             buttonCart.Location = new Point(0, 280);
             buttonCart.Name = "buttonCart";
@@ -175,6 +171,7 @@ namespace Presentation.Pages.Customer
             buttonCart.TabIndex = 3;
             buttonCart.Text = "Giỏ hàng";
             buttonCart.TextAlign = ContentAlignment.MiddleLeft;
+            buttonCart.UseVisualStyleBackColor = false;
             buttonCart.Click += buttonCart_Click;
             // 
             // buttonOrders
@@ -182,7 +179,7 @@ namespace Presentation.Pages.Customer
             buttonOrders.BackColor = Color.FromArgb(77, 58, 41);
             buttonOrders.FlatAppearance.BorderSize = 0;
             buttonOrders.FlatStyle = FlatStyle.Flat;
-            buttonOrders.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            buttonOrders.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             buttonOrders.ForeColor = Color.White;
             buttonOrders.Location = new Point(0, 330);
             buttonOrders.Name = "buttonOrders";
@@ -191,12 +188,12 @@ namespace Presentation.Pages.Customer
             buttonOrders.TabIndex = 4;
             buttonOrders.Text = "Đơn mua";
             buttonOrders.TextAlign = ContentAlignment.MiddleLeft;
+            buttonOrders.UseVisualStyleBackColor = false;
             // 
             // pictureBoxMain
             // 
-            pictureBoxMain.BackColor = Color.FromArgb(237, 224, 207);
             pictureBoxMain.BorderStyle = BorderStyle.FixedSingle;
-            pictureBoxMain.Location = new Point(199, 0);
+            pictureBoxMain.Location = new Point(200, 0);
             pictureBoxMain.Margin = new Padding(0);
             pictureBoxMain.Name = "pictureBoxMain";
             pictureBoxMain.Size = new Size(963, 46);
@@ -208,17 +205,15 @@ namespace Presentation.Pages.Customer
             // 
             flowLayoutPanelProducts.AutoScroll = true;
             flowLayoutPanelProducts.BackColor = Color.FromArgb(255, 255, 255);
-            flowLayoutPanelProducts.Location = new Point(229, 173);
+            flowLayoutPanelProducts.Location = new Point(200, 151);
             flowLayoutPanelProducts.Name = "flowLayoutPanelProducts";
-            flowLayoutPanelProducts.Size = new Size(931, 427);
+            flowLayoutPanelProducts.Size = new Size(938, 393);
             flowLayoutPanelProducts.TabIndex = 23;
             // 
             // ProductPage
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLight;
-            ClientSize = new Size(1160, 600);
+            BackColor = Color.FromArgb(237, 224, 207);
+            ClientSize = new Size(1138, 544);
             Controls.Add(flowLayoutPanelProducts);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -227,13 +222,17 @@ namespace Presentation.Pages.Customer
             Controls.Add(label1);
             Controls.Add(panelSidebar);
             Controls.Add(pictureBoxMain);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MaximumSize = new Size(1160, 600);
+            MinimumSize = new Size(1160, 600);
             Name = "ProductPage";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Sản phẩm";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panelSidebar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxMain).EndInit();
-            flowLayoutPanelProducts.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -252,6 +251,7 @@ namespace Presentation.Pages.Customer
         private Button buttonOrders;
         private PictureBox pictureBoxMain;
         private FlowLayoutPanel flowLayoutPanelProducts;
+
     }
 }
 

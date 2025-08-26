@@ -1,5 +1,6 @@
-﻿
-namespace Presentation.Pages.Customer
+﻿using Presentation.Pages.Customer;
+
+namespace Presentation
 {
     internal static class Program
     {

@@ -60,7 +60,7 @@
             panelSidebar.Dock = DockStyle.Left;
             panelSidebar.Location = new Point(0, 0);
             panelSidebar.Name = "panelSidebar";
-            panelSidebar.Size = new Size(200, 600);
+            panelSidebar.Size = new Size(200, 544);
             panelSidebar.TabIndex = 0;
             // 
             // pictureBoxLogo
@@ -207,7 +207,7 @@
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
             pictureBox2.Location = new Point(200, 151);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(963, 449);
+            pictureBox2.Size = new Size(938, 393);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 15;
             pictureBox2.TabStop = false;
@@ -215,7 +215,7 @@
             // HomePage
             // 
             BackColor = Color.FromArgb(237, 224, 207);
-            ClientSize = new Size(1160, 600);
+            ClientSize = new Size(1138, 544);
             Controls.Add(pictureBox2);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -224,7 +224,12 @@
             Controls.Add(label1);
             Controls.Add(panelSidebar);
             Controls.Add(pictureBoxMain);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MaximumSize = new Size(1160, 600);
+            MinimumSize = new Size(1160, 600);
             Name = "HomePage";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             panelSidebar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).EndInit();

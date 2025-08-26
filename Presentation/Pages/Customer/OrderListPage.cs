@@ -21,6 +21,11 @@ namespace Presentation.Pages.Customer
             _orderService = new OrderService();
             _orders = new List<Order>();
             this.Load += OrderListPage_Load;
+
+            // Gán sự kiện cho các nút điều hướng
+            buttonHome.Click += buttonHome_Click!;
+            buttonProducts.Click += buttonProducts_Click!;
+            buttonCart.Click += buttonCart_Click!;
         }
 
         private async void OrderListPage_Load(object? sender, EventArgs e)
@@ -184,7 +189,7 @@ namespace Presentation.Pages.Customer
             };
         }
 
-        private void ButtonViewDetail_Click(object sender, EventArgs e)
+        private void ButtonViewDetail_Click(object? sender, EventArgs e)
         {
             if (sender is Button button && button.Tag is int orderId)
             {
@@ -199,9 +204,33 @@ namespace Presentation.Pages.Customer
             }
         }
 
-        private void buttonBack_Click(object sender, EventArgs e)
+        private void buttonHome_Click(object? sender, EventArgs e)
         {
-            this.Close();
+            var homePage = new HomePage();
+            this.Hide();
+            homePage.FormClosed += (s, args) => this.Show();
+            homePage.Show();
+        }
+
+        private void buttonProducts_Click(object? sender, EventArgs e)
+        {
+            var productPage = new ProductPage();
+            this.Hide();
+            productPage.FormClosed += (s, args) => this.Show();
+            productPage.Show();
+        }
+
+        private void buttonCart_Click(object? sender, EventArgs e)
+        {
+            var cartPage = new CartPage();
+            this.Hide();
+            cartPage.FormClosed += (s, args) => this.Show();
+            cartPage.Show();
+        }
+
+        private void buttonOrders_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

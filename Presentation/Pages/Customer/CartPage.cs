@@ -74,7 +74,7 @@ namespace Presentation.Pages.Customer
             var panel = new Panel
             {
                 BackColor = System.Drawing.Color.FromArgb(237, 224, 207),
-                Size = new System.Drawing.Size(550, 120),
+                Size = new System.Drawing.Size(600, 150),
                 Margin = new Padding(10),
                 Tag = cartItem
             };
@@ -83,10 +83,10 @@ namespace Presentation.Pages.Customer
             var labelProductName = new Label
             {
                 Text = cartItem.Product?.ProductName ?? "Không có tên",
-                Font = new Font("Segoe UI", 12, FontStyle.Bold),
+                Font = new Font("Segoe UI", 14, FontStyle.Bold),
                 ForeColor = System.Drawing.Color.FromArgb(77, 58, 41),
-                Location = new System.Drawing.Point(15, 15),
-                Size = new System.Drawing.Size(300, 25),
+                Location = new System.Drawing.Point(15, 20),
+                Size = new System.Drawing.Size(380, 30),
                 AutoSize = false
             };
 
@@ -94,10 +94,10 @@ namespace Presentation.Pages.Customer
             var labelPrice = new Label
             {
                 Text = $"{(cartItem.Product?.SellPrice ?? 0):N0} ₫",
-                Font = new Font("Segoe UI", 11, FontStyle.Regular),
+                Font = new Font("Segoe UI", 12, FontStyle.Regular),
                 ForeColor = System.Drawing.Color.FromArgb(77, 58, 41),
-                Location = new System.Drawing.Point(15, 45),
-                Size = new System.Drawing.Size(150, 20),
+                Location = new System.Drawing.Point(15, 60),
+                Size = new System.Drawing.Size(200, 25),
                 AutoSize = false
             };
 
@@ -105,10 +105,10 @@ namespace Presentation.Pages.Customer
             var labelQuantity = new Label
             {
                 Text = "Số lượng:",
-                Font = new Font("Segoe UI", 10, FontStyle.Regular),
+                Font = new Font("Segoe UI", 12, FontStyle.Regular),
                 ForeColor = System.Drawing.Color.FromArgb(77, 58, 41),
-                Location = new System.Drawing.Point(15, 75),
-                Size = new System.Drawing.Size(70, 20),
+                Location = new System.Drawing.Point(15, 95),
+                Size = new System.Drawing.Size(80, 25),
                 AutoSize = false
             };
 
@@ -117,8 +117,8 @@ namespace Presentation.Pages.Customer
                 Minimum = 1,
                 Maximum = cartItem.Product?.ProductInStock ?? 1, // Sử dụng ProductInStock thay vì Stock
                 Value = cartItem.Quantity,
-                Location = new System.Drawing.Point(90, 73),
-                Size = new System.Drawing.Size(60, 25),
+                Location = new System.Drawing.Point(100, 93),
+                Size = new System.Drawing.Size(80, 30),
                 Tag = cartItem
             };
             numericUpDownQuantity.ValueChanged += NumericUpDownQuantity_ValueChanged;
@@ -128,10 +128,10 @@ namespace Presentation.Pages.Customer
             var labelTotal = new Label
             {
                 Text = $"Tổng: {totalPrice:N0} ₫",
-                Font = new Font("Segoe UI", 11, FontStyle.Bold),
+                Font = new Font("Segoe UI", 13, FontStyle.Bold),
                 ForeColor = System.Drawing.Color.FromArgb(77, 58, 41),
-                Location = new System.Drawing.Point(350, 15),
-                Size = new System.Drawing.Size(180, 20),
+                Location = new System.Drawing.Point(380, 20),
+                Size = new Size(230, 30),
                 AutoSize = false,
                 TextAlign = ContentAlignment.MiddleRight
             };
@@ -144,10 +144,10 @@ namespace Presentation.Pages.Customer
                 ForeColor = System.Drawing.Color.White,
                 FlatStyle = FlatStyle.Flat,
                 FlatAppearance = { BorderSize = 0 },
-                Location = new System.Drawing.Point(450, 70),
-                Size = new System.Drawing.Size(80, 30),
+                Location = new System.Drawing.Point(480, 95),
+                Size = new System.Drawing.Size(90, 35),
                 Tag = cartItem,
-                Font = new Font("Segoe UI", 9, FontStyle.Bold)
+                Font = new Font("Segoe UI", 10, FontStyle.Bold)
             };
             buttonRemove.Click += ButtonRemove_Click;
 
@@ -195,7 +195,7 @@ namespace Presentation.Pages.Customer
             {
                 try
                 {
-                    var result = MessageBox.Show("Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?", "Xác nhận", 
+                    var result = MessageBox.Show("Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?", "Xác nhận",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                     if (result == DialogResult.Yes)
@@ -228,7 +228,7 @@ namespace Presentation.Pages.Customer
             }
 
             var totalItems = _cartItems.Sum(ci => ci.Quantity);
-            var totalAmount = _cartItems.Sum(ci => 
+            var totalAmount = _cartItems.Sum(ci =>
             {
                 if (ci.Product?.SellPrice.HasValue == true)
                 {
@@ -245,7 +245,7 @@ namespace Presentation.Pages.Customer
         {
             try
             {
-                var result = MessageBox.Show("Bạn có chắc muốn xóa toàn bộ giỏ hàng?", "Xác nhận", 
+                var result = MessageBox.Show("Bạn có chắc muốn xóa toàn bộ giỏ hàng?", "Xác nhận",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
@@ -279,7 +279,7 @@ namespace Presentation.Pages.Customer
             // Mở trang đặt hàng
             var orderPage = new OrderPage(_cartItems, _currentUserId);
             this.Hide();
-            orderPage.FormClosed += (s, args) => 
+            orderPage.FormClosed += (s, args) =>
             {
                 this.Show();
                 // Refresh giỏ hàng sau khi đặt hàng
@@ -295,5 +295,46 @@ namespace Presentation.Pages.Customer
         {
             this.Close();
         }
+
+        private void buttonHome_Click(object sender, EventArgs e)
+        {
+            var homePage = new HomePage();
+            this.Hide();
+            homePage.FormClosed += (s, args) => this.Show();
+            homePage.Show();
+        }
+
+        private void buttonProducts_Click(object sender, EventArgs e)
+        {
+            var productPage = new ProductPage();
+            this.Hide();
+            productPage.FormClosed += (s, args) => this.Show();
+            productPage.Show();
+        }
+
+        private void buttonOrders_Click(object sender, EventArgs e)
+        {
+            var orderListPage = new OrderListPage();
+            this.Hide();
+            orderListPage.FormClosed += (s, args) => this.Show();
+            orderListPage.Show();
+        }
+
+        private void pictureBoxLogo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void flowLayoutPanelCartItems_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void labelTotalAmount_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }
