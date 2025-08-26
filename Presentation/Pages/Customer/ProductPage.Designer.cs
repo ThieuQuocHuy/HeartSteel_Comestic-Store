@@ -43,6 +43,9 @@ namespace Presentation.Pages.Customer
             buttonLogout = new Button();
             pictureBoxMain = new PictureBox();
             flowLayoutPanelProducts = new FlowLayoutPanel();
+            textSearch = new TextBox();
+            comboCategory = new ComboBox();
+            comboSortPrice = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelSidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
@@ -224,16 +227,43 @@ namespace Presentation.Pages.Customer
             // 
             flowLayoutPanelProducts.AutoScroll = true;
             flowLayoutPanelProducts.BackColor = Color.FromArgb(255, 255, 255);
-            flowLayoutPanelProducts.Location = new Point(200, 151);
+            flowLayoutPanelProducts.Location = new Point(200, 200);
             flowLayoutPanelProducts.Name = "flowLayoutPanelProducts";
-            flowLayoutPanelProducts.Size = new Size(938, 393);
+            flowLayoutPanelProducts.Size = new Size(938, 344);
             flowLayoutPanelProducts.TabIndex = 23;
+            // 
+            // textSearch
+            // 
+            textSearch.Location = new Point(200, 160);
+            textSearch.Name = "textSearch";
+            textSearch.PlaceholderText = "tìm sản phẩm";
+            textSearch.Size = new Size(280, 31);
+            textSearch.TabIndex = 24;
+            // 
+            // comboCategory
+            // 
+            comboCategory.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboCategory.Location = new Point(490, 160);
+            comboCategory.Name = "comboCategory";
+            comboCategory.Size = new Size(220, 33);
+            comboCategory.TabIndex = 25;
+            // 
+            // comboSortPrice
+            // 
+            comboSortPrice.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboSortPrice.Location = new Point(720, 160);
+            comboSortPrice.Name = "comboSortPrice";
+            comboSortPrice.Size = new Size(220, 33);
+            comboSortPrice.TabIndex = 26;
             // 
             // ProductPage
             // 
             BackColor = Color.FromArgb(237, 224, 207);
             ClientSize = new Size(1138, 544);
             Controls.Add(flowLayoutPanelProducts);
+            Controls.Add(comboSortPrice);
+            Controls.Add(comboCategory);
+            Controls.Add(textSearch);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -271,6 +301,9 @@ namespace Presentation.Pages.Customer
         private PictureBox pictureBoxMain;
         private FlowLayoutPanel flowLayoutPanelProducts;
         private Button buttonLogout;
+        private TextBox textSearch;
+        private ComboBox comboCategory;
+        private ComboBox comboSortPrice;
 
     }
 }

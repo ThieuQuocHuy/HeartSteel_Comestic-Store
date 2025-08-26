@@ -13,6 +13,7 @@ namespace Presentation.Pages.Customer
         private readonly IProductService _productService;
         private readonly ICartService _cartService;
         private int _currentUserId = 1; // default; will be overwritten by session if available
+        private List<Product> _allProducts = new List<Product>();
 
         public ProductPage()
         {
@@ -47,6 +48,7 @@ namespace Presentation.Pages.Customer
         private async void ProductPage_Load(object? sender, EventArgs e)
         {
             await LoadProducts();
+            WireUpFilterControls();
         }
 
         private async Task LoadProducts()
@@ -54,18 +56,14 @@ namespace Presentation.Pages.Customer
             try
             {
                 var products = await _productService.GetAllAsync();
+                _allProducts = new List<Product>(products);
 
                 // Xóa các panel cũ nếu có
                 ClearProductPanels();
 
                 if (products.Count > 0)
                 {
-                    // Tạo panel động cho từng sản phẩm
-                    foreach (var product in products)
-                    {
-                        var productPanel = CreateProductPanel(product);
-                        flowLayoutPanelProducts.Controls.Add(productPanel);
-                    }
+                    ApplyFiltersAndRender();
                 }
                 else
                 {
@@ -105,6 +103,7 @@ namespace Presentation.Pages.Customer
                 BackColor = SystemColors.ControlLightLight,
                 Size = new Size(282, 400),
                 Margin = new Padding(10),
+                BorderStyle = BorderStyle.FixedSingle,
                 Tag = product.ProductId // Lưu ProductId để sử dụng khi thêm vào giỏ hàng
             };
 
@@ -114,33 +113,56 @@ namespace Presentation.Pages.Customer
                 Location = new Point(5, 4),
                 Size = new Size(272, 191),
                 SizeMode = PictureBoxSizeMode.Zoom,
-                BackColor = Color.LightGray
+                BackColor = Color.LightGray,
+                Cursor = Cursors.Hand,
+                Tag = product.ProductId
             };
+            pictureBox.Click += ProductCard_Click;
+            // Load image from resources by Img field
+            var img = Presentation.Services.ResourceImageLoader.LoadByFileName(product.Img);
+            if (img != null)
+            {
+                pictureBox.Image = img;
+                pictureBox.BackColor = Color.White;
+            }
 
-            // Tên sản phẩm
-            var textBoxName = new TextBox
+            // Tên sản phẩm (giữa, dưới ảnh)
+            var labelName = new Label
             {
                 BackColor = SystemColors.ControlLightLight,
-                BorderStyle = BorderStyle.None,
+                AutoSize = false,
                 Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular),
-                Location = new Point(32, 201),
-                Size = new Size(226, 50),
-                Multiline = true,
-                ReadOnly = true,
-                Text = product.ProductName ?? "Không có tên"
+                Location = new Point(10, 201),
+                Size = new Size(262, 40),
+                TextAlign = ContentAlignment.MiddleCenter,
+                Text = product.ProductName ?? "Không có tên",
+                Cursor = Cursors.Hand,
+                Tag = product.ProductId
             };
+            labelName.Click += ProductCard_Click;
 
-            // Giá sản phẩm
-            var textBoxPrice = new TextBox
+            // Giá sản phẩm (bên trái) và Đã bán (bên phải)
+            var labelPrice = new Label
             {
                 BackColor = SystemColors.ControlLightLight,
-                BorderStyle = BorderStyle.None,
-                Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular),
-                Location = new Point(58, 269),
-                Size = new Size(161, 25),
-                ReadOnly = true,
-                TextAlign = HorizontalAlignment.Center,
+                AutoSize = false,
+                Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular),
+                Location = new Point(10, 260),
+                Size = new Size(130, 25),
+                TextAlign = ContentAlignment.MiddleLeft,
+                ForeColor = Color.Red,
                 Text = $"{(product.SellPrice ?? 0):N0} ₫"
+            };
+
+            var labelSold = new Label
+            {
+                BackColor = SystemColors.ControlLightLight,
+                AutoSize = false,
+                Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular),
+                Location = new Point(142, 260), // 262 - 10 (padding phải) - 110 (width) = 142
+                Size = new Size(130, 25),
+                TextAlign = ContentAlignment.MiddleRight,
+                Text = $"đã bán: {product.SoldCount}"
             };
 
             // Nút "Thêm vào giỏ hàng"
@@ -159,11 +181,107 @@ namespace Presentation.Pages.Customer
 
             // Thêm controls vào panel
             panel.Controls.Add(pictureBox);
-            panel.Controls.Add(textBoxName);
-            panel.Controls.Add(textBoxPrice);
+            panel.Controls.Add(labelName);
+            panel.Controls.Add(labelPrice);
+            panel.Controls.Add(labelSold);
             panel.Controls.Add(buttonAddToCart);
 
             return panel;
+        }
+
+        private void ApplyFiltersAndRender()
+        {
+            IEnumerable<Product> query = _allProducts;
+
+            // Lọc theo tên
+            var keyword = textSearch?.Text?.Trim();
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                query = query.Where(p => (p.ProductName ?? string.Empty).IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+
+            // Lọc theo danh mục
+            if (comboCategory?.SelectedItem is ComboBoxItem catItem && catItem.Value is int catId && catId != -1)
+            {
+                query = query.Where(p => (p.CategoryId ?? -1) == catId);
+            }
+
+            // Sắp xếp theo giá
+            if (comboSortPrice?.SelectedItem is ComboBoxItem sortItem)
+            {
+                switch (sortItem.Value)
+                {
+                    case "asc":
+                        query = query.OrderBy(p => p.SellPrice ?? 0);
+                        break;
+                    case "desc":
+                        query = query.OrderByDescending(p => p.SellPrice ?? 0);
+                        break;
+                }
+            }
+
+            // Render
+            ClearProductPanels();
+            foreach (var p in query)
+            {
+                flowLayoutPanelProducts.Controls.Add(CreateProductPanel(p));
+            }
+        }
+
+        private void WireUpFilterControls()
+        {
+            // Categories
+            comboCategory.Items.Clear();
+            comboCategory.Items.Add(new ComboBoxItem("Tất cả danh mục", -1));
+            var cats = _allProducts.Select(p => p.Category).Where(c => c != null).GroupBy(c => c!.CategoryId).Select(g => g.First()!).OrderBy(c => c.CategoryName);
+            foreach (var c in cats)
+            {
+                comboCategory.Items.Add(new ComboBoxItem(c.CategoryName, c.CategoryId));
+            }
+            if (comboCategory.Items.Count > 0) comboCategory.SelectedIndex = 0;
+
+            // Sort
+            comboSortPrice.Items.Clear();
+            comboSortPrice.Items.Add(new ComboBoxItem("Giá: mặc định", "none"));
+            comboSortPrice.Items.Add(new ComboBoxItem("Giá: thấp đến cao", "asc"));
+            comboSortPrice.Items.Add(new ComboBoxItem("Giá: cao đến thấp", "desc"));
+            comboSortPrice.SelectedIndex = 0;
+
+            // Events
+            textSearch.TextChanged += (_, __) => ApplyFiltersAndRender();
+            comboCategory.SelectedIndexChanged += (_, __) => ApplyFiltersAndRender();
+            comboSortPrice.SelectedIndexChanged += (_, __) => ApplyFiltersAndRender();
+        }
+
+        private class ComboBoxItem
+        {
+            public string Text { get; }
+            public object Value { get; }
+            public ComboBoxItem(string text, object value)
+            {
+                Text = text;
+                Value = value;
+            }
+            public override string ToString() => Text;
+        }
+
+        private void ProductCard_Click(object? sender, EventArgs e)
+        {
+            int? productId = null;
+            switch (sender)
+            {
+                case Control c when c.Tag is int id:
+                    productId = id;
+                    break;
+                case Control { Parent.Tag: int id2 }:
+                    productId = id2;
+                    break;
+            }
+
+            if (productId.HasValue)
+            {
+                Presentation.Navigation.Navigator.Navigate(new ProductDetailPage(productId.Value));
+            }
         }
 
         private async void ButtonAddToCart_Click(object? sender, EventArgs e)
