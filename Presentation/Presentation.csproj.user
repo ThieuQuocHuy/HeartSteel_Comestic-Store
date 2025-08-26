@@ -19,6 +19,9 @@
     <Compile Update="Pages\Customer\OrderPage.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Pages\Customer\ProductDetailPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Pages\Customer\ProductPage.cs">
       <SubType>Form</SubType>
     </Compile>
