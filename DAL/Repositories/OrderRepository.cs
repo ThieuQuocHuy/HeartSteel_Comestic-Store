@@ -36,6 +36,7 @@ namespace DAL.Repositories
         {
             try
             {
+                System.Diagnostics.Trace.WriteLine($"[DAL] GetOrdersByUserIdAsync userId={userId}");
                 return await _context.Orders
                     .Include(o => o.OrderDetails)
                     .ThenInclude(od => od.Product)

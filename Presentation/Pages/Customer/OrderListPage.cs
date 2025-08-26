@@ -12,7 +12,7 @@ namespace Presentation.Pages.Customer
     public partial class OrderListPage : Form
     {
         private readonly IOrderService _orderService;
-        private int _currentUserId = 1; // Tạm thời hardcode, sau này sẽ lấy từ login
+        private int _currentUserId = 1; // default; will be overwritten by session if available
         private List<Order> _orders;
 
         public OrderListPage()
@@ -21,11 +21,28 @@ namespace Presentation.Pages.Customer
             _orderService = new OrderService();
             _orders = new List<Order>();
             this.Load += OrderListPage_Load;
+            // Hiển thị tên người dùng đang đăng nhập
+            label4.Text = Presentation.Auth.UserSession.CurrentUser?.Fullname ?? label4.Text;
+            // lấy user id từ session nếu có
+            if (Presentation.Auth.UserSession.CurrentUserId.HasValue)
+            {
+                _currentUserId = Presentation.Auth.UserSession.CurrentUserId.Value;
+            }
 
             // Gán sự kiện cho các nút điều hướng
             buttonHome.Click += buttonHome_Click!;
             buttonProducts.Click += buttonProducts_Click!;
             buttonCart.Click += buttonCart_Click!;
+            if (buttonLogout != null)
+            {
+                buttonLogout.Click += buttonLogout_Click!;
+            }
+        }
+
+        private void buttonLogout_Click(object? sender, EventArgs e)
+        {
+            Presentation.Auth.UserSession.Clear();
+            Presentation.Navigation.Navigator.Navigate(new LoginForm());
         }
 
         private async void OrderListPage_Load(object? sender, EventArgs e)
@@ -37,7 +54,14 @@ namespace Presentation.Pages.Customer
         {
             try
             {
+                // Đồng bộ lại user id từ session trước khi gọi service
+                if (Presentation.Auth.UserSession.CurrentUserId.HasValue)
+                {
+                    _currentUserId = Presentation.Auth.UserSession.CurrentUserId.Value;
+                }
+                System.Diagnostics.Trace.WriteLine($"[ORDERS] SessionUserId={Presentation.Auth.UserSession.CurrentUserId}");
                 _orders = await _orderService.GetUserOrdersAsync(_currentUserId);
+                System.Diagnostics.Trace.WriteLine($"[ORDERS] Loaded orders count={_orders.Count} for userId={_currentUserId}");
                 DisplayOrders();
             }
             catch (Exception ex)
@@ -197,35 +221,24 @@ namespace Presentation.Pages.Customer
                 if (order != null)
                 {
                     var orderDetailPage = new OrderDetailPage(order);
-                    this.Hide();
-                    orderDetailPage.FormClosed += (s, args) => this.Show();
-                    orderDetailPage.Show();
+                    Presentation.Navigation.Navigator.Navigate(orderDetailPage);
                 }
             }
         }
 
         private void buttonHome_Click(object? sender, EventArgs e)
         {
-            var homePage = new HomePage();
-            this.Hide();
-            homePage.FormClosed += (s, args) => this.Show();
-            homePage.Show();
+            Presentation.Navigation.Navigator.Navigate(new HomePage());
         }
 
         private void buttonProducts_Click(object? sender, EventArgs e)
         {
-            var productPage = new ProductPage();
-            this.Hide();
-            productPage.FormClosed += (s, args) => this.Show();
-            productPage.Show();
+            Presentation.Navigation.Navigator.Navigate(new ProductPage());
         }
 
         private void buttonCart_Click(object? sender, EventArgs e)
         {
-            var cartPage = new CartPage();
-            this.Hide();
-            cartPage.FormClosed += (s, args) => this.Show();
-            cartPage.Show();
+            Presentation.Navigation.Navigator.Navigate(new CartPage());
         }
 
         private void buttonOrders_Click(object sender, EventArgs e)

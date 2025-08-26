@@ -41,11 +41,10 @@ namespace Presentation.Pages.Customer
                     }
                     else
                     {
-                        // Khách hàng - mở HomePage
-                        var homePage = new HomePage();
-                        this.Hide();
-                        homePage.FormClosed += (s, args) => this.Close();
-                        homePage.Show();
+                        // Lưu session người dùng và điều hướng qua Navigator
+                        System.Diagnostics.Trace.WriteLine($"[LOGIN] userId={user.UserId}, name={user.Fullname}");
+                        Presentation.Auth.UserSession.SetUser(user);
+                        Presentation.Navigation.Navigator.Navigate(new HomePage());
                     }
                 }
                 else

@@ -40,6 +40,7 @@ namespace Presentation.Pages.Customer
             buttonProducts = new Button();
             buttonCart = new Button();
             buttonOrders = new Button();
+            buttonLogout = new Button();
             pictureBoxMain = new PictureBox();
             flowLayoutPanelProducts = new FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -108,6 +109,7 @@ namespace Presentation.Pages.Customer
             panelSidebar.Controls.Add(buttonProducts);
             panelSidebar.Controls.Add(buttonCart);
             panelSidebar.Controls.Add(buttonOrders);
+            panelSidebar.Controls.Add(buttonLogout);
             panelSidebar.Dock = DockStyle.Left;
             panelSidebar.Location = new Point(0, 0);
             panelSidebar.Name = "panelSidebar";
@@ -189,6 +191,23 @@ namespace Presentation.Pages.Customer
             buttonOrders.Text = "Đơn mua";
             buttonOrders.TextAlign = ContentAlignment.MiddleLeft;
             buttonOrders.UseVisualStyleBackColor = false;
+
+            // 
+            // buttonLogout
+            // 
+            buttonLogout.BackColor = Color.FromArgb(120, 40, 40);
+            buttonLogout.FlatAppearance.BorderSize = 0;
+            buttonLogout.FlatStyle = FlatStyle.Flat;
+            buttonLogout.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            buttonLogout.ForeColor = Color.White;
+            buttonLogout.Location = new Point(0, 380);
+            buttonLogout.Name = "buttonLogout";
+            buttonLogout.Padding = new Padding(30, 0, 0, 0);
+            buttonLogout.Size = new Size(200, 50);
+            buttonLogout.TabIndex = 5;
+            buttonLogout.Text = "Đăng xuất";
+            buttonLogout.TextAlign = ContentAlignment.MiddleLeft;
+            buttonLogout.UseVisualStyleBackColor = false;
             // 
             // pictureBoxMain
             // 
@@ -251,6 +270,7 @@ namespace Presentation.Pages.Customer
         private Button buttonOrders;
         private PictureBox pictureBoxMain;
         private FlowLayoutPanel flowLayoutPanelProducts;
+        private Button buttonLogout;
 
     }
 }

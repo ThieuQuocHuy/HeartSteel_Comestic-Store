@@ -13,7 +13,7 @@ namespace Presentation.Pages.Customer
     public partial class CartPage : Form
     {
         private readonly ICartService _cartService;
-        private int _currentUserId = 1; // Tạm thời hardcode, sau này sẽ lấy từ login
+        private int _currentUserId = 1; // default; will be overwritten by session if available
         private List<CartItem> _cartItems;
 
         public CartPage()
@@ -22,6 +22,23 @@ namespace Presentation.Pages.Customer
             _cartService = new CartService();
             _cartItems = new List<CartItem>(); // Khởi tạo để tránh warning nullable
             this.Load += CartPage_Load;
+            // Hiển thị tên người dùng đang đăng nhập
+            label4.Text = Presentation.Auth.UserSession.CurrentUser?.Fullname ?? label4.Text;
+            // lấy user id từ session nếu có
+            if (Presentation.Auth.UserSession.CurrentUserId.HasValue)
+            {
+                _currentUserId = Presentation.Auth.UserSession.CurrentUserId.Value;
+            }
+            if (buttonLogout != null)
+            {
+                buttonLogout.Click += buttonLogout_Click;
+            }
+        }
+
+        private void buttonLogout_Click(object? sender, EventArgs e)
+        {
+            Presentation.Auth.UserSession.Clear();
+            Presentation.Navigation.Navigator.Navigate(new LoginForm());
         }
 
         private async void CartPage_Load(object? sender, EventArgs e)
@@ -33,7 +50,14 @@ namespace Presentation.Pages.Customer
         {
             try
             {
+                // Đồng bộ lại user id từ session trước khi gọi service
+                if (Presentation.Auth.UserSession.CurrentUserId.HasValue)
+                {
+                    _currentUserId = Presentation.Auth.UserSession.CurrentUserId.Value;
+                }
+                System.Diagnostics.Trace.WriteLine($"[CART] SessionUserId={Presentation.Auth.UserSession.CurrentUserId}");
                 _cartItems = await _cartService.GetUserCartAsync(_currentUserId);
+                System.Diagnostics.Trace.WriteLine($"[CART] Loaded cart items count={_cartItems?.Count ?? 0} for userId={_currentUserId}");
                 DisplayCartItems();
                 UpdateCartSummary();
             }
@@ -276,48 +300,28 @@ namespace Presentation.Pages.Customer
                 return;
             }
 
-            // Mở trang đặt hàng
-            var orderPage = new OrderPage(_cartItems, _currentUserId);
-            this.Hide();
-            orderPage.FormClosed += (s, args) =>
-            {
-                this.Show();
-                // Refresh giỏ hàng sau khi đặt hàng
-                if (orderPage.DialogResult == DialogResult.OK)
-                {
-                    _ = LoadCartItems();
-                }
-            };
-            orderPage.Show();
+            // Điều hướng qua Navigator để đóng CartPage và mở OrderPage
+            Presentation.Navigation.Navigator.Navigate(new OrderPage(_cartItems, _currentUserId));
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Presentation.Navigation.Navigator.Navigate(new HomePage());
         }
 
         private void buttonHome_Click(object sender, EventArgs e)
         {
-            var homePage = new HomePage();
-            this.Hide();
-            homePage.FormClosed += (s, args) => this.Show();
-            homePage.Show();
+            Presentation.Navigation.Navigator.Navigate(new HomePage());
         }
 
         private void buttonProducts_Click(object sender, EventArgs e)
         {
-            var productPage = new ProductPage();
-            this.Hide();
-            productPage.FormClosed += (s, args) => this.Show();
-            productPage.Show();
+            Presentation.Navigation.Navigator.Navigate(new ProductPage());
         }
 
         private void buttonOrders_Click(object sender, EventArgs e)
         {
-            var orderListPage = new OrderListPage();
-            this.Hide();
-            orderListPage.FormClosed += (s, args) => this.Show();
-            orderListPage.Show();
+            Presentation.Navigation.Navigator.Navigate(new OrderListPage());
         }
 
         private void pictureBoxLogo_Click(object sender, EventArgs e)
