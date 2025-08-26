@@ -12,19 +12,36 @@ namespace Presentation.Pages.Customer
     {
         private readonly IProductService _productService;
         private readonly ICartService _cartService;
-        private int _currentUserId = 1; // Tạm thời hardcode, sau này sẽ lấy từ login
+        private int _currentUserId = 1; // default; will be overwritten by session if available
 
         public ProductPage()
         {
             InitializeComponent();
             _productService = new ProductService(new DAL.Repositories.ProductRepository());
             _cartService = new CartService();
+            // Hiển thị tên người dùng đang đăng nhập
+            label4.Text = Presentation.Auth.UserSession.CurrentUser?.Fullname ?? label4.Text;
             this.Load += ProductPage_Load;
+            // lấy user id từ session nếu có
+            if (Presentation.Auth.UserSession.CurrentUserId.HasValue)
+            {
+                _currentUserId = Presentation.Auth.UserSession.CurrentUserId.Value;
+            }
             
             // Gán sự kiện cho các nút điều hướng
             buttonHome.Click += buttonHome_Click;
             buttonCart.Click += buttonCart_Click;
             buttonOrders.Click += buttonOrders_Click;
+            if (buttonLogout != null)
+            {
+                buttonLogout.Click += buttonLogout_Click;
+            }
+        }
+
+        private void buttonLogout_Click(object? sender, EventArgs e)
+        {
+            Presentation.Auth.UserSession.Clear();
+            Presentation.Navigation.Navigator.Navigate(new LoginForm());
         }
 
         private async void ProductPage_Load(object? sender, EventArgs e)
@@ -161,6 +178,13 @@ namespace Presentation.Pages.Customer
         {
             try
             {
+                // Đồng bộ lại user id từ session trước khi thêm giỏ hàng
+                if (Presentation.Auth.UserSession.CurrentUserId.HasValue)
+                {
+                    _currentUserId = Presentation.Auth.UserSession.CurrentUserId.Value;
+                }
+                System.Diagnostics.Trace.WriteLine($"[ADD_CART] userId={_currentUserId}, productId={productId}, qty={quantity}");
+
                 var success = await _cartService.AddToCartAsync(_currentUserId, productId, quantity);
 
                 if (success)
@@ -180,23 +204,17 @@ namespace Presentation.Pages.Customer
 
         private void buttonHome_Click(object? sender, EventArgs e)
         {
-            this.Close();
+            Presentation.Navigation.Navigator.Navigate(new HomePage());
         }
 
         private void buttonCart_Click(object? sender, EventArgs e)
         {
-            var cartPage = new CartPage();
-            this.Hide();
-            cartPage.FormClosed += (s, args) => this.Show();
-            cartPage.Show();
+            Presentation.Navigation.Navigator.Navigate(new CartPage());
         }
 
         private void buttonOrders_Click(object? sender, EventArgs e)
         {
-            var orderListPage = new OrderListPage();
-            this.Hide();
-            orderListPage.FormClosed += (s, args) => this.Show();
-            orderListPage.Show();
+            Presentation.Navigation.Navigator.Navigate(new OrderListPage());
         }
 
 

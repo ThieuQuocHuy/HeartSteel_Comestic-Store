@@ -22,6 +22,10 @@ namespace BLL.Services
         {
             try
             {
+                if (userId <= 0)
+                {
+                    throw new InvalidOperationException("User chưa đăng nhập hoặc userId không hợp lệ");
+                }
                 // Kiểm tra sản phẩm có tồn tại không
                 var product = await _productRepository.GetByIdAsync(productId);
                 if (product == null)
@@ -132,6 +136,8 @@ namespace BLL.Services
                 return new List<CartItem>();
             }
         }
+
+        
 
         public async Task<bool> ClearCartAsync(int userId)
         {

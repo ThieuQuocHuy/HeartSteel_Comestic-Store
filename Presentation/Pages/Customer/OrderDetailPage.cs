@@ -220,7 +220,7 @@ namespace Presentation.Pages.Customer
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Presentation.Navigation.Navigator.Navigate(new OrderListPage());
         }
     }
 }

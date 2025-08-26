@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using DAL.Repositories;
 using DAL.Models;
@@ -48,10 +49,39 @@ namespace BLL.Services
             {
                 if (cartItems == null || cartItems.Count == 0)
                 {
+                    System.Diagnostics.Trace.WriteLine("[ORDER] Fail: cartItems null/empty");
                     return false;
                 }
 
-                // Tạo Order mới
+                using var context = new DAL.Models.shopdbContext();
+                using var transaction = await context.Database.BeginTransactionAsync();
+
+                // Kiểm tra và cập nhật tồn kho (trong cùng transaction)
+                var productIds = cartItems.Select(ci => ci.ProductId).Distinct().ToList();
+                var products = await context.Products
+                    .Where(p => productIds.Contains(p.ProductId))
+                    .ToListAsync();
+
+                var quantityByProductId = cartItems
+                    .GroupBy(ci => ci.ProductId)
+                    .ToDictionary(g => g.Key, g => g.Sum(ci => ci.Quantity));
+
+                foreach (var product in products)
+                {
+                    var qty = quantityByProductId[product.ProductId];
+                    System.Diagnostics.Trace.WriteLine($"[TX-INV] productId={product.ProductId}, stock={product.ProductInStock}, sold={product.SoldCount}, orderQty={qty}");
+                    if (product.ProductInStock < qty)
+                    {
+                        System.Diagnostics.Trace.WriteLine($"[TX-INV] Fail: not enough stock for productId={product.ProductId}");
+                        return false;
+                    }
+                    product.ProductInStock -= qty;
+                    product.SoldCount += qty;
+                    // Đánh dấu modified để chắc chắn EF theo dõi cập nhật
+                    context.Products.Update(product);
+                }
+
+                // Tạo Order mới (trong cùng DbContext)
                 var order = new Order
                 {
                     UserId = userId,
@@ -60,33 +90,113 @@ namespace BLL.Services
                     ShippingAddress = shippingAddress
                 };
 
-                // Tạo OrderDetails từ CartItems
                 var orderDetails = new List<OrderDetail>();
                 foreach (var cartItem in cartItems)
                 {
-                    var orderDetail = new OrderDetail
+                    var price = (cartItem.Product?.SellPrice ?? 0) * cartItem.Quantity;
+                    orderDetails.Add(new OrderDetail
                     {
                         ProductId = cartItem.ProductId,
                         Quantity = cartItem.Quantity,
-                        Price = (cartItem.Product?.SellPrice ?? 0) * cartItem.Quantity
-                    };
-                    orderDetails.Add(orderDetail);
+                        Price = price
+                    });
                 }
-
                 order.OrderDetails = orderDetails;
 
-                // Lưu Order vào database
-                var success = await _orderRepository.CreateOrderAsync(order);
-                if (success)
+                context.Orders.Add(order);
+                var saved = await context.SaveChangesAsync();
+                System.Diagnostics.Trace.WriteLine($"[TX] SaveChanges affected={saved}");
+                if (saved <= 0)
                 {
-                    // Xóa giỏ hàng sau khi tạo order thành công
-                    await _cartService.ClearCartAsync(userId);
+                    System.Diagnostics.Trace.WriteLine("[TX] Fail: SaveChanges <= 0");
+                    return false;
                 }
 
-                return success;
+                await transaction.CommitAsync();
+
+                // Xóa giỏ hàng sau khi commit
+                var cleared = await _cartService.ClearCartAsync(userId);
+                System.Diagnostics.Trace.WriteLine($"[ORDER] ClearCart result={cleared}");
+                return true;
             }
             catch (Exception)
             {
+                System.Diagnostics.Trace.WriteLine("[ORDER] Exception in CreateOrderFromCartAsync");
+                return false;
+            }
+        }
+
+        private static async Task<bool> UpdateProductInventoryAsync(List<CartItem> cartItems)
+        {
+            try
+            {
+                using var context = new DAL.Models.shopdbContext();
+
+                // Tập hợp các sản phẩm cần cập nhật
+                var productIds = cartItems.Select(ci => ci.ProductId).Distinct().ToList();
+                var products = await context.Products
+                    .Where(p => productIds.Contains(p.ProductId))
+                    .ToListAsync();
+
+                // Ánh xạ productId -> quantity đã bán trong đơn này
+                var quantityByProductId = cartItems
+                    .GroupBy(ci => ci.ProductId)
+                    .ToDictionary(g => g.Key, g => g.Sum(ci => ci.Quantity));
+
+                foreach (var product in products)
+                {
+                    var qty = quantityByProductId[product.ProductId];
+                    System.Diagnostics.Trace.WriteLine($"[INV] productId={product.ProductId}, stock={product.ProductInStock}, sold={product.SoldCount}, orderQty={qty}");
+                    // Kiểm tra tồn kho trước khi trừ
+                    if (product.ProductInStock < qty)
+                    {
+                        System.Diagnostics.Trace.WriteLine($"[INV] Fail: not enough stock for productId={product.ProductId}");
+                        return false;
+                    }
+
+                    product.ProductInStock -= qty;
+                    product.SoldCount += qty;
+                }
+
+                var saved = await context.SaveChangesAsync();
+                System.Diagnostics.Trace.WriteLine($"[INV] SaveChanges affected={saved}");
+                return saved > 0;
+            }
+            catch
+            {
+                System.Diagnostics.Trace.WriteLine("[INV] Exception while updating inventory");
+                return false;
+            }
+        }
+
+        private static async Task<bool> RevertProductInventoryAsync(List<CartItem> cartItems)
+        {
+            try
+            {
+                using var context = new DAL.Models.shopdbContext();
+                var productIds = cartItems.Select(ci => ci.ProductId).Distinct().ToList();
+                var products = await context.Products
+                    .Where(p => productIds.Contains(p.ProductId))
+                    .ToListAsync();
+
+                var quantityByProductId = cartItems
+                    .GroupBy(ci => ci.ProductId)
+                    .ToDictionary(g => g.Key, g => g.Sum(ci => ci.Quantity));
+
+                foreach (var product in products)
+                {
+                    var qty = quantityByProductId[product.ProductId];
+                    product.ProductInStock += qty;
+                    product.SoldCount = product.SoldCount - qty < 0 ? 0 : product.SoldCount - qty;
+                }
+
+                var saved = await context.SaveChangesAsync();
+                System.Diagnostics.Trace.WriteLine($"[INV-REVERT] SaveChanges affected={saved}");
+                return saved > 0;
+            }
+            catch
+            {
+                System.Diagnostics.Trace.WriteLine("[INV-REVERT] Exception while reverting inventory");
                 return false;
             }
         }

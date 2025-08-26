@@ -130,9 +130,15 @@ namespace Presentation.Pages.Customer
                 buttonPlaceOrder.Enabled = false;
                 buttonPlaceOrder.Text = "Đang xử lý...";
 
+                // Lấy userId hiện tại từ session (ưu tiên), fallback về _currentUserId
+                var sessionUserId = Presentation.Auth.UserSession.CurrentUserId.HasValue
+                    ? Presentation.Auth.UserSession.CurrentUserId.Value
+                    : _currentUserId;
+                System.Diagnostics.Trace.WriteLine($"[CREATE_ORDER] userId={sessionUserId}, cartItems={_cartItems?.Count ?? 0}");
+
                 // Tạo đơn hàng
                 var success = await _orderService.CreateOrderFromCartAsync(
-                    _currentUserId,
+                    sessionUserId,
                     _cartItems,
                     textBoxShippingAddress.Text.Trim()
                 );
@@ -140,8 +146,9 @@ namespace Presentation.Pages.Customer
                 if (success)
                 {
                     MessageBox.Show("Đặt hàng thành công! Đơn hàng của bạn đã được tạo.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.DialogResult = DialogResult.OK;
+                    Presentation.Navigation.Navigator.Navigate(new OrderListPage());
                     this.Close();
+                    return;
                 }
                 else
                 {
@@ -161,8 +168,7 @@ namespace Presentation.Pages.Customer
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            Presentation.Navigation.Navigator.Navigate(new CartPage());
         }
     }
 }
