@@ -1,4 +1,4 @@
-﻿namespace Customer
+﻿namespace Presentation.Pages.Customer
 {
     partial class HomePage
     {
@@ -60,7 +60,7 @@
             panelSidebar.Dock = DockStyle.Left;
             panelSidebar.Location = new Point(0, 0);
             panelSidebar.Name = "panelSidebar";
-            panelSidebar.Size = new Size(200, 600);
+            panelSidebar.Size = new Size(200, 544);
             panelSidebar.TabIndex = 0;
             // 
             // pictureBoxLogo
@@ -79,7 +79,7 @@
             buttonHome.BackColor = Color.FromArgb(221, 207, 182);
             buttonHome.FlatAppearance.BorderSize = 0;
             buttonHome.FlatStyle = FlatStyle.Flat;
-            buttonHome.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            buttonHome.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             buttonHome.ForeColor = Color.White;
             buttonHome.Location = new Point(0, 180);
             buttonHome.Name = "buttonHome";
@@ -95,7 +95,7 @@
             buttonProducts.BackColor = Color.FromArgb(77, 58, 41);
             buttonProducts.FlatAppearance.BorderSize = 0;
             buttonProducts.FlatStyle = FlatStyle.Flat;
-            buttonProducts.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            buttonProducts.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             buttonProducts.ForeColor = Color.White;
             buttonProducts.Location = new Point(0, 230);
             buttonProducts.Name = "buttonProducts";
@@ -111,7 +111,7 @@
             buttonCart.BackColor = Color.FromArgb(77, 58, 41);
             buttonCart.FlatAppearance.BorderSize = 0;
             buttonCart.FlatStyle = FlatStyle.Flat;
-            buttonCart.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            buttonCart.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             buttonCart.ForeColor = Color.White;
             buttonCart.Location = new Point(0, 280);
             buttonCart.Name = "buttonCart";
@@ -127,7 +127,7 @@
             buttonOrders.BackColor = Color.FromArgb(77, 58, 41);
             buttonOrders.FlatAppearance.BorderSize = 0;
             buttonOrders.FlatStyle = FlatStyle.Flat;
-            buttonOrders.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            buttonOrders.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             buttonOrders.ForeColor = Color.White;
             buttonOrders.Location = new Point(0, 330);
             buttonOrders.Name = "buttonOrders";
@@ -152,10 +152,10 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.Location = new Point(237, 9);
             label1.Name = "label1";
-            label1.Size = new Size(270, 28);
+            label1.Size = new Size(336, 29);
             label1.TabIndex = 10;
             label1.Text = "Cửa hàng HeartSteelComestic";
             label1.Click += label1_Click;
@@ -175,30 +175,30 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.Location = new Point(237, 59);
             label2.Name = "label2";
-            label2.Size = new Size(463, 28);
+            label2.Size = new Size(555, 29);
             label2.TabIndex = 12;
             label2.Text = "Chào mừng bạn đã đến với cửa hàng của chúng tôi!";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.Location = new Point(237, 105);
             label3.Name = "label3";
-            label3.Size = new Size(118, 28);
+            label3.Size = new Size(145, 29);
             label3.TabIndex = 13;
             label3.Text = "Khách hàng:";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(361, 105);
+            label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(377, 105);
             label4.Name = "label4";
-            label4.Size = new Size(151, 28);
+            label4.Size = new Size(186, 29);
             label4.TabIndex = 14;
             label4.Text = "Thiều Quốc Huy";
             // 
@@ -207,7 +207,7 @@
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
             pictureBox2.Location = new Point(200, 151);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(963, 449);
+            pictureBox2.Size = new Size(938, 393);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 15;
             pictureBox2.TabStop = false;
@@ -215,7 +215,7 @@
             // HomePage
             // 
             BackColor = Color.FromArgb(237, 224, 207);
-            ClientSize = new Size(1160, 600);
+            ClientSize = new Size(1138, 544);
             Controls.Add(pictureBox2);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -224,7 +224,12 @@
             Controls.Add(label1);
             Controls.Add(panelSidebar);
             Controls.Add(pictureBoxMain);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MaximumSize = new Size(1160, 600);
+            MinimumSize = new Size(1160, 600);
             Name = "HomePage";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             panelSidebar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).EndInit();
