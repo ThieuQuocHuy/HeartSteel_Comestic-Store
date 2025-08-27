@@ -51,11 +51,72 @@ public partial class shopdbContext : DbContext
 
     private string GetConnectionString()
     {
-        IConfiguration config = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-            .Build();
-        return config.GetConnectionString("Default");
+        try
+        {
+            // Debug: In ra thông tin tìm kiếm config
+            var currentDir = Directory.GetCurrentDirectory();
+            System.Diagnostics.Debug.WriteLine($"[DB] Current directory: {currentDir}");
+            
+            // Thử tìm file appsettings.json từ nhiều vị trí khác nhau
+            var possiblePaths = new[]
+            {
+                Directory.GetCurrentDirectory(),
+                AppContext.BaseDirectory,
+                Path.Combine(AppContext.BaseDirectory, ".."),
+                Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "Presentation")
+            };
+
+            string configPath = null;
+            foreach (var path in possiblePaths)
+            {
+                var testPath = Path.Combine(path, "appsettings.json");
+                System.Diagnostics.Debug.WriteLine($"[DB] Testing path: {testPath}");
+                if (File.Exists(testPath))
+                {
+                    configPath = path;
+                    System.Diagnostics.Debug.WriteLine($"[DB] ✅ Found appsettings.json at: {testPath}");
+                    break;
+                }
+            }
+
+            if (configPath == null)
+            {
+                // Fallback connection string nếu không tìm thấy appsettings.json
+                var fallbackConnectionString = "Server=localhost;Database=shopdb;User ID=sa;Password=huythieu520;Integrated Security=false;TrustServerCertificate=True;Connection Timeout=30;";
+                System.Diagnostics.Debug.WriteLine($"[DB] ⚠️ No appsettings.json found, using fallback connection string");
+                System.Diagnostics.Debug.WriteLine($"[DB] Fallback connection: {fallbackConnectionString}");
+                return fallbackConnectionString;
+            }
+
+            IConfiguration config = new ConfigurationBuilder()
+                .SetBasePath(configPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .Build();
+            
+            var connectionString = config.GetConnectionString("Default");
+            
+            // Nếu không có trong config, dùng fallback
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                var fallbackConnectionString = "Server=localhost;Database=shopdb;User ID=sa;Password=huythieu520;Integrated Security=false;TrustServerCertificate=True;Connection Timeout=30;";
+                System.Diagnostics.Debug.WriteLine($"[DB] ⚠️ No connection string in config, using fallback");
+                System.Diagnostics.Debug.WriteLine($"[DB] Fallback connection: {fallbackConnectionString}");
+                return fallbackConnectionString;
+            }
+
+            System.Diagnostics.Debug.WriteLine($"[DB] ✅ Using connection string from config: {connectionString}");
+            return connectionString;
+        }
+        catch (Exception ex)
+        {
+            // Log lỗi (nếu có hệ thống logging)
+            System.Diagnostics.Debug.WriteLine($"[DB] ❌ Error reading config: {ex.Message}");
+            
+            // Trả về connection string mặc định
+            var fallbackConnectionString = "Server=localhost;Database=shopdb;User ID=sa;Password=huythieu520;Integrated Security=false;TrustServerCertificate=True;Connection Timeout=30;";
+            System.Diagnostics.Debug.WriteLine($"[DB] Using fallback connection string due to error");
+            return fallbackConnectionString;
+        }
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
