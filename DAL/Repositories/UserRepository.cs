@@ -62,65 +62,6 @@ namespace DAL.Repositories
             }
         }
 
-        public async Task<List<User>> GetCustomersAsync(string? keyword = null)
-        {
-            try
-            {
-                using var db = new shopdbContext();
-                var query = db.Users
-                .Include(u => u.Role)
-                .AsNoTracking()
-                .Where(u => u.Role.RoleName == "Customer");
-                if (!string.IsNullOrWhiteSpace(keyword))
-                {
-                    var kw = keyword.Trim().ToLower();
-                    query = query.Where(u =>
-                    u.Username.ToLower().Contains(kw) ||
-                    u.Fullname.ToLower().Contains(kw) ||
-                    u.Email.ToLower().Contains(kw) ||
-                    u.Phone.ToLower().Contains(kw));
-                }
-                return await query
-                .OrderByDescending(u => u.CreatedAt)
-                .ToListAsync();
-            }
-            catch
-            {
-                return new List<User>();
-            }
-        }
-
-        public async Task<bool> UpdateUserAsync(User user)
-        {
-            try
-            {
-                using var db = new shopdbContext();
-                db.Users.Update(user);
-                var result = await db.SaveChangesAsync();
-                return result > 0;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        public async Task<bool> DeleteUserAsync(int userId)
-        {
-            try
-            {
-                using var db = new shopdbContext();
-                var user = await db.Users.FindAsync(userId);
-                if (user == null) return false;
-                db.Users.Remove(user);
-                var result = await db.SaveChangesAsync();
-                return result > 0;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
         private string HashPassword(string password)
         {
             using var sha256 = SHA256.Create();
