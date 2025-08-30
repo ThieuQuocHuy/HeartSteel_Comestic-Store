@@ -1,7 +1,8 @@
+using BLL.Services;
+using Presentation.Pages.Admin;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BLL.Services;
 
 namespace Presentation.Pages.Customer
 {
@@ -35,9 +36,8 @@ namespace Presentation.Pages.Customer
 
                     if (isAdmin)
                     {
-                        MessageBox.Show("Chào mừng Admin! Chức năng Admin sẽ được phát triển sau.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        // TODO: Mở AdminHomePage khi có
-                        this.Close();
+                        Presentation.Auth.UserSession.SetUser(user);
+                        Presentation.Navigation.Navigator.Navigate(new AdminHomeForm());
                     }
                     else
                     {

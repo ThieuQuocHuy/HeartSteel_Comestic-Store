@@ -1,10 +1,12 @@
+using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using DAL.Models;
-using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DAL.Repositories
 {
@@ -55,6 +57,67 @@ namespace DAL.Repositories
                 db.Users.Add(user);
                 await db.SaveChangesAsync();
                 return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<List<User>> GetCustomersAsync(string? keyword = null)
+        { 
+            try
+            {
+                using var db = new shopdbContext();
+                var query = db.Users
+                    .Include(u => u.Role)
+                    .AsNoTracking()
+                    .Where(u => u.Role.RoleName == "Customer");
+
+                if (!string.IsNullOrWhiteSpace(keyword))
+                { 
+                    var kw = keyword.Trim().ToLower();
+                    query = query.Where(u =>
+                    u.Username.ToLower().Contains(kw) ||
+                    u.Fullname.ToLower().Contains(kw) ||
+                    u.Email.ToLower().Contains(kw) ||
+                    u.Phone.ToLower().Contains(kw));
+                }
+
+                return await query
+                    .OrderByDescending(u => u.CreatedAt)
+                    .ToListAsync();
+                }
+                catch
+                {
+                    return new List<User>();
+                }
+        }
+
+        public async Task<bool> UpdateUserAsync(User user)
+        {
+            try
+            {
+                using var db = new shopdbContext();
+                db.Users.Update(user);
+                var result = await db.SaveChangesAsync();
+                return result > 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public async Task<bool> DeleteUserAsync(int userId)
+        {
+            try
+            {
+                using var db = new shopdbContext();
+                var user = await db.Users.FindAsync(userId);
+                if (user == null) return false;
+                db.Users.Remove(user);
+                var result = await db.SaveChangesAsync();
+                return result > 0;
             }
             catch
             {
