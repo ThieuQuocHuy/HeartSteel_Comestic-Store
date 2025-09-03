@@ -30,26 +30,27 @@ namespace Presentation.Pages.Customer
 
                 if (success && user != null)
                 {
+                    // Lưu session người dùng trước khi kiểm tra role
+                    Presentation.Auth.UserSession.SetUser(user);
+                    System.Diagnostics.Trace.WriteLine($"[LOGIN] userId={user.UserId}, name={user.Fullname}");
+
                     // Kiểm tra role và chuyển hướng
                     var isAdmin = await _authService.IsAdminAsync(user.UserId);
 
                     if (isAdmin)
                     {
-                        MessageBox.Show("Chào mừng Admin! Chức năng Admin sẽ được phát triển sau.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        // TODO: Mở AdminHomePage khi có
-                        this.Close();
+                        // Điều hướng đến AdminHomePage
+                        Presentation.Navigation.Navigator.Navigate(new Admin.AdminHomePage());
                     }
                     else
                     {
-                        // Lưu session người dùng và điều hướng qua Navigator
-                        System.Diagnostics.Trace.WriteLine($"[LOGIN] userId={user.UserId}, name={user.Fullname}");
-                        Presentation.Auth.UserSession.SetUser(user);
+                        // Điều hướng đến trang khách hàng
                         Presentation.Navigation.Navigator.Navigate(new HomePage());
                     }
                 }
                 else
                 {
-                    MessageBox.Show(message, "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"{message}\n\n💡 Tài khoản mặc định:\n- Admin: username=admin, password=admin123\n- Customer: username=customer, password=123456", "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -75,7 +76,7 @@ namespace Presentation.Pages.Customer
             {
                 buttonLogin_Click(sender, e);
             }
-           }
+        }
 
         private void textBoxUsername_KeyPress(object sender, KeyPressEventArgs e)
         {

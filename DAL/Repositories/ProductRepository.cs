@@ -30,8 +30,6 @@ namespace DAL.Repositories
                 .Include(p => p.Status)
                 .FirstOrDefaultAsync(p => p.ProductId == id);
         }
-<<<<<<< Updated upstream
-=======
 
         public async Task<List<Product>> GetAllProductsAsync()
         {
@@ -193,7 +191,5 @@ namespace DAL.Repositories
                 return false;
             }
         }
-
->>>>>>> Stashed changes
     }
 }
