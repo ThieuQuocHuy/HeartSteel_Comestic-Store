@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.Models;
@@ -10,6 +11,14 @@ namespace DAL.Repositories
 {
     public class UserRepository : IUserRepository
     {
+        public async Task<List<User>> GetAllAsync()
+        {
+            using var db = new shopdbContext();
+            return await db.Users
+                .Include(u => u.Role)
+                .AsNoTracking()
+                .ToListAsync();
+        }
         public async Task<User?> AuthenticateAsync(string username, string password)
         {
             try
