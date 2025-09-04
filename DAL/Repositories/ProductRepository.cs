@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DAL.Models;
@@ -55,11 +55,11 @@ namespace DAL.Repositories
             try
             {
                 using var db = new shopdbContext();
-                
+
                 // Remove navigation properties to avoid conflicts
                 product.Category = null;
                 product.Status = null;
-                
+
                 db.Products.Add(product);
                 var result = await db.SaveChangesAsync();
                 return result > 0;
@@ -75,7 +75,7 @@ namespace DAL.Repositories
             try
             {
                 using var db = new shopdbContext();
-                
+
                 var existingProduct = await db.Products.FindAsync(product.ProductId);
                 if (existingProduct == null)
                 {
@@ -104,7 +104,7 @@ namespace DAL.Repositories
             try
             {
                 using var db = new shopdbContext();
-                
+
                 var product = await db.Products.FindAsync(productId);
                 if (product == null)
                 {
@@ -150,18 +150,18 @@ namespace DAL.Repositories
         public async Task<List<Product>> SearchProductsAsync(string searchTerm)
         {
             using var db = new shopdbContext();
-            
+
             if (string.IsNullOrWhiteSpace(searchTerm))
             {
                 return await GetAllProductsAsync();
             }
 
             var lowercaseSearchTerm = searchTerm.ToLower();
-            
+
             return await db.Products
                 .AsNoTracking()
                 .Include(p => p.Category)
-                .Where(p => 
+                .Where(p =>
                     p.ProductName.ToLower().Contains(lowercaseSearchTerm) ||
                     (p.Description != null && p.Description.ToLower().Contains(lowercaseSearchTerm)) ||
                     (p.Category != null && p.Category.CategoryName.ToLower().Contains(lowercaseSearchTerm)))
@@ -169,26 +169,31 @@ namespace DAL.Repositories
                 .ToListAsync();
         }
 
+
         public async Task<bool> UpdateProductStockAsync(int productId, int newStock)
         {
             try
             {
                 using var db = new shopdbContext();
-                
-                var product = await db.Products.FindAsync(productId);
+                var product = await db.Products.FirstOrDefaultAsync(p => p.ProductId == productId);
+
                 if (product == null)
                 {
                     return false;
                 }
 
                 product.ProductInStock = newStock;
-                var tracking = db.ChangeTracker.Entries<Product>();
-                await db.SaveChangesAsync();
-                return true ;
+                product.StockInDate = DateOnly.FromDateTime(DateTime.Now);
+
+
+                db.Entry(product).State = EntityState.Modified;
+
+                var result = await db.SaveChangesAsync();
+                return result > 0;
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                throw new Exception($"Lỗi database khi cập nhật tồn kho cho Product ID {productId}.", ex);
             }
         }
     }

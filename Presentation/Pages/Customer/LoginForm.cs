@@ -50,7 +50,7 @@ namespace Presentation.Pages.Customer
                 }
                 else
                 {
-                    MessageBox.Show($"{message}\n\n💡 Tài khoản mặc định:\n- Admin: username=admin, password=admin123\n- Customer: username=customer, password=123456", "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"{message}", "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)

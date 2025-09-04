@@ -12,8 +12,7 @@ namespace DAL.Repositories
         Task<bool> UpdateOrderAsync(Order order);
         Task<bool> DeleteOrderAsync(int orderId);
         Task<List<Order>> GetOrdersByUserIdAsync(int userId);
-        Task<Order?> GetByIdAsync(int orderId);
-        Task UpdateAsync(Order orderToUpdate);
         Task<Order> AddOrderAsync(Order order);
+        Task<Order?> GetByIdAsync(int orderId);
     }
 }

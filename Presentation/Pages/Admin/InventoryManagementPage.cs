@@ -12,18 +12,19 @@ namespace Presentation.Pages.Admin
 {
     public partial class InventoryManagementPage : Form
     {
-        private readonly InventoryRepository _inventoryRepository;
-        private List<Product> _allProducts;
+        private readonly ProductRepository _productRepository;
+        // Change the declaration of _allProducts to nullable to fix CS8618
+        private List<Product>? _allProducts;
         private const int ALERT_THRESHOLD = 10;
 
         public InventoryManagementPage()
         {
             InitializeComponent();
-            _inventoryRepository = new InventoryRepository();
+            _productRepository = new ProductRepository();
             this.Load += InventoryManagementPage_Load;
         }
 
-        private async void InventoryManagementPage_Load(object sender, EventArgs e)
+        private async void InventoryManagementPage_Load(object? sender, EventArgs e)
         {
             SetupDataGridViews();
             await LoadAllDataAsync();
@@ -119,13 +120,20 @@ namespace Presentation.Pages.Admin
                 DataPropertyName = "Status",
                 Width = 120
             });
+            dataGridViewInventory.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "StockInDate",
+                HeaderText = "Ngày nhập hàng",
+                DataPropertyName = "StockInDate",
+                Width = 120
+            });
         }
 
         private async Task LoadAllDataAsync()
         {
             try
             {
-                _allProducts = (await _inventoryRepository.GetInventoryProductsAsync()).ToList();
+                _allProducts = (await _productRepository.GetAllProductsAsync()).ToList();
                 UpdateInventoryDataGridView(_allProducts);
                 UpdateStockAlertsDataGridView();
             }
@@ -141,13 +149,20 @@ namespace Presentation.Pages.Admin
             {
                 p.ProductId,
                 p.ProductName,
-                p.ProductInStock
+                p.ProductInStock,
+                p.StockInDate
             }).ToList();
             dataGridViewInventory.DataSource = displayData;
         }
 
         private void UpdateStockAlertsDataGridView()
         {
+            if (_allProducts == null)
+            {
+                dataGridViewStockAlerts.DataSource = null;
+                return;
+            }
+
             var alertProducts = _allProducts.Where(p => p.ProductInStock < ALERT_THRESHOLD).ToList();
             var displayData = alertProducts.Select(p => new
             {
@@ -209,34 +224,9 @@ namespace Presentation.Pages.Admin
                 return;
             }
 
-            var productId = (int)dataGridViewInventory.CurrentRow.Cells["ProductId"].Value;
-            var product = _allProducts.FirstOrDefault(p => p.ProductId == productId);
-            if (product == null) return;
-
-            using (var dialog = new InputDialogForm("Nhập kho", $"Nhập số lượng cho sản phẩm: {product.ProductName}"))
+            if (_allProducts == null)
             {
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    int newStock = product.ProductInStock + dialog.Quantity;
-                    bool success = await _inventoryRepository.UpdateStockAsync(product.ProductId, newStock);
-                    if (success)
-                    {
-                        MessageBox.Show("Nhập kho thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        await LoadAllDataAsync(); // Tải lại dữ liệu
-                    }
-                    else
-                    {
-                        MessageBox.Show("Nhập kho thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-        }
-
-        private async void buttonStockOut_Click_1(object sender, EventArgs e)
-        {
-            if (dataGridViewInventory.CurrentRow == null)
-            {
-                MessageBox.Show("Vui lòng chọn một sản phẩm để xuất kho.", "Chưa chọn sản phẩm", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Không có dữ liệu sản phẩm.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -244,30 +234,39 @@ namespace Presentation.Pages.Admin
             var product = _allProducts.FirstOrDefault(p => p.ProductId == productId);
             if (product == null) return;
 
-            using (var dialog = new InputDialogForm("Xuất kho", $"Nhập số lượng xuất cho: {product.ProductName}"))
+            // 1. Tạo và hiển thị dialog form.
+            using (var dialog = new InputDialogForm("Nhập kho", $"Nhập số lượng cho sản phẩm: {product.ProductName}"))
             {
+                // 2. Chỉ khi người dùng nhấn OK, chúng ta mới xử lý tiếp.
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    if (dialog.Quantity > product.ProductInStock)
-                    {
-                        MessageBox.Show("Số lượng xuất kho không thể lớn hơn tồn kho.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
+                    // 3. Lấy số lượng từ dialog và tính toán tồn kho mới.
+                    int quantityToAdd = dialog.Quantity;
+                    int newStock = product.ProductInStock + quantityToAdd;
 
-                    int newStock = product.ProductInStock - dialog.Quantity;
-                    bool success = await _inventoryRepository.UpdateStockAsync(product.ProductId, newStock);
-                    if (success)
+                    try
                     {
-                        MessageBox.Show("Xuất kho thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        await LoadAllDataAsync(); 
+                        bool success = await _productRepository.UpdateProductStockAsync(product.ProductId, newStock);
+
+                        // 5. Thông báo kết quả và tải lại dữ liệu.
+                        if (success)
+                        {
+                            MessageBox.Show("Nhập kho thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            await LoadAllDataAsync(); // Tải lại dữ liệu để làm mới giao diện
+                        }
+                        else
+                        {
+                            MessageBox.Show("Cập nhật kho thất bại. Vui lòng kiểm tra lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Xuất kho thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(ex.Message, "Lỗi Database", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                }
+                }    
             }
         }
+
 
         private void buttonCheckInventory_Click(object sender, EventArgs e)
         {
@@ -293,7 +292,6 @@ namespace Presentation.Pages.Admin
         private async void buttonRefreshStock_Click(object sender, EventArgs e)
         {
             await LoadAllDataAsync();
-            MessageBox.Show("Đã làm mới dữ liệu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
     #endregion

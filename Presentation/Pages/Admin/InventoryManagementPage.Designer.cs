@@ -48,7 +48,6 @@
             buttonRefreshStock = new Button();
             buttonCheckInventory = new Button();
             buttonStockIn = new Button();
-            buttonStockOut = new Button();
             tabPageStockAlerts = new TabPage();
             dataGridViewStockAlerts = new DataGridView();
             panelAlertActions = new Panel();
@@ -274,7 +273,6 @@
             panelInventoryActions.Controls.Add(buttonRefreshStock);
             panelInventoryActions.Controls.Add(buttonCheckInventory);
             panelInventoryActions.Controls.Add(buttonStockIn);
-            panelInventoryActions.Controls.Add(buttonStockOut);
             panelInventoryActions.Dock = DockStyle.Top;
             panelInventoryActions.Location = new Point(3, 3);
             panelInventoryActions.Name = "panelInventoryActions";
@@ -284,7 +282,7 @@
             // buttonRefreshStock
             // 
             buttonRefreshStock.BackColor = Color.FromArgb(0, 123, 255);
-            buttonRefreshStock.Location = new Point(441, 14);
+            buttonRefreshStock.Location = new Point(295, 14);
             buttonRefreshStock.Name = "buttonRefreshStock";
             buttonRefreshStock.Size = new Size(140, 40);
             buttonRefreshStock.TabIndex = 0;
@@ -295,7 +293,7 @@
             // buttonCheckInventory
             // 
             buttonCheckInventory.BackColor = Color.FromArgb(52, 152, 219);
-            buttonCheckInventory.Location = new Point(295, 14);
+            buttonCheckInventory.Location = new Point(149, 14);
             buttonCheckInventory.Name = "buttonCheckInventory";
             buttonCheckInventory.Size = new Size(140, 40);
             buttonCheckInventory.TabIndex = 1;
@@ -313,17 +311,6 @@
             buttonStockIn.Text = "➕ Nhập hàng";
             buttonStockIn.UseVisualStyleBackColor = false;
             buttonStockIn.Click += buttonStockIn_Click_1;
-            // 
-            // buttonStockOut
-            // 
-            buttonStockOut.BackColor = Color.FromArgb(192, 64, 0);
-            buttonStockOut.Location = new Point(149, 14);
-            buttonStockOut.Name = "buttonStockOut";
-            buttonStockOut.Size = new Size(140, 40);
-            buttonStockOut.TabIndex = 2;
-            buttonStockOut.Text = "➖ Xuất hàng";
-            buttonStockOut.UseVisualStyleBackColor = false;
-            buttonStockOut.Click += buttonStockOut_Click_1;
             // 
             // tabPageStockAlerts
             // 
@@ -398,7 +385,6 @@
         private System.Windows.Forms.DataGridView dataGridViewInventory;
         private System.Windows.Forms.Panel panelInventoryActions;
         private System.Windows.Forms.Button buttonStockIn;
-        private System.Windows.Forms.Button buttonStockOut;
         private System.Windows.Forms.Button buttonCheckInventory;
         private System.Windows.Forms.Button buttonRefreshStock;
         private System.Windows.Forms.DataGridView dataGridViewStockAlerts;

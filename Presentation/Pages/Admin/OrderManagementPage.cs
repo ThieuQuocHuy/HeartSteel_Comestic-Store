@@ -240,7 +240,7 @@ namespace Presentation.Pages.Admin
 
                 // Cập nhật các trường của đối tượng Order
                 existingOrder.OrderDate = dateTimePickerOrderDate.Value;
-
+                existingOrder.OrderTotal = numericUpDownTotalAmount.Value;
                 // Sử dụng UpdateOrderAsync từ interface
                 bool success = await _orderRepository.UpdateOrderAsync(existingOrder);
 
