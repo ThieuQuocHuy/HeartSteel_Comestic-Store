@@ -45,17 +45,37 @@ public partial class shopdbContext : DbContext
         if (!optionsBuilder.IsConfigured)
         {
             optionsBuilder.UseSqlServer(GetConnectionString());
-            optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            // Remove global NoTracking to allow proper entity tracking for updates
+            // optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
         }
     }
 
     private string GetConnectionString()
     {
-        IConfiguration config = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-            .Build();
-        return config.GetConnectionString("Default");
+        // Try multiple paths to find appsettings.json
+        var possiblePaths = new[]
+        {
+            Directory.GetCurrentDirectory(),
+            Path.Combine(Directory.GetCurrentDirectory(), "..", "Presentation"),
+            Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "Presentation"),
+            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Presentation")
+        };
+
+        foreach (var path in possiblePaths)
+        {
+            var appsettingsPath = Path.Combine(path, "appsettings.json");
+            if (File.Exists(appsettingsPath))
+            {
+                IConfiguration config = new ConfigurationBuilder()
+                    .SetBasePath(path)
+                    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                    .Build();
+                return config.GetConnectionString("Default");
+            }
+        }
+
+        // Fallback to hardcoded connection string if appsettings.json not found
+        return "Data Source=localhost;Initial Catalog=shopdb;User ID=sa;Password=huythieu520;Persist Security Info=True;TrustServerCertificate=True";
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

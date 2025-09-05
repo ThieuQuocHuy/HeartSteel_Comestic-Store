@@ -129,5 +129,21 @@ namespace DAL.Repositories
         {
             return await GetOrderByIdAsync(orderId);
         }
+
+        public async Task<List<Order>> GetOrdersByDateRangeAsync(DateTime startDate, DateTime endDate)
+        {
+            using (var context = new shopdbContext())
+            {
+                return await context.Orders
+                                     .Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate)
+                                     .Where(o => o.CancelReasonId == null) // Chỉ lấy đơn hàng không bị hủy
+                                     .Include(o => o.User)
+                                     .Include(o => o.OrderStatuses)
+                                     .Include(o => o.OrderDetails)
+                                     .ThenInclude(od => od.Product)
+                                     .OrderByDescending(o => o.OrderDate)
+                                     .ToListAsync();
+            }
+        }
     }
 }

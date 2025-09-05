@@ -1,4 +1,5 @@
 ﻿using DAL.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,5 +15,6 @@ namespace DAL.Repositories
         Task<List<Order>> GetOrdersByUserIdAsync(int userId);
         Task<Order> AddOrderAsync(Order order);
         Task<Order?> GetByIdAsync(int orderId);
+        Task<List<Order>> GetOrdersByDateRangeAsync(DateTime startDate, DateTime endDate);
     }
 }

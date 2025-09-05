@@ -80,7 +80,7 @@ namespace Presentation.Pages.Customer
                     flowLayoutPanelProducts.Controls.Add(emptyLabel);
                 }
 
-
+                System.Diagnostics.Debug.WriteLine($"ProductPage: Loaded {products.Count} products");
             }
             catch (Exception ex)
             {
@@ -119,11 +119,17 @@ namespace Presentation.Pages.Customer
             };
             pictureBox.Click += ProductCard_Click;
             // Load image from resources by Img field
+            System.Diagnostics.Debug.WriteLine($"Loading image for product {product.ProductName}: {product.Img}");
             var img = Presentation.Services.ResourceImageLoader.LoadByFileName(product.Img);
             if (img != null)
             {
                 pictureBox.Image = img;
                 pictureBox.BackColor = Color.White;
+                System.Diagnostics.Debug.WriteLine($"Successfully loaded image for {product.ProductName}");
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to load image for {product.ProductName}: {product.Img}");
             }
 
             // Tên sản phẩm (giữa, dưới ảnh)

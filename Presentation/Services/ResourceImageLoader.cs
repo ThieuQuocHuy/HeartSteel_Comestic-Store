@@ -69,9 +69,16 @@ namespace Presentation.Services
                 var candidate = Path.Combine(baseDir, "Resource", fileName);
                 if (File.Exists(candidate))
                 {
-                    using var fs = new FileStream(candidate, FileMode.Open, FileAccess.Read, FileShare.Read);
-                    System.Diagnostics.Trace.WriteLine($"[IMG] Loaded from file '{candidate}'");
-                    return Image.FromStream(fs);
+                    try
+                    {
+                        using var fs = new FileStream(candidate, FileMode.Open, FileAccess.Read, FileShare.Read);
+                        System.Diagnostics.Trace.WriteLine($"[IMG] Loaded from file '{candidate}'");
+                        return Image.FromStream(fs);
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Trace.WriteLine($"[IMG] Error loading from '{candidate}': {ex.Message}");
+                    }
                 }
 
                 // Another fallback: try directly next to executable

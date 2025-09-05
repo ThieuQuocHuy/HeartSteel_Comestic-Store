@@ -1,6 +1,6 @@
 ﻿using Presentation.Pages.Customer;
 using Presentation.Navigation;
-
+///test
 namespace Presentation
 {
     internal static class Program
