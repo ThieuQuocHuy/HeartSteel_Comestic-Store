@@ -589,7 +589,7 @@
             comboBoxCategory.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxCategory.Font = new Font("Segoe UI", 10F);
             comboBoxCategory.FormattingEnabled = true;
-            comboBoxCategory.Location = new Point(481, 19);
+            comboBoxCategory.Location = new Point(496, 19);
             comboBoxCategory.Margin = new Padding(3, 2, 3, 2);
             comboBoxCategory.Name = "comboBoxCategory";
             comboBoxCategory.Size = new Size(158, 25);

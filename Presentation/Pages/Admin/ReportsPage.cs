@@ -33,6 +33,9 @@ namespace Presentation.Pages.Admin
             await LoadDataAsync();
             SetupDatePickers();
             AddHoverEffects();
+            SetupProductCategoryEvent();
+            SetupRevenueDateEvents();
+            SetupInventoryEvents();
             await LoadDefaultReports();
         }
 
@@ -82,6 +85,23 @@ namespace Presentation.Pages.Admin
             button.MouseLeave += (s, e) => button.BackColor = normalColor;
         }
 
+        private void SetupProductCategoryEvent()
+        {
+            comboBoxProductCategory.SelectedIndexChanged += async (s, e) => await GenerateProductReport();
+        }
+
+        private void SetupRevenueDateEvents()
+        {
+            dateTimePickerRevenueFrom.ValueChanged += async (s, e) => await GenerateRevenueReport();
+            dateTimePickerRevenueTo.ValueChanged += async (s, e) => await GenerateRevenueReport();
+        }
+
+        private void SetupInventoryEvents()
+        {
+            numericUpDownStockThreshold.ValueChanged += async (s, e) => await GenerateInventoryReport();
+            checkBoxShowLowStock.CheckedChanged += async (s, e) => await GenerateInventoryReport();
+        }
+
         private async Task LoadDefaultReports()
         {
             await GenerateRevenueReport();
@@ -90,11 +110,6 @@ namespace Presentation.Pages.Admin
         }
 
         #region Revenue Report
-        private async void buttonGenerateRevenue_Click(object sender, EventArgs e)
-        {
-            await GenerateRevenueReport();
-        }
-
         private async Task GenerateRevenueReport()
         {
             try
@@ -241,11 +256,6 @@ namespace Presentation.Pages.Admin
         #endregion
 
         #region Product Report
-        private async void buttonGenerateProduct_Click(object sender, EventArgs e)
-        {
-            await GenerateProductReport();
-        }
-
         private Task GenerateProductReport()
         {
             try
@@ -377,11 +387,6 @@ namespace Presentation.Pages.Admin
         #endregion
 
         #region Inventory Report
-        private async void buttonGenerateInventory_Click(object sender, EventArgs e)
-        {
-            await GenerateInventoryReport();
-        }
-
         private Task GenerateInventoryReport()
         {
             try
