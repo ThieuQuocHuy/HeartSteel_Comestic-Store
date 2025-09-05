@@ -253,7 +253,7 @@ namespace BLL.Services
             }
         }
 
-        public async Task<decimal> CalculateOrderTotalAsync(List<CartItem> cartItems)
+        public Task<decimal> CalculateOrderTotalAsync(List<CartItem> cartItems)
         {
             try
             {
@@ -265,11 +265,11 @@ namespace BLL.Services
                         total += cartItem.Product.SellPrice.Value * cartItem.Quantity;
                     }
                 }
-                return total;
+                return Task.FromResult(total);
             }
             catch (Exception)
             {
-                return 0;
+                return Task.FromResult<decimal>(0);
             }
         }
     }

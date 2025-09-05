@@ -1,53 +1,53 @@
+﻿using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DAL.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repositories
 {
     public class OrderRepository : IOrderRepository
     {
-        private readonly shopdbContext _context;
-
+      
         public OrderRepository()
         {
-            _context = new shopdbContext();
+            
         }
 
-        public async Task<Order?> GetByIdAsync(int orderId)
+        public async Task<List<Order>> GetAllOrdersAsync()
         {
-            try
+            using (var context = new shopdbContext())
             {
-                return await _context.Orders
-                    .Include(o => o.OrderDetails)
-                    .ThenInclude(od => od.Product)
-                    .Include(o => o.OrderStatuses)
-                    .FirstOrDefaultAsync(o => o.OrderId == orderId);
-            }
-            catch (Exception)
-            {
-                return null;
+                return await context.Orders
+                                     .Include(o => o.User)
+                                     .Include(o => o.OrderStatuses)
+                                     .Include(o => o.OrderDetails)
+                                     .ThenInclude(od => od.Product)
+                                     .ToListAsync();
             }
         }
 
-        public async Task<List<Order>> GetOrdersByUserIdAsync(int userId)
+        public async Task<Order?> GetOrderByIdAsync(int orderId)
         {
-            try
+            using (var context = new shopdbContext())
             {
-                System.Diagnostics.Trace.WriteLine($"[DAL] GetOrdersByUserIdAsync userId={userId}");
-                return await _context.Orders
-                    .Include(o => o.OrderDetails)
-                    .ThenInclude(od => od.Product)
-                    .Include(o => o.OrderStatuses)
-                    .Where(o => o.UserId == userId)
-                    .OrderByDescending(o => o.OrderDate)
-                    .ToListAsync();
+                return await context.Orders
+                                     .Include(o => o.User)
+                                     .Include(o => o.OrderStatuses)
+                                     .Include(o => o.OrderDetails)
+                                     .ThenInclude(od => od.Product)
+                                     .FirstOrDefaultAsync(o => o.OrderId == orderId);
             }
-            catch (Exception)
+        }
+
+        public async Task<Order> AddOrderAsync(Order order)
+        {
+            using (var context = new shopdbContext())
             {
-                return new List<Order>();
+                await context.Orders.AddAsync(order);
+                await context.SaveChangesAsync();
+                return order;
             }
         }
 
@@ -55,11 +55,14 @@ namespace DAL.Repositories
         {
             try
             {
-                _context.Orders.Add(order);
-                var result = await _context.SaveChangesAsync();
-                return result > 0;
+                using (var context = new shopdbContext())
+                {
+                    await context.Orders.AddAsync(order);
+                    await context.SaveChangesAsync();
+                    return true;
+                }
             }
-            catch (Exception)
+            catch
             {
                 return false;
             }
@@ -69,11 +72,14 @@ namespace DAL.Repositories
         {
             try
             {
-                _context.Orders.Update(order);
-                var result = await _context.SaveChangesAsync();
-                return result > 0;
+                using (var context = new shopdbContext())
+                {
+                    context.Orders.Update(order);
+                    await context.SaveChangesAsync();
+                    return true;
+                }
             }
-            catch (Exception)
+            catch
             {
                 return false;
             }
@@ -83,32 +89,45 @@ namespace DAL.Repositories
         {
             try
             {
-                var order = await _context.Orders.FindAsync(orderId);
-                if (order != null)
+                using (var context = new shopdbContext())
                 {
-                    _context.Orders.Remove(order);
-                    var result = await _context.SaveChangesAsync();
-                    return result > 0;
+                    var order = await context.Orders
+                                             .Include(o => o.OrderDetails)
+                                             .Include(o => o.OrderStatuses)
+                                             .FirstOrDefaultAsync(o => o.OrderId == orderId);
+
+                    if (order != null)
+                    {
+                        context.OrderDetails.RemoveRange(order.OrderDetails);
+                        context.OrderStatuses.RemoveRange(order.OrderStatuses);
+                        context.Orders.Remove(order);
+                        await context.SaveChangesAsync();
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
             }
-            catch (Exception)
+            catch
             {
                 return false;
             }
         }
 
-        public async Task<int> GetNextOrderIdAsync()
+        public async Task<List<Order>> GetOrdersByUserIdAsync(int userId)
         {
-            try
+            using (var context = new shopdbContext())
             {
-                var maxOrderId = await _context.Orders.MaxAsync(o => (int?)o.OrderId) ?? 0;
-                return maxOrderId + 1;
+                return await context.Orders
+                                     .Where(o => o.UserId == userId)
+                                     .Include(o => o.OrderStatuses)
+                                     .Include(o => o.OrderDetails)
+                                     .ThenInclude(od => od.Product)
+                                     .ToListAsync();
             }
-            catch (Exception)
-            {
-                return 1;
-            }
+        }
+        public async Task<Order?> GetByIdAsync(int orderId)
+        {
+            return await GetOrderByIdAsync(orderId);
         }
     }
 }
