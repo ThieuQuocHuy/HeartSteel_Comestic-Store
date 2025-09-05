@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DAL.Models;
 using DAL.Repositories;
+using Presentation.Services;
 
 namespace Presentation.Pages.Admin
 {
@@ -37,6 +38,7 @@ namespace Presentation.Pages.Admin
             SetupRevenueDateEvents();
             SetupInventoryEvents();
             await LoadDefaultReports();
+            LoadLogo();
         }
 
         private async Task LoadDataAsync()
@@ -83,6 +85,30 @@ namespace Presentation.Pages.Admin
         {
             button.MouseEnter += (s, e) => button.BackColor = hoverColor;
             button.MouseLeave += (s, e) => button.BackColor = normalColor;
+        }
+
+        private void LoadLogo()
+        {
+            try
+            {
+                if (pictureBoxLogo != null)
+                {
+                    var logoImage = ResourceImageLoader.LoadByFileName("logoden.png");
+                    if (logoImage != null)
+                    {
+                        pictureBoxLogo.Image = logoImage;
+                        System.Diagnostics.Debug.WriteLine("Logo loaded successfully for ReportsPage");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Failed to load logo image for ReportsPage");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"LoadLogo Error: {ex.Message}");
+            }
         }
 
         private void SetupProductCategoryEvent()

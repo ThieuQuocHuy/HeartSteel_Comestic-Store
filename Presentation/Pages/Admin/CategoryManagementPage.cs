@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using DAL.Models;
 using DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Presentation.Services;
 
 namespace Presentation.Pages.Admin
 {
@@ -43,6 +44,7 @@ namespace Presentation.Pages.Admin
                 await LoadAllDataAsync();
                 AddHoverEffects();
                 WireUpEventHandlers();
+                LoadLogo();
             }
             catch (Exception ex)
             {
@@ -51,6 +53,30 @@ namespace Presentation.Pages.Admin
         }
 
         #region Setup UI
+
+        private void LoadLogo()
+        {
+            try
+            {
+                if (pictureBoxLogo != null)
+                {
+                    var logoImage = ResourceImageLoader.LoadByFileName("logoden.png");
+                    if (logoImage != null)
+                    {
+                        pictureBoxLogo.Image = logoImage;
+                        System.Diagnostics.Debug.WriteLine("Logo loaded successfully for CategoryManagementPage");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Failed to load logo image for CategoryManagementPage");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"LoadLogo Error: {ex.Message}");
+            }
+        }
 
         private void AddHoverEffects()
         {

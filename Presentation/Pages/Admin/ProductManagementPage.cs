@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using BLL.Services;
 using DAL.Models;
 using DAL.Repositories;
+using Presentation.Services;
 
 namespace Presentation.Pages.Admin
 {
@@ -52,6 +53,7 @@ namespace Presentation.Pages.Admin
                 SetFormMode(false);
                 AddHoverEffects();
                 WireUpEventHandlers();
+                LoadLogo();
             }
             catch (Exception ex)
             {
@@ -94,6 +96,30 @@ namespace Presentation.Pages.Admin
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"WireUpEventHandlers Error: {ex.Message}");
+            }
+        }
+
+        private void LoadLogo()
+        {
+            try
+            {
+                if (pictureBoxLogo != null)
+                {
+                    var logoImage = ResourceImageLoader.LoadByFileName("logoden.png");
+                    if (logoImage != null)
+                    {
+                        pictureBoxLogo.Image = logoImage;
+                        System.Diagnostics.Debug.WriteLine("Logo loaded successfully for ProductManagementPage");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Failed to load logo image for ProductManagementPage");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"LoadLogo Error: {ex.Message}");
             }
         }
 
