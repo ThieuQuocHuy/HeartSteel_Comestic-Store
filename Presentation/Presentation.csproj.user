@@ -8,6 +8,9 @@
     <Compile Update="Pages\Admin\AdminHomePage.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Pages\Admin\CategoryManagementPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Pages\Admin\InputDialogForm.cs">
       <SubType>Form</SubType>
     </Compile>

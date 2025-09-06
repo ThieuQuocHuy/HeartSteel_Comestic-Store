@@ -62,10 +62,13 @@ namespace DAL.Repositories
 
                 db.Products.Add(product);
                 var result = await db.SaveChangesAsync();
+                System.Diagnostics.Debug.WriteLine($"CreateProductAsync: {result} rows affected");
                 return result > 0;
             }
-            catch
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"CreateProductAsync Error: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Stack Trace: {ex.StackTrace}");
                 return false;
             }
         }
@@ -76,9 +79,13 @@ namespace DAL.Repositories
             {
                 using var db = new shopdbContext();
 
+                // Temporarily disable NoTracking for this operation
+                db.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
+
                 var existingProduct = await db.Products.FindAsync(product.ProductId);
                 if (existingProduct == null)
                 {
+                    System.Diagnostics.Debug.WriteLine($"Product with ID {product.ProductId} not found");
                     return false;
                 }
 
@@ -89,12 +96,24 @@ namespace DAL.Repositories
                 existingProduct.SellPrice = product.SellPrice;
                 existingProduct.ProductInStock = product.ProductInStock;
                 existingProduct.Description = product.Description;
+                existingProduct.SoldCount = product.SoldCount;
+                existingProduct.StockInDate = product.StockInDate;
+                existingProduct.Img = product.Img;
+                existingProduct.StatusId = product.StatusId;
+                existingProduct.MarketPrice = product.MarketPrice;
+
+                // Mark the entity as modified
+                db.Entry(existingProduct).State = EntityState.Modified;
 
                 var result = await db.SaveChangesAsync();
+                System.Diagnostics.Debug.WriteLine($"UpdateProductAsync: {result} rows affected");
                 return result > 0;
             }
-            catch
+            catch (Exception ex)
             {
+                // Log the exception for debugging
+                System.Diagnostics.Debug.WriteLine($"UpdateProductAsync Error: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Stack Trace: {ex.StackTrace}");
                 return false;
             }
         }

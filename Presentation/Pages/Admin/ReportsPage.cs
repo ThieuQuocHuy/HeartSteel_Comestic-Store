@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DAL.Models;
 using DAL.Repositories;
+using Presentation.Services;
 
 namespace Presentation.Pages.Admin
 {
@@ -15,23 +16,29 @@ namespace Presentation.Pages.Admin
     {
         private readonly IProductRepository _productRepository;
         private readonly ICategoryRepository _categoryRepository;
-        private List<Product> _allProducts;
-        private List<Category> _categories;
+        private readonly IOrderRepository _orderRepository;
+        private List<Product> _allProducts = new List<Product>();
+        private List<Category> _categories = new List<Category>();
 
         public ReportsPage()
         {
             InitializeComponent();
             _productRepository = new ProductRepository();
             _categoryRepository = new CategoryRepository();
+            _orderRepository = new OrderRepository();
             this.Load += ReportsPage_Load;
         }
 
-        private async void ReportsPage_Load(object sender, EventArgs e)
+        private async void ReportsPage_Load(object? sender, EventArgs e)
         {
             await LoadDataAsync();
             SetupDatePickers();
             AddHoverEffects();
+            SetupProductCategoryEvent();
+            SetupRevenueDateEvents();
+            SetupInventoryEvents();
             await LoadDefaultReports();
+            LoadLogo();
         }
 
         private async Task LoadDataAsync()
@@ -80,6 +87,47 @@ namespace Presentation.Pages.Admin
             button.MouseLeave += (s, e) => button.BackColor = normalColor;
         }
 
+        private void LoadLogo()
+        {
+            try
+            {
+                if (pictureBoxLogo != null)
+                {
+                    var logoImage = ResourceImageLoader.LoadByFileName("logoden.png");
+                    if (logoImage != null)
+                    {
+                        pictureBoxLogo.Image = logoImage;
+                        System.Diagnostics.Debug.WriteLine("Logo loaded successfully for ReportsPage");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Failed to load logo image for ReportsPage");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"LoadLogo Error: {ex.Message}");
+            }
+        }
+
+        private void SetupProductCategoryEvent()
+        {
+            comboBoxProductCategory.SelectedIndexChanged += async (s, e) => await GenerateProductReport();
+        }
+
+        private void SetupRevenueDateEvents()
+        {
+            dateTimePickerRevenueFrom.ValueChanged += async (s, e) => await GenerateRevenueReport();
+            dateTimePickerRevenueTo.ValueChanged += async (s, e) => await GenerateRevenueReport();
+        }
+
+        private void SetupInventoryEvents()
+        {
+            numericUpDownStockThreshold.ValueChanged += async (s, e) => await GenerateInventoryReport();
+            checkBoxShowLowStock.CheckedChanged += async (s, e) => await GenerateInventoryReport();
+        }
+
         private async Task LoadDefaultReports()
         {
             await GenerateRevenueReport();
@@ -88,22 +136,24 @@ namespace Presentation.Pages.Admin
         }
 
         #region Revenue Report
-        private async void buttonGenerateRevenue_Click(object sender, EventArgs e)
-        {
-            await GenerateRevenueReport();
-        }
-
         private async Task GenerateRevenueReport()
         {
             try
             {
-                // Tạo dữ liệu giả lập cho báo cáo doanh thu
-                var revenueData = GenerateSampleRevenueData();
+                // Lấy dữ liệu thực từ database
+                var revenueData = await GetRealRevenueData();
 
                 SetupRevenueDataGridView();
                 dataGridViewRevenue.DataSource = revenueData;
 
                 UpdateRevenueSummary(revenueData);
+
+                // Hiển thị thông báo nếu không có dữ liệu
+                if (!revenueData.Any() || revenueData.All(x => (int)x.OrderCount == 0))
+                {
+                    MessageBox.Show("Không có dữ liệu đơn hàng trong khoảng thời gian đã chọn.", 
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {
@@ -161,29 +211,55 @@ namespace Presentation.Pages.Admin
             });
         }
 
-        private List<dynamic> GenerateSampleRevenueData()
+        private async Task<List<dynamic>> GetRealRevenueData()
         {
-            var data = new List<dynamic>();
-            var random = new Random();
-            var startDate = dateTimePickerRevenueFrom.Value;
-            var endDate = dateTimePickerRevenueTo.Value;
+            var startDate = dateTimePickerRevenueFrom.Value.Date;
+            var endDate = dateTimePickerRevenueTo.Value.Date.AddDays(1).AddTicks(-1); // End of day
 
-            for (var date = startDate; date <= endDate; date = date.AddDays(1))
+            // Validation: đảm bảo startDate không lớn hơn endDate
+            if (startDate > endDate.Date)
             {
-                var orderCount = random.Next(0, 15);
-                var revenue = orderCount * random.Next(100000, 2000000);
-                var avgOrderValue = orderCount > 0 ? revenue / orderCount : 0;
-
-                data.Add(new
-                {
-                    Date = date,
-                    OrderCount = orderCount,
-                    Revenue = revenue,
-                    AverageOrderValue = avgOrderValue
-                });
+                throw new ArgumentException("Ngày bắt đầu không được lớn hơn ngày kết thúc.");
             }
 
-            return data.OrderByDescending(x => x.Date).ToList();
+            // Lấy tất cả đơn hàng trong khoảng thời gian
+            var orders = await _orderRepository.GetOrdersByDateRangeAsync(startDate, endDate);
+
+            // Nhóm đơn hàng theo ngày
+            var dailyData = orders
+                .GroupBy(o => o.OrderDate.Date)
+                .Select(g => new
+                {
+                    Date = g.Key,
+                    OrderCount = g.Count(),
+                    Revenue = g.Sum(o => o.OrderTotal),
+                    AverageOrderValue = g.Count() > 0 ? g.Sum(o => o.OrderTotal) / g.Count() : 0
+                })
+                .OrderByDescending(x => x.Date)
+                .ToList();
+
+            // Tạo dữ liệu cho tất cả các ngày trong khoảng (kể cả ngày không có đơn hàng)
+            var allDates = new List<dynamic>();
+            for (var date = startDate; date <= endDate.Date; date = date.AddDays(1))
+            {
+                var dayData = dailyData.FirstOrDefault(d => d.Date.Date == date.Date);
+                if (dayData != null)
+                {
+                    allDates.Add(dayData);
+                }
+                else
+                {
+                    allDates.Add(new
+                    {
+                        Date = date,
+                        OrderCount = 0,
+                        Revenue = 0m,
+                        AverageOrderValue = 0m
+                    });
+                }
+            }
+
+            return allDates.OrderByDescending(x => x.Date).ToList();
         }
 
         private void UpdateRevenueSummary(List<dynamic> data)
@@ -195,16 +271,18 @@ namespace Presentation.Pages.Admin
             labelTotalRevenue.Text = $"Tổng doanh thu: ₫{totalRevenue:N0}";
             labelTotalOrders.Text = $"Số đơn hàng: {totalOrders}";
             labelAverageOrder.Text = $"Giá trị đơn hàng TB: ₫{averageOrder:N0}";
+
+            // Debug info - có thể xóa sau khi test xong
+            Console.WriteLine($"Revenue Report Summary:");
+            Console.WriteLine($"- Total Revenue: {totalRevenue:N0}");
+            Console.WriteLine($"- Total Orders: {totalOrders}");
+            Console.WriteLine($"- Average Order Value: {averageOrder:N0}");
+            Console.WriteLine($"- Date Range: {dateTimePickerRevenueFrom.Value:dd/MM/yyyy} - {dateTimePickerRevenueTo.Value:dd/MM/yyyy}");
         }
         #endregion
 
         #region Product Report
-        private async void buttonGenerateProduct_Click(object sender, EventArgs e)
-        {
-            await GenerateProductReport();
-        }
-
-        private async Task GenerateProductReport()
+        private Task GenerateProductReport()
         {
             try
             {
@@ -236,6 +314,7 @@ namespace Presentation.Pages.Admin
             {
                 MessageBox.Show($"Lỗi tạo báo cáo sản phẩm: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            return Task.CompletedTask;
         }
 
         private void SetupProductDataGridView()
@@ -334,12 +413,7 @@ namespace Presentation.Pages.Admin
         #endregion
 
         #region Inventory Report
-        private async void buttonGenerateInventory_Click(object sender, EventArgs e)
-        {
-            await GenerateInventoryReport();
-        }
-
-        private async Task GenerateInventoryReport()
+        private Task GenerateInventoryReport()
         {
             try
             {
@@ -368,6 +442,7 @@ namespace Presentation.Pages.Admin
             {
                 MessageBox.Show($"Lỗi tạo báo cáo tồn kho: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            return Task.CompletedTask;
         }
 
         private void SetupInventoryDataGridView()
@@ -539,8 +614,7 @@ namespace Presentation.Pages.Admin
 
         private void buttonManageCategories_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("📂 Chức năng quản lý danh mục sẽ được phát triển trong phiên bản tiếp theo.",
-                "Quản lý danh mục", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Presentation.Navigation.Navigator.Navigate(new CategoryManagementPage());
         }
 
         private void buttonReports_Click(object sender, EventArgs e)

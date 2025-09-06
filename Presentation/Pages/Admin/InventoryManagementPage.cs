@@ -196,8 +196,7 @@ namespace Presentation.Pages.Admin
 
         private void buttonManageCategories_Click_1(object sender, EventArgs e)
         {
-            MessageBox.Show("📂 Chức năng quản lý danh mục sẽ được phát triển trong phiên bản tiếp theo.",
-                "Quản lý danh mục", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Presentation.Navigation.Navigator.Navigate(new CategoryManagementPage());
         }
 
         private void buttonReports_Click_1(object sender, EventArgs e)
