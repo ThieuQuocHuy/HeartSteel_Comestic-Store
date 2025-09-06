@@ -18,8 +18,48 @@ namespace Presentation.Pages.Customer
             {
                 buttonLogout.Click += buttonLogout_Click;
             }
+            // Load ảnh
+            LoadImages();
         }
+        private void LoadImages()
+        {
+            try
+            {
+                // Load logo
+                if (pictureBoxLogo != null)
+                {
+                    var logoImage = Presentation.Services.ResourceImageLoader.LoadByFileName("logoden.png");
+                    if (logoImage != null)
+                    {
+                        pictureBoxLogo.Image = logoImage;
+                        System.Diagnostics.Debug.WriteLine("Logo loaded successfully for HomePage");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Failed to load logo image for HomePage");
+                    }
+                }
 
+                // Load trangchu2.png vào pictureBox2
+                if (pictureBox2 != null)
+                {
+                    var trangchuImage = Presentation.Services.ResourceImageLoader.LoadByFileName("trangchu2.png");
+                    if (trangchuImage != null)
+                    {
+                        pictureBox2.Image = trangchuImage;
+                        System.Diagnostics.Debug.WriteLine("Trangchu2 image loaded successfully for HomePage");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Failed to load trangchu2 image for HomePage");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"LoadImages Error: {ex.Message}");
+            }
+        }   
         private void buttonLogout_Click(object? sender, EventArgs e)
         {
             Presentation.Auth.UserSession.Clear();

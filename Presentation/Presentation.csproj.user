@@ -56,8 +56,5 @@
     <Compile Update="Pages\Customer\RegisterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Pages\Customer\StartupForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
 </Project>

@@ -37,8 +37,34 @@ namespace Presentation.Pages.Customer
             {
                 buttonLogout.Click += buttonLogout_Click;
             }
+            // Load ảnh
+            LoadImages();
         }
 
+        private void LoadImages()
+        {
+            try
+            {
+                // Load logo
+                if (pictureBoxLogo != null)
+                {
+                    var logoImage = Presentation.Services.ResourceImageLoader.LoadByFileName("logoden.png");
+                    if (logoImage != null)
+                    {
+                        pictureBoxLogo.Image = logoImage;
+                        System.Diagnostics.Debug.WriteLine("Logo loaded successfully for ProductPage");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Failed to load logo image for ProductPage");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"LoadImages Error: {ex.Message}");
+            }
+        }
         private void buttonLogout_Click(object? sender, EventArgs e)
         {
             Presentation.Auth.UserSession.Clear();

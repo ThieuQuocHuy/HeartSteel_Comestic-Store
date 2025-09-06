@@ -28,7 +28,6 @@ namespace Presentation.Pages.Admin
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CategoryManagementPage));
             panelHeader = new Panel();
             labelTitle = new Label();
             panelSidebar = new Panel();
@@ -50,12 +49,12 @@ namespace Presentation.Pages.Admin
             buttonEdit = new Button();
             buttonAdd = new Button();
             groupBoxCategoryInfo = new GroupBox();
+            buttonCancel = new Button();
+            buttonSave = new Button();
             textBoxCategoryName = new TextBox();
             labelCategoryName = new Label();
             textBoxCategoryId = new TextBox();
             labelCategoryId = new Label();
-            buttonSave = new Button();
-            buttonCancel = new Button();
             panelHeader.SuspendLayout();
             panelSidebar.SuspendLayout();
             panel1.SuspendLayout();
@@ -85,7 +84,7 @@ namespace Presentation.Pages.Admin
             labelTitle.ForeColor = Color.White;
             labelTitle.Location = new Point(30, 20);
             labelTitle.Name = "labelTitle";
-            labelTitle.Size = new Size(316, 41);
+            labelTitle.Size = new Size(322, 41);
             labelTitle.TabIndex = 1;
             labelTitle.Text = "📂 Quản lý danh mục";
             // 
@@ -362,11 +361,44 @@ namespace Presentation.Pages.Admin
             groupBoxCategoryInfo.TabIndex = 0;
             groupBoxCategoryInfo.TabStop = false;
             groupBoxCategoryInfo.Text = "Thông tin danh mục";
+            groupBoxCategoryInfo.Enter += groupBoxCategoryInfo_Enter;
+            // 
+            // buttonCancel
+            // 
+            buttonCancel.BackColor = Color.FromArgb(108, 117, 125);
+            buttonCancel.FlatAppearance.BorderSize = 0;
+            buttonCancel.FlatStyle = FlatStyle.Flat;
+            buttonCancel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonCancel.ForeColor = Color.White;
+            buttonCancel.Location = new Point(591, 40);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new Size(100, 40);
+            buttonCancel.TabIndex = 5;
+            buttonCancel.Text = "❌ Hủy";
+            buttonCancel.UseVisualStyleBackColor = false;
+            buttonCancel.Visible = false;
+            buttonCancel.Click += buttonCancel_Click;
+            // 
+            // buttonSave
+            // 
+            buttonSave.BackColor = Color.FromArgb(40, 167, 69);
+            buttonSave.FlatAppearance.BorderSize = 0;
+            buttonSave.FlatStyle = FlatStyle.Flat;
+            buttonSave.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonSave.ForeColor = Color.White;
+            buttonSave.Location = new Point(481, 40);
+            buttonSave.Name = "buttonSave";
+            buttonSave.Size = new Size(100, 40);
+            buttonSave.TabIndex = 4;
+            buttonSave.Text = "💾 Lưu";
+            buttonSave.UseVisualStyleBackColor = false;
+            buttonSave.Visible = false;
+            buttonSave.Click += buttonSave_Click;
             // 
             // textBoxCategoryName
             // 
             textBoxCategoryName.Font = new Font("Segoe UI", 10F);
-            textBoxCategoryName.Location = new Point(120, 50);
+            textBoxCategoryName.Location = new Point(146, 50);
             textBoxCategoryName.Name = "textBoxCategoryName";
             textBoxCategoryName.Size = new Size(300, 30);
             textBoxCategoryName.TabIndex = 3;
@@ -378,14 +410,14 @@ namespace Presentation.Pages.Admin
             labelCategoryName.ForeColor = Color.FromArgb(77, 58, 41);
             labelCategoryName.Location = new Point(20, 53);
             labelCategoryName.Name = "labelCategoryName";
-            labelCategoryName.Size = new Size(95, 23);
+            labelCategoryName.Size = new Size(122, 23);
             labelCategoryName.TabIndex = 2;
             labelCategoryName.Text = "Tên danh mục:";
             // 
             // textBoxCategoryId
             // 
             textBoxCategoryId.Font = new Font("Segoe UI", 10F);
-            textBoxCategoryId.Location = new Point(120, 20);
+            textBoxCategoryId.Location = new Point(146, 20);
             textBoxCategoryId.Name = "textBoxCategoryId";
             textBoxCategoryId.ReadOnly = true;
             textBoxCategoryId.Size = new Size(100, 30);
@@ -399,41 +431,9 @@ namespace Presentation.Pages.Admin
             labelCategoryId.ForeColor = Color.FromArgb(77, 58, 41);
             labelCategoryId.Location = new Point(20, 23);
             labelCategoryId.Name = "labelCategoryId";
-            labelCategoryId.Size = new Size(90, 23);
+            labelCategoryId.Size = new Size(120, 23);
             labelCategoryId.TabIndex = 0;
             labelCategoryId.Text = "Mã danh mục:";
-            // 
-            // buttonSave
-            // 
-            buttonSave.BackColor = Color.FromArgb(40, 167, 69);
-            buttonSave.FlatAppearance.BorderSize = 0;
-            buttonSave.FlatStyle = FlatStyle.Flat;
-            buttonSave.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            buttonSave.ForeColor = Color.White;
-            buttonSave.Location = new Point(450, 20);
-            buttonSave.Name = "buttonSave";
-            buttonSave.Size = new Size(100, 40);
-            buttonSave.TabIndex = 4;
-            buttonSave.Text = "💾 Lưu";
-            buttonSave.UseVisualStyleBackColor = false;
-            buttonSave.Visible = false;
-            buttonSave.Click += buttonSave_Click;
-            // 
-            // buttonCancel
-            // 
-            buttonCancel.BackColor = Color.FromArgb(108, 117, 125);
-            buttonCancel.FlatAppearance.BorderSize = 0;
-            buttonCancel.FlatStyle = FlatStyle.Flat;
-            buttonCancel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            buttonCancel.ForeColor = Color.White;
-            buttonCancel.Location = new Point(560, 20);
-            buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(100, 40);
-            buttonCancel.TabIndex = 5;
-            buttonCancel.Text = "❌ Hủy";
-            buttonCancel.UseVisualStyleBackColor = false;
-            buttonCancel.Visible = false;
-            buttonCancel.Click += buttonCancel_Click;
             // 
             // CategoryManagementPage
             // 

@@ -27,6 +27,33 @@ namespace Presentation.Pages.Admin
             this.Load += OrderManagementPage_Load;
             buttonSearch.Click += buttonSearch_Click;
             textBoxSearch.TextChanged += textBoxSearch_TextChanged;
+            // Load ảnh
+            LoadImages();
+        }
+
+        private void LoadImages()
+        {
+            try
+            {
+                // Load logo
+                if (pictureBoxLogo != null)
+                {
+                    var logoImage = Presentation.Services.ResourceImageLoader.LoadByFileName("logoden.png");
+                    if (logoImage != null)
+                    {
+                        pictureBoxLogo.Image = logoImage;
+                        System.Diagnostics.Debug.WriteLine("Logo loaded successfully for OrderManagementPage");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Failed to load logo image for OrderManagementPage");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"LoadImages Error: {ex.Message}");
+            }
         }
 
         private async void OrderManagementPage_Load(object? sender, EventArgs e)
@@ -251,7 +278,7 @@ namespace Presentation.Pages.Admin
                 }
 
                 // Xử lý việc thay đổi trạng thái
-                string newStatusText = comboBoxStatus.SelectedItem.ToString();
+                string newStatusText = comboBoxStatus.SelectedItem?.ToString() ?? "";
                 var latestStatus = existingOrder.OrderStatuses.OrderByDescending(os => os.ChangedAt).FirstOrDefault();
 
                 if (latestStatus == null || latestStatus.Status != newStatusText)
@@ -368,7 +395,7 @@ namespace Presentation.Pages.Admin
             Presentation.Navigation.Navigator.Navigate(new InventoryManagementPage());
         }
 
-        private void buttonSearch_Click(object sender, EventArgs e)
+        private void buttonSearch_Click(object? sender, EventArgs e)
         {
             string searchText = textBoxSearch.Text.Trim();
             if (string.IsNullOrWhiteSpace(searchText))
@@ -381,7 +408,7 @@ namespace Presentation.Pages.Admin
             UpdateDataGridView(filteredOrders);
         }
 
-        private void textBoxSearch_TextChanged(object sender, EventArgs e)
+        private void textBoxSearch_TextChanged(object? sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(textBoxSearch.Text))
             {
