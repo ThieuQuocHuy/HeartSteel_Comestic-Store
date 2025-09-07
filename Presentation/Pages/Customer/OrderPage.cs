@@ -90,7 +90,7 @@ namespace Presentation.Pages.Customer
                 Font = new Font("Segoe UI", 10, FontStyle.Regular),
                 ForeColor = Color.FromArgb(77, 58, 41),
                 Location = new Point(15, 45),
-                Size = new Size(150, 20),
+                Size = new Size(150, 30),
                 AutoSize = false
             };
 
@@ -102,7 +102,7 @@ namespace Presentation.Pages.Customer
                 Font = new Font("Segoe UI", 11, FontStyle.Bold),
                 ForeColor = Color.FromArgb(77, 58, 41),
                 Location = new Point(320, 15),
-                Size = new Size(150, 20),
+                Size = new Size(150, 30),
                 AutoSize = false,
                 TextAlign = ContentAlignment.MiddleRight
             };

@@ -100,6 +100,12 @@ namespace Presentation.Pages.Customer
         private void DisplayOrders()
         {
             flowLayoutPanelOrders.Controls.Clear();
+            
+            // Cải thiện cấu hình FlowLayoutPanel
+            flowLayoutPanelOrders.FlowDirection = FlowDirection.TopDown;
+            flowLayoutPanelOrders.WrapContents = false;
+            flowLayoutPanelOrders.AutoScroll = true;
+            flowLayoutPanelOrders.Padding = new Padding(10);
 
             if (_orders == null || _orders.Count == 0)
             {
@@ -130,7 +136,9 @@ namespace Presentation.Pages.Customer
                 BackColor = Color.FromArgb(237, 224, 207),
                 Size = new Size(700, 120),
                 Margin = new Padding(10),
-                Tag = order.OrderId
+                Tag = order.OrderId,
+                Padding = new Padding(15),
+                
             };
 
             // Mã đơn hàng
@@ -140,7 +148,7 @@ namespace Presentation.Pages.Customer
                 Font = new Font("Segoe UI", 14, FontStyle.Bold),
                 ForeColor = Color.FromArgb(77, 58, 41),
                 Location = new Point(15, 15),
-                Size = new Size(200, 25),
+                Size = new Size(200, 35),
                 AutoSize = false
             };
 
@@ -162,7 +170,7 @@ namespace Presentation.Pages.Customer
                 Font = new Font("Segoe UI", 12, FontStyle.Bold),
                 ForeColor = Color.FromArgb(77, 58, 41),
                 Location = new Point(15, 70),
-                Size = new Size(200, 20),
+                Size = new Size(200, 35),
                 AutoSize = false
             };
 
@@ -197,7 +205,7 @@ namespace Presentation.Pages.Customer
                 Font = new Font("Segoe UI", 10, FontStyle.Bold),
                 ForeColor = GetStatusColor(latestStatus),
                 Location = new Point(250, 70),
-                Size = new Size(200, 20),
+                Size = new Size(200, 30),
                 AutoSize = false
             };
 
@@ -238,6 +246,17 @@ namespace Presentation.Pages.Customer
                 "cancelled" or "đã hủy" => Color.Red,
                 _ => Color.Gray
             };
+        }
+
+        private string TruncateText(string text, int maxLength)
+        {
+            if (string.IsNullOrEmpty(text))
+                return "N/A";
+            
+            if (text.Length <= maxLength)
+                return text;
+            
+            return text.Substring(0, maxLength - 3) + "...";
         }
 
         private void ButtonViewDetail_Click(object? sender, EventArgs e)

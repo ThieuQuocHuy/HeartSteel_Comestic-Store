@@ -29,6 +29,7 @@ namespace Presentation.Pages.Customer
         private void InitializeComponent()
         {
             panelSidebar = new Panel();
+            buttonLogout1 = new Button();
             pictureBoxLogo = new PictureBox();
             buttonHome = new Button();
             buttonProducts = new Button();
@@ -54,6 +55,7 @@ namespace Presentation.Pages.Customer
             // panelSidebar
             // 
             panelSidebar.BackColor = Color.FromArgb(77, 58, 41);
+            panelSidebar.Controls.Add(buttonLogout1);
             panelSidebar.Controls.Add(pictureBoxLogo);
             panelSidebar.Controls.Add(buttonHome);
             panelSidebar.Controls.Add(buttonProducts);
@@ -65,6 +67,22 @@ namespace Presentation.Pages.Customer
             panelSidebar.Name = "panelSidebar";
             panelSidebar.Size = new Size(200, 553);
             panelSidebar.TabIndex = 0;
+            // 
+            // buttonLogout1
+            // 
+            buttonLogout1.BackColor = Color.FromArgb(77, 58, 41);
+            buttonLogout1.FlatAppearance.BorderSize = 0;
+            buttonLogout1.FlatStyle = FlatStyle.Flat;
+            buttonLogout1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            buttonLogout1.ForeColor = Color.White;
+            buttonLogout1.Location = new Point(0, 380);
+            buttonLogout1.Name = "buttonLogout1";
+            buttonLogout1.Padding = new Padding(30, 0, 0, 0);
+            buttonLogout1.Size = new Size(200, 50);
+            buttonLogout1.TabIndex = 6;
+            buttonLogout1.Text = "CSKH";
+            buttonLogout1.TextAlign = ContentAlignment.MiddleLeft;
+            buttonLogout1.UseVisualStyleBackColor = false;
             // 
             // pictureBoxLogo
             // 
@@ -150,7 +168,7 @@ namespace Presentation.Pages.Customer
             buttonLogout.FlatStyle = FlatStyle.Flat;
             buttonLogout.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             buttonLogout.ForeColor = Color.White;
-            buttonLogout.Location = new Point(0, 380);
+            buttonLogout.Location = new Point(0, 430);
             buttonLogout.Name = "buttonLogout";
             buttonLogout.Padding = new Padding(30, 0, 0, 0);
             buttonLogout.Size = new Size(200, 50);
@@ -226,10 +244,12 @@ namespace Presentation.Pages.Customer
             // 
             flowLayoutPanelOrders.AutoScroll = true;
             flowLayoutPanelOrders.BackColor = Color.FromArgb(255, 255, 255);
+            flowLayoutPanelOrders.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanelOrders.Location = new Point(200, 200);
             flowLayoutPanelOrders.Name = "flowLayoutPanelOrders";
             flowLayoutPanelOrders.Size = new Size(940, 344);
             flowLayoutPanelOrders.TabIndex = 15;
+            flowLayoutPanelOrders.WrapContents = false;
             // 
             // labelOrdersTitle
             // 
@@ -299,5 +319,6 @@ namespace Presentation.Pages.Customer
         private PictureBox pictureBox2;
         private FlowLayoutPanel flowLayoutPanelOrders;
         private Label labelOrdersTitle;
+        private Button buttonLogout1;
     }
 }

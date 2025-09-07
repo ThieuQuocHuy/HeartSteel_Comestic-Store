@@ -28,7 +28,6 @@ namespace Presentation.Pages.Customer
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductPage));
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
@@ -46,6 +45,7 @@ namespace Presentation.Pages.Customer
             textSearch = new TextBox();
             comboCategory = new ComboBox();
             comboSortPrice = new ComboBox();
+            buttonCSKH = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelSidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
@@ -58,7 +58,7 @@ namespace Presentation.Pages.Customer
             label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.Location = new Point(377, 105);
             label4.Name = "label4";
-            label4.Size = new Size(186, 29);
+            label4.Size = new Size(155, 25);
             label4.TabIndex = 22;
             label4.Text = "Thiều Quốc Huy";
             // 
@@ -68,7 +68,7 @@ namespace Presentation.Pages.Customer
             label3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.Location = new Point(237, 105);
             label3.Name = "label3";
-            label3.Size = new Size(145, 29);
+            label3.Size = new Size(124, 25);
             label3.TabIndex = 21;
             label3.Text = "Khách hàng:";
             // 
@@ -78,7 +78,7 @@ namespace Presentation.Pages.Customer
             label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.Location = new Point(237, 59);
             label2.Name = "label2";
-            label2.Size = new Size(555, 29);
+            label2.Size = new Size(460, 25);
             label2.TabIndex = 20;
             label2.Text = "Chào mừng bạn đã đến với cửa hàng của chúng tôi!";
             // 
@@ -100,13 +100,14 @@ namespace Presentation.Pages.Customer
             label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.Location = new Point(237, 9);
             label1.Name = "label1";
-            label1.Size = new Size(336, 29);
+            label1.Size = new Size(277, 25);
             label1.TabIndex = 18;
             label1.Text = "Cửa hàng HeartSteelComestic";
             // 
             // panelSidebar
             // 
             panelSidebar.BackColor = Color.FromArgb(77, 58, 41);
+            panelSidebar.Controls.Add(buttonCSKH);
             panelSidebar.Controls.Add(pictureBoxLogo);
             panelSidebar.Controls.Add(buttonHome);
             panelSidebar.Controls.Add(buttonProducts);
@@ -116,12 +117,11 @@ namespace Presentation.Pages.Customer
             panelSidebar.Dock = DockStyle.Left;
             panelSidebar.Location = new Point(0, 0);
             panelSidebar.Name = "panelSidebar";
-            panelSidebar.Size = new Size(200, 544);
+            panelSidebar.Size = new Size(200, 553);
             panelSidebar.TabIndex = 16;
             // 
             // pictureBoxLogo
             // 
-            pictureBoxLogo.Image = (Image)resources.GetObject("pictureBoxLogo.Image");
             pictureBoxLogo.Location = new Point(0, 0);
             pictureBoxLogo.Name = "pictureBoxLogo";
             pictureBoxLogo.Size = new Size(200, 182);
@@ -194,7 +194,6 @@ namespace Presentation.Pages.Customer
             buttonOrders.Text = "Đơn mua";
             buttonOrders.TextAlign = ContentAlignment.MiddleLeft;
             buttonOrders.UseVisualStyleBackColor = false;
-
             // 
             // buttonLogout
             // 
@@ -203,7 +202,7 @@ namespace Presentation.Pages.Customer
             buttonLogout.FlatStyle = FlatStyle.Flat;
             buttonLogout.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             buttonLogout.ForeColor = Color.White;
-            buttonLogout.Location = new Point(0, 380);
+            buttonLogout.Location = new Point(0, 430);
             buttonLogout.Name = "buttonLogout";
             buttonLogout.Padding = new Padding(30, 0, 0, 0);
             buttonLogout.Size = new Size(200, 50);
@@ -237,7 +236,7 @@ namespace Presentation.Pages.Customer
             textSearch.Location = new Point(200, 160);
             textSearch.Name = "textSearch";
             textSearch.PlaceholderText = "tìm sản phẩm";
-            textSearch.Size = new Size(280, 31);
+            textSearch.Size = new Size(280, 27);
             textSearch.TabIndex = 24;
             // 
             // comboCategory
@@ -245,7 +244,7 @@ namespace Presentation.Pages.Customer
             comboCategory.DropDownStyle = ComboBoxStyle.DropDownList;
             comboCategory.Location = new Point(490, 160);
             comboCategory.Name = "comboCategory";
-            comboCategory.Size = new Size(220, 33);
+            comboCategory.Size = new Size(220, 28);
             comboCategory.TabIndex = 25;
             // 
             // comboSortPrice
@@ -253,13 +252,29 @@ namespace Presentation.Pages.Customer
             comboSortPrice.DropDownStyle = ComboBoxStyle.DropDownList;
             comboSortPrice.Location = new Point(720, 160);
             comboSortPrice.Name = "comboSortPrice";
-            comboSortPrice.Size = new Size(220, 33);
+            comboSortPrice.Size = new Size(220, 28);
             comboSortPrice.TabIndex = 26;
+            // 
+            // buttonCSKH
+            // 
+            buttonCSKH.BackColor = Color.FromArgb(77, 58, 41);
+            buttonCSKH.FlatAppearance.BorderSize = 0;
+            buttonCSKH.FlatStyle = FlatStyle.Flat;
+            buttonCSKH.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            buttonCSKH.ForeColor = Color.White;
+            buttonCSKH.Location = new Point(0, 380);
+            buttonCSKH.Name = "buttonCSKH";
+            buttonCSKH.Padding = new Padding(30, 0, 0, 0);
+            buttonCSKH.Size = new Size(200, 50);
+            buttonCSKH.TabIndex = 6;
+            buttonCSKH.Text = "CSKH";
+            buttonCSKH.TextAlign = ContentAlignment.MiddleLeft;
+            buttonCSKH.UseVisualStyleBackColor = false;
             // 
             // ProductPage
             // 
             BackColor = Color.FromArgb(237, 224, 207);
-            ClientSize = new Size(1138, 544);
+            ClientSize = new Size(1142, 553);
             Controls.Add(flowLayoutPanelProducts);
             Controls.Add(comboSortPrice);
             Controls.Add(comboCategory);
@@ -304,7 +319,7 @@ namespace Presentation.Pages.Customer
         private TextBox textSearch;
         private ComboBox comboCategory;
         private ComboBox comboSortPrice;
-
+        private Button buttonCSKH;
     }
 }
 

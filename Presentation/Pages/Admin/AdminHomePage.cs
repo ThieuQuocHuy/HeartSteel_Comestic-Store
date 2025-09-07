@@ -32,13 +32,13 @@ namespace Presentation.Pages.Admin
         {
             // Hiển thị tên admin đang đăng nhập
             labelAdminName.Text = $"Xin chào, {Presentation.Auth.UserSession.CurrentUser?.Fullname ?? "Admin"}! 👋";
-            
+
             // Cập nhật thời gian ngay lập tức
             labelCurrentTime.Text = DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
-            
+
             // Load thống kê dashboard (giả lập dữ liệu)
             LoadDashboardStats();
-            
+
             // Thêm hiệu ứng hover cho các button
             AddHoverEffects();
 
@@ -51,7 +51,7 @@ namespace Presentation.Pages.Admin
             // Dừng timer trước khi chuyển trang
             timeTimer?.Stop();
             timeTimer?.Dispose();
-            
+
             // Chuyển đến trang quản lý sản phẩm
             Presentation.Navigation.Navigator.Navigate(new ProductManagementPage());
         }
@@ -74,7 +74,7 @@ namespace Presentation.Pages.Admin
             AddButtonHoverEffect(buttonManageOrders, Color.FromArgb(95, 76, 59), Color.FromArgb(115, 96, 79));
             AddButtonHoverEffect(buttonReports, Color.FromArgb(95, 76, 59), Color.FromArgb(115, 96, 79));
             AddButtonHoverEffect(buttonLogout, Color.FromArgb(184, 84, 84), Color.FromArgb(204, 104, 104));
-            
+
             // Thêm hiệu ứng hover cho quick action buttons
             AddButtonHoverEffect(buttonQuickAddProduct, Color.FromArgb(74, 144, 226), Color.FromArgb(94, 164, 246));
             AddButtonHoverEffect(buttonQuickManageInventory, Color.FromArgb(39, 174, 96), Color.FromArgb(59, 194, 116));
@@ -118,10 +118,10 @@ namespace Presentation.Pages.Admin
             // Dừng timer
             timeTimer?.Stop();
             timeTimer?.Dispose();
-            
+
             // Clear session
             Presentation.Auth.UserSession.Clear();
-            
+
             // Navigate to login
             Presentation.Navigation.Navigator.Navigate(new Customer.LoginForm());
         }
@@ -135,6 +135,11 @@ namespace Presentation.Pages.Admin
                 components?.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private void panelSidebar_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

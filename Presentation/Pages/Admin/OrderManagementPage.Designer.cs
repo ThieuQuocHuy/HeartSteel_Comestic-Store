@@ -17,7 +17,6 @@
 
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrderManagementPage));
             panelSidebar = new Panel();
             buttonLogout = new Button();
             buttonManageInventory = new Button();
@@ -53,6 +52,8 @@
             labelSearch = new Label();
             panelHeader = new Panel();
             labelTitle = new Label();
+            buttonAdminCSKH = new Button();
+            buttonAdminHome = new Button();
             panelSidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
             panelMain.SuspendLayout();
@@ -68,6 +69,8 @@
             // panelSidebar
             // 
             panelSidebar.BackColor = Color.FromArgb(77, 58, 41);
+            panelSidebar.Controls.Add(buttonAdminHome);
+            panelSidebar.Controls.Add(buttonAdminCSKH);
             panelSidebar.Controls.Add(buttonLogout);
             panelSidebar.Controls.Add(buttonManageInventory);
             panelSidebar.Controls.Add(buttonReports);
@@ -104,7 +107,7 @@
             buttonManageInventory.FlatStyle = FlatStyle.Flat;
             buttonManageInventory.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonManageInventory.ForeColor = Color.White;
-            buttonManageInventory.Location = new Point(10, 210);
+            buttonManageInventory.Location = new Point(10, 270);
             buttonManageInventory.Name = "buttonManageInventory";
             buttonManageInventory.Padding = new Padding(5, 0, 0, 0);
             buttonManageInventory.Size = new Size(200, 50);
@@ -121,7 +124,7 @@
             buttonReports.FlatStyle = FlatStyle.Flat;
             buttonReports.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonReports.ForeColor = Color.White;
-            buttonReports.Location = new Point(10, 390);
+            buttonReports.Location = new Point(10, 450);
             buttonReports.Name = "buttonReports";
             buttonReports.Padding = new Padding(5, 0, 0, 0);
             buttonReports.Size = new Size(200, 50);
@@ -138,7 +141,7 @@
             buttonManageCategories.FlatStyle = FlatStyle.Flat;
             buttonManageCategories.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonManageCategories.ForeColor = Color.White;
-            buttonManageCategories.Location = new Point(10, 270);
+            buttonManageCategories.Location = new Point(10, 330);
             buttonManageCategories.Name = "buttonManageCategories";
             buttonManageCategories.Padding = new Padding(5, 0, 0, 0);
             buttonManageCategories.Size = new Size(200, 50);
@@ -150,7 +153,6 @@
             // 
             // pictureBoxLogo
             // 
-            pictureBoxLogo.Image = (Image)resources.GetObject("pictureBoxLogo.Image");
             pictureBoxLogo.Location = new Point(10, 10);
             pictureBoxLogo.Name = "pictureBoxLogo";
             pictureBoxLogo.Size = new Size(200, 120);
@@ -165,7 +167,7 @@
             buttonManageOrders.FlatStyle = FlatStyle.Flat;
             buttonManageOrders.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonManageOrders.ForeColor = Color.FromArgb(77, 58, 41);
-            buttonManageOrders.Location = new Point(10, 330);
+            buttonManageOrders.Location = new Point(10, 390);
             buttonManageOrders.Name = "buttonManageOrders";
             buttonManageOrders.Padding = new Padding(5, 0, 0, 0);
             buttonManageOrders.Size = new Size(200, 50);
@@ -182,7 +184,7 @@
             buttonManageProducts.FlatStyle = FlatStyle.Flat;
             buttonManageProducts.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonManageProducts.ForeColor = Color.White;
-            buttonManageProducts.Location = new Point(10, 150);
+            buttonManageProducts.Location = new Point(10, 210);
             buttonManageProducts.Name = "buttonManageProducts";
             buttonManageProducts.Padding = new Padding(5, 0, 0, 0);
             buttonManageProducts.Size = new Size(200, 50);
@@ -531,6 +533,38 @@
             labelTitle.TabIndex = 1;
             labelTitle.Text = "📜 Quản lý đơn hàng";
             // 
+            // buttonAdminCSKH
+            // 
+            buttonAdminCSKH.BackColor = Color.FromArgb(95, 76, 59);
+            buttonAdminCSKH.FlatAppearance.BorderSize = 0;
+            buttonAdminCSKH.FlatStyle = FlatStyle.Flat;
+            buttonAdminCSKH.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonAdminCSKH.ForeColor = Color.White;
+            buttonAdminCSKH.Location = new Point(10, 510);
+            buttonAdminCSKH.Name = "buttonAdminCSKH";
+            buttonAdminCSKH.Padding = new Padding(5, 0, 0, 0);
+            buttonAdminCSKH.Size = new Size(200, 50);
+            buttonAdminCSKH.TabIndex = 11;
+            buttonAdminCSKH.Text = "💬 Trang CSKH";
+            buttonAdminCSKH.TextAlign = ContentAlignment.MiddleLeft;
+            buttonAdminCSKH.UseVisualStyleBackColor = false;
+            // 
+            // buttonAdminHome
+            // 
+            buttonAdminHome.BackColor = Color.FromArgb(95, 76, 59);
+            buttonAdminHome.FlatAppearance.BorderSize = 0;
+            buttonAdminHome.FlatStyle = FlatStyle.Flat;
+            buttonAdminHome.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonAdminHome.ForeColor = Color.White;
+            buttonAdminHome.Location = new Point(10, 150);
+            buttonAdminHome.Name = "buttonAdminHome";
+            buttonAdminHome.Padding = new Padding(5, 0, 0, 0);
+            buttonAdminHome.Size = new Size(200, 50);
+            buttonAdminHome.TabIndex = 12;
+            buttonAdminHome.Text = "🏠 Trang chủ HeartSteel Cosmetic";
+            buttonAdminHome.TextAlign = ContentAlignment.MiddleLeft;
+            buttonAdminHome.UseVisualStyleBackColor = false;
+            // 
             // OrderManagementPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -599,6 +633,7 @@
         private System.Windows.Forms.Label labelOrderId;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonCancel;
-
+        private Button buttonAdminHome;
+        private Button buttonAdminCSKH;
     }
 }

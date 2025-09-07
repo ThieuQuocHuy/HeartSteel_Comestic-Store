@@ -125,20 +125,23 @@ namespace Presentation.Pages.Customer
             var panel = new Panel
             {
                 BackColor = System.Drawing.Color.FromArgb(237, 224, 207),
-                Size = new System.Drawing.Size(600, 150),
+                Size = new System.Drawing.Size(620, 150), // Tăng chiều rộng để có thêm không gian
                 Margin = new Padding(10),
-                Tag = cartItem
+                Tag = cartItem,
+                BorderStyle = BorderStyle.FixedSingle // Thêm border để dễ nhìn
             };
 
-            // Tên sản phẩm
+            // Tên sản phẩm - Có thể xuống hàng
+            var productName = TruncateText(cartItem.Product?.ProductName ?? "Không có tên", 50);
             var labelProductName = new Label
             {
-                Text = cartItem.Product?.ProductName ?? "Không có tên",
-                Font = new Font("Segoe UI", 14, FontStyle.Bold),
+                Text = productName,
+                Font = new Font("Segoe UI", 13, FontStyle.Bold), // Giảm font size một chút
                 ForeColor = System.Drawing.Color.FromArgb(77, 58, 41),
                 Location = new System.Drawing.Point(15, 20),
-                Size = new System.Drawing.Size(380, 30),
-                AutoSize = false
+                Size = new System.Drawing.Size(550, 50), // Tăng chiều cao để chứa text 2 hàng
+                AutoSize = false,
+                UseMnemonic = false // Tắt mnemonic để hiển thị & bình thường
             };
 
             // Giá sản phẩm (lấy từ Product.SellPrice)
@@ -147,7 +150,7 @@ namespace Presentation.Pages.Customer
                 Text = $"{(cartItem.Product?.SellPrice ?? 0):N0} ₫",
                 Font = new Font("Segoe UI", 12, FontStyle.Regular),
                 ForeColor = System.Drawing.Color.FromArgb(77, 58, 41),
-                Location = new System.Drawing.Point(15, 60),
+                Location = new System.Drawing.Point(15, 70), // Điều chỉnh vị trí
                 Size = new System.Drawing.Size(200, 25),
                 AutoSize = false
             };
@@ -158,7 +161,7 @@ namespace Presentation.Pages.Customer
                 Text = "Số lượng:",
                 Font = new Font("Segoe UI", 12, FontStyle.Regular),
                 ForeColor = System.Drawing.Color.FromArgb(77, 58, 41),
-                Location = new System.Drawing.Point(15, 95),
+                Location = new System.Drawing.Point(15, 105), // Điều chỉnh vị trí
                 Size = new System.Drawing.Size(80, 25),
                 AutoSize = false
             };
@@ -168,7 +171,7 @@ namespace Presentation.Pages.Customer
                 Minimum = 1,
                 Maximum = cartItem.Product?.ProductInStock ?? 1, // Sử dụng ProductInStock thay vì Stock
                 Value = cartItem.Quantity,
-                Location = new System.Drawing.Point(100, 93),
+                Location = new System.Drawing.Point(100, 103), // Điều chỉnh vị trí
                 Size = new System.Drawing.Size(80, 30),
                 Tag = cartItem
             };
@@ -179,12 +182,13 @@ namespace Presentation.Pages.Customer
             var labelTotal = new Label
             {
                 Text = $"Tổng: {totalPrice:N0} ₫",
-                Font = new Font("Segoe UI", 13, FontStyle.Bold),
+                Font = new Font("Segoe UI", 12, FontStyle.Bold), // Giảm font size một chút
                 ForeColor = System.Drawing.Color.FromArgb(77, 58, 41),
-                Location = new System.Drawing.Point(380, 20),
-                Size = new Size(230, 30),
+                Location = new System.Drawing.Point(320, 70),
+                Size = new Size(250, 30),
                 AutoSize = false,
-                TextAlign = ContentAlignment.MiddleRight
+                TextAlign = ContentAlignment.MiddleRight,
+                UseMnemonic = false // Tắt mnemonic để hiển thị & bình thường
             };
 
             // Nút xóa
@@ -195,7 +199,7 @@ namespace Presentation.Pages.Customer
                 ForeColor = System.Drawing.Color.White,
                 FlatStyle = FlatStyle.Flat,
                 FlatAppearance = { BorderSize = 0 },
-                Location = new System.Drawing.Point(480, 95),
+                Location = new System.Drawing.Point(400, 105), // Điều chỉnh vị trí
                 Size = new System.Drawing.Size(90, 35),
                 Tag = cartItem,
                 Font = new Font("Segoe UI", 10, FontStyle.Bold)
@@ -290,6 +294,17 @@ namespace Presentation.Pages.Customer
 
             labelTotalItems.Text = $"Tổng sản phẩm: {totalItems}";
             labelTotalAmount.Text = $"Tổng tiền: {totalAmount:N0} ₫";
+        }
+
+        private string TruncateText(string text, int maxLength)
+        {
+            if (string.IsNullOrEmpty(text))
+                return "N/A";
+            
+            if (text.Length <= maxLength)
+                return text;
+            
+            return text.Substring(0, maxLength - 3) + "...";
         }
 
         private async void buttonClearCart_Click(object sender, EventArgs e)
