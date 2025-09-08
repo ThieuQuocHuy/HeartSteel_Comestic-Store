@@ -100,7 +100,7 @@ namespace Presentation.Pages.Customer
         private void DisplayOrders()
         {
             flowLayoutPanelOrders.Controls.Clear();
-            
+
             // Cải thiện cấu hình FlowLayoutPanel
             flowLayoutPanelOrders.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanelOrders.WrapContents = false;
@@ -138,7 +138,7 @@ namespace Presentation.Pages.Customer
                 Margin = new Padding(10),
                 Tag = order.OrderId,
                 Padding = new Padding(15),
-                
+
             };
 
             // Mã đơn hàng
@@ -252,10 +252,10 @@ namespace Presentation.Pages.Customer
         {
             if (string.IsNullOrEmpty(text))
                 return "N/A";
-            
+
             if (text.Length <= maxLength)
                 return text;
-            
+
             return text.Substring(0, maxLength - 3) + "...";
         }
 
@@ -290,6 +290,11 @@ namespace Presentation.Pages.Customer
         private void buttonOrders_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonLogout1_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new CSKHPage());
         }
     }
 }

@@ -34,6 +34,7 @@ namespace Presentation.Pages.Customer
             pictureBox1 = new PictureBox();
             label1 = new Label();
             panelSidebar = new Panel();
+            buttonCSKH = new Button();
             pictureBoxLogo = new PictureBox();
             buttonHome = new Button();
             buttonProducts = new Button();
@@ -45,7 +46,6 @@ namespace Presentation.Pages.Customer
             textSearch = new TextBox();
             comboCategory = new ComboBox();
             comboSortPrice = new ComboBox();
-            buttonCSKH = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelSidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
@@ -119,6 +119,23 @@ namespace Presentation.Pages.Customer
             panelSidebar.Name = "panelSidebar";
             panelSidebar.Size = new Size(200, 553);
             panelSidebar.TabIndex = 16;
+            // 
+            // buttonCSKH
+            // 
+            buttonCSKH.BackColor = Color.FromArgb(77, 58, 41);
+            buttonCSKH.FlatAppearance.BorderSize = 0;
+            buttonCSKH.FlatStyle = FlatStyle.Flat;
+            buttonCSKH.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            buttonCSKH.ForeColor = Color.White;
+            buttonCSKH.Location = new Point(0, 380);
+            buttonCSKH.Name = "buttonCSKH";
+            buttonCSKH.Padding = new Padding(30, 0, 0, 0);
+            buttonCSKH.Size = new Size(200, 50);
+            buttonCSKH.TabIndex = 6;
+            buttonCSKH.Text = "CSKH";
+            buttonCSKH.TextAlign = ContentAlignment.MiddleLeft;
+            buttonCSKH.UseVisualStyleBackColor = false;
+            buttonCSKH.Click += buttonCSKH_Click;
             // 
             // pictureBoxLogo
             // 
@@ -254,22 +271,6 @@ namespace Presentation.Pages.Customer
             comboSortPrice.Name = "comboSortPrice";
             comboSortPrice.Size = new Size(220, 28);
             comboSortPrice.TabIndex = 26;
-            // 
-            // buttonCSKH
-            // 
-            buttonCSKH.BackColor = Color.FromArgb(77, 58, 41);
-            buttonCSKH.FlatAppearance.BorderSize = 0;
-            buttonCSKH.FlatStyle = FlatStyle.Flat;
-            buttonCSKH.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
-            buttonCSKH.ForeColor = Color.White;
-            buttonCSKH.Location = new Point(0, 380);
-            buttonCSKH.Name = "buttonCSKH";
-            buttonCSKH.Padding = new Padding(30, 0, 0, 0);
-            buttonCSKH.Size = new Size(200, 50);
-            buttonCSKH.TabIndex = 6;
-            buttonCSKH.Text = "CSKH";
-            buttonCSKH.TextAlign = ContentAlignment.MiddleLeft;
-            buttonCSKH.UseVisualStyleBackColor = false;
             // 
             // ProductPage
             // 

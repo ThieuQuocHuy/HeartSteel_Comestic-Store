@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panelSidebar = new Panel();
+            buttonCSKH = new Button();
             pictureBoxLogo = new PictureBox();
             buttonHome = new Button();
             buttonProducts = new Button();
@@ -42,7 +43,6 @@
             label3 = new Label();
             label4 = new Label();
             pictureBox2 = new PictureBox();
-            buttonCSKH = new Button();
             panelSidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxMain).BeginInit();
@@ -65,6 +65,23 @@
             panelSidebar.Name = "panelSidebar";
             panelSidebar.Size = new Size(200, 553);
             panelSidebar.TabIndex = 0;
+            // 
+            // buttonCSKH
+            // 
+            buttonCSKH.BackColor = Color.FromArgb(77, 58, 41);
+            buttonCSKH.FlatAppearance.BorderSize = 0;
+            buttonCSKH.FlatStyle = FlatStyle.Flat;
+            buttonCSKH.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            buttonCSKH.ForeColor = Color.White;
+            buttonCSKH.Location = new Point(0, 380);
+            buttonCSKH.Name = "buttonCSKH";
+            buttonCSKH.Padding = new Padding(30, 0, 0, 0);
+            buttonCSKH.Size = new Size(200, 50);
+            buttonCSKH.TabIndex = 6;
+            buttonCSKH.Text = "CSKH";
+            buttonCSKH.TextAlign = ContentAlignment.MiddleLeft;
+            buttonCSKH.UseVisualStyleBackColor = false;
+            buttonCSKH.Click += buttonCSKH_Click;
             // 
             // pictureBoxLogo
             // 
@@ -228,22 +245,6 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 15;
             pictureBox2.TabStop = false;
-            // 
-            // buttonCSKH
-            // 
-            buttonCSKH.BackColor = Color.FromArgb(77, 58, 41);
-            buttonCSKH.FlatAppearance.BorderSize = 0;
-            buttonCSKH.FlatStyle = FlatStyle.Flat;
-            buttonCSKH.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
-            buttonCSKH.ForeColor = Color.White;
-            buttonCSKH.Location = new Point(0, 380);
-            buttonCSKH.Name = "buttonCSKH";
-            buttonCSKH.Padding = new Padding(30, 0, 0, 0);
-            buttonCSKH.Size = new Size(200, 50);
-            buttonCSKH.TabIndex = 6;
-            buttonCSKH.Text = "CSKH";
-            buttonCSKH.TextAlign = ContentAlignment.MiddleLeft;
-            buttonCSKH.UseVisualStyleBackColor = false;
             // 
             // HomePage
             // 

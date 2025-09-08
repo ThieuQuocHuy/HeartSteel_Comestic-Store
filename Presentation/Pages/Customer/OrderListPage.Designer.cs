@@ -83,6 +83,7 @@ namespace Presentation.Pages.Customer
             buttonLogout1.Text = "CSKH";
             buttonLogout1.TextAlign = ContentAlignment.MiddleLeft;
             buttonLogout1.UseVisualStyleBackColor = false;
+            buttonLogout1.Click += buttonLogout1_Click;
             // 
             // pictureBoxLogo
             // 

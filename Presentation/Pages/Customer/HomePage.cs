@@ -59,7 +59,7 @@ namespace Presentation.Pages.Customer
             {
                 System.Diagnostics.Debug.WriteLine($"LoadImages Error: {ex.Message}");
             }
-        }   
+        }
         private void buttonLogout_Click(object? sender, EventArgs e)
         {
             Presentation.Auth.UserSession.Clear();
@@ -104,6 +104,11 @@ namespace Presentation.Pages.Customer
         private void buttonOrders_Click(object? sender, EventArgs e)
         {
             Presentation.Navigation.Navigator.Navigate(new OrderListPage());
+        }
+
+        private void buttonCSKH_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new CSKHPage());
         }
     }
 }

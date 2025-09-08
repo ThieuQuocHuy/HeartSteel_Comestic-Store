@@ -300,10 +300,10 @@ namespace Presentation.Pages.Customer
         {
             if (string.IsNullOrEmpty(text))
                 return "N/A";
-            
+
             if (text.Length <= maxLength)
                 return text;
-            
+
             return text.Substring(0, maxLength - 3) + "...";
         }
 
@@ -381,6 +381,9 @@ namespace Presentation.Pages.Customer
 
         }
 
-
+        private void buttonCSKH_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new CSKHPage());
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace Presentation.Pages.Customer
             {
                 _currentUserId = Presentation.Auth.UserSession.CurrentUserId.Value;
             }
-            
+
             // Gán sự kiện cho các nút điều hướng
             buttonHome.Click += buttonHome_Click;
             buttonCart.Click += buttonCart_Click;
@@ -375,6 +375,10 @@ namespace Presentation.Pages.Customer
 
         }
 
+        private void buttonCSKH_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new CSKHPage());
+        }
     }
 }
 
