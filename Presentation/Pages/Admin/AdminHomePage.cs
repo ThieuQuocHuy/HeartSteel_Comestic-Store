@@ -42,19 +42,50 @@ namespace Presentation.Pages.Admin
             // Thêm hiệu ứng hover cho các button
             AddHoverEffects();
 
-            // Tự động chuyển đến trang quản lý sản phẩm
-            NavigateToProductManagement();
+            //Load ảnh logo và trang chủ
+            LoadImages();
         }
 
-        private void NavigateToProductManagement()
+        private void LoadImages()
         {
-            // Dừng timer trước khi chuyển trang
-            timeTimer?.Stop();
-            timeTimer?.Dispose();
+            try
+            {
+                // Load logo
+                if (pictureBoxLogo != null)
+                {
+                    var logoImage = Presentation.Services.ResourceImageLoader.LoadByFileName("logoden.png");
+                    if (logoImage != null)
+                    {
+                        pictureBoxLogo.Image = logoImage;
+                        System.Diagnostics.Debug.WriteLine("Logo loaded successfully for HomePage");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Failed to load logo image for HomePage");
+                    }
+                }
 
-            // Chuyển đến trang quản lý sản phẩm
-            Presentation.Navigation.Navigator.Navigate(new ProductManagementPage());
+                // Load trangchu2.png vào pictureBox2
+                if (pictureBox2 != null)
+                {
+                    var trangchuImage = Presentation.Services.ResourceImageLoader.LoadByFileName("trangchu2.png");
+                    if (trangchuImage != null)
+                    {
+                        pictureBox2.Image = trangchuImage;
+                        System.Diagnostics.Debug.WriteLine("Trangchu2 image loaded successfully for HomePage");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Failed to load trangchu2 image for HomePage");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"LoadImages Error: {ex.Message}");
+            }
         }
+
 
         private void LoadDashboardStats()
         {
@@ -138,6 +169,11 @@ namespace Presentation.Pages.Admin
         }
 
         private void panelSidebar_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBoxLogo_Click(object sender, EventArgs e)
         {
 
         }
