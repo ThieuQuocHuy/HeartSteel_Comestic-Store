@@ -40,6 +40,8 @@ public partial class shopdbContext : DbContext
     public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<CustomerRequirement> CustomerRequirements { get; set; }
+    public virtual DbSet<RequirementStatus> RequirementStatuses { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
@@ -271,6 +273,50 @@ public partial class shopdbContext : DbContext
             entity.Property(e => e.StatusName)
                 .IsRequired()
                 .HasMaxLength(100)
+                .HasColumnName("status_name");
+        });
+
+        modelBuilder.Entity<CustomerRequirement>(entity =>
+        {
+            entity.HasKey(e => e.RequirementId);
+
+            entity.ToTable("CustomerRequirements");
+
+            entity.Property(e => e.RequirementId).HasColumnName("requirement_id");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+            entity.Property(e => e.CustomerName)
+                .IsRequired()
+                .HasMaxLength(100)
+                .HasColumnName("customer_name");
+            entity.Property(e => e.Phone)
+                .IsRequired()
+                .HasMaxLength(20)
+                .HasColumnName("phone");
+            entity.Property(e => e.Content).HasColumnName("content");
+            entity.Property(e => e.RequestDate).HasColumnName("request_date");
+            entity.Property(e => e.StatusId).HasColumnName("status_id");
+
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.CustomerRequirements)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            entity.HasOne(d => d.Status)
+                .WithMany(p => p.CustomerRequirements)
+                .HasForeignKey(d => d.StatusId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+        });
+
+        modelBuilder.Entity<RequirementStatus>(entity =>
+        {
+            entity.HasKey(e => e.StatusId);
+
+            entity.ToTable("RequirementStatus");
+
+            entity.Property(e => e.StatusId).HasColumnName("status_id");
+            entity.Property(e => e.StatusName)
+                .IsRequired()
+                .HasMaxLength(50)
                 .HasColumnName("status_name");
         });
 

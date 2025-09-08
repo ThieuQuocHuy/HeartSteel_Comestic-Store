@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             panelSidebar = new Panel();
+            buttonAdminHome = new Button();
+            buttonAdminCSKH = new Button();
             buttonManageOrders = new Button();
             pictureBoxLogo = new PictureBox();
             buttonManageProducts = new Button();
@@ -79,8 +81,6 @@
             labelInventoryTitle = new Label();
             panelHeader = new Panel();
             labelTitle = new Label();
-            buttonAdminCSKH = new Button();
-            buttonAdminHome = new Button();
             panelSidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
             panelMain.SuspendLayout();
@@ -118,6 +118,40 @@
             panelSidebar.Name = "panelSidebar";
             panelSidebar.Size = new Size(219, 707);
             panelSidebar.TabIndex = 0;
+            // 
+            // buttonAdminHome
+            // 
+            buttonAdminHome.BackColor = Color.FromArgb(95, 76, 59);
+            buttonAdminHome.FlatAppearance.BorderSize = 0;
+            buttonAdminHome.FlatStyle = FlatStyle.Flat;
+            buttonAdminHome.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonAdminHome.ForeColor = Color.White;
+            buttonAdminHome.Location = new Point(10, 150);
+            buttonAdminHome.Name = "buttonAdminHome";
+            buttonAdminHome.Padding = new Padding(5, 0, 0, 0);
+            buttonAdminHome.Size = new Size(200, 51);
+            buttonAdminHome.TabIndex = 10;
+            buttonAdminHome.Text = "🏠 Trang chủ HeartSteel Cosmetic";
+            buttonAdminHome.TextAlign = ContentAlignment.MiddleLeft;
+            buttonAdminHome.UseVisualStyleBackColor = false;
+            buttonAdminHome.Click += buttonAdminHome_Click;
+            // 
+            // buttonAdminCSKH
+            // 
+            buttonAdminCSKH.BackColor = Color.FromArgb(95, 76, 59);
+            buttonAdminCSKH.FlatAppearance.BorderSize = 0;
+            buttonAdminCSKH.FlatStyle = FlatStyle.Flat;
+            buttonAdminCSKH.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonAdminCSKH.ForeColor = Color.White;
+            buttonAdminCSKH.Location = new Point(10, 510);
+            buttonAdminCSKH.Name = "buttonAdminCSKH";
+            buttonAdminCSKH.Padding = new Padding(5, 0, 0, 0);
+            buttonAdminCSKH.Size = new Size(200, 51);
+            buttonAdminCSKH.TabIndex = 9;
+            buttonAdminCSKH.Text = "💬 Trang CSKH";
+            buttonAdminCSKH.TextAlign = ContentAlignment.MiddleLeft;
+            buttonAdminCSKH.UseVisualStyleBackColor = false;
+            buttonAdminCSKH.Click += buttonAdminCSKH_Click;
             // 
             // buttonManageOrders
             // 
@@ -261,7 +295,7 @@
             tabPageRevenue.Controls.Add(panelRevenueFilter);
             tabPageRevenue.Location = new Point(4, 32);
             tabPageRevenue.Name = "tabPageRevenue";
-            tabPageRevenue.Padding = new Padding(3, 3, 3, 3);
+            tabPageRevenue.Padding = new Padding(3);
             tabPageRevenue.Size = new Size(1176, 602);
             tabPageRevenue.TabIndex = 0;
             tabPageRevenue.Text = "💰 Báo cáo doanh thu";
@@ -276,7 +310,7 @@
             panelRevenueSummary.Dock = DockStyle.Bottom;
             panelRevenueSummary.Location = new Point(3, 498);
             panelRevenueSummary.Name = "panelRevenueSummary";
-            panelRevenueSummary.Padding = new Padding(15, 15, 15, 15);
+            panelRevenueSummary.Padding = new Padding(15);
             panelRevenueSummary.Size = new Size(1170, 101);
             panelRevenueSummary.TabIndex = 2;
             // 
@@ -344,7 +378,7 @@
             panelRevenueFilter.Dock = DockStyle.Top;
             panelRevenueFilter.Location = new Point(3, 3);
             panelRevenueFilter.Name = "panelRevenueFilter";
-            panelRevenueFilter.Padding = new Padding(15, 15, 15, 15);
+            panelRevenueFilter.Padding = new Padding(15);
             panelRevenueFilter.Size = new Size(1170, 101);
             panelRevenueFilter.TabIndex = 0;
             // 
@@ -435,8 +469,8 @@
             tabPageProducts.Controls.Add(panelProductFilter);
             tabPageProducts.Location = new Point(4, 32);
             tabPageProducts.Name = "tabPageProducts";
-            tabPageProducts.Padding = new Padding(3, 3, 3, 3);
-            tabPageProducts.Size = new Size(1178, 612);
+            tabPageProducts.Padding = new Padding(3);
+            tabPageProducts.Size = new Size(1176, 602);
             tabPageProducts.TabIndex = 1;
             tabPageProducts.Text = "📦 Thống kê sản phẩm";
             // 
@@ -448,10 +482,10 @@
             panelProductSummary.Controls.Add(labelLowStockProducts);
             panelProductSummary.Controls.Add(labelTotalProducts);
             panelProductSummary.Dock = DockStyle.Bottom;
-            panelProductSummary.Location = new Point(3, 508);
+            panelProductSummary.Location = new Point(3, 498);
             panelProductSummary.Name = "panelProductSummary";
-            panelProductSummary.Padding = new Padding(15, 15, 15, 15);
-            panelProductSummary.Size = new Size(1172, 101);
+            panelProductSummary.Padding = new Padding(15);
+            panelProductSummary.Size = new Size(1170, 101);
             panelProductSummary.TabIndex = 2;
             // 
             // labelTopSellingProduct
@@ -501,7 +535,7 @@
             dataGridViewProducts.ReadOnly = true;
             dataGridViewProducts.RowHeadersWidth = 51;
             dataGridViewProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewProducts.Size = new Size(1172, 505);
+            dataGridViewProducts.Size = new Size(1170, 495);
             dataGridViewProducts.TabIndex = 1;
             // 
             // panelProductFilter
@@ -516,8 +550,8 @@
             panelProductFilter.Dock = DockStyle.Top;
             panelProductFilter.Location = new Point(3, 3);
             panelProductFilter.Name = "panelProductFilter";
-            panelProductFilter.Padding = new Padding(15, 15, 15, 15);
-            panelProductFilter.Size = new Size(1172, 101);
+            panelProductFilter.Padding = new Padding(15);
+            panelProductFilter.Size = new Size(1170, 101);
             panelProductFilter.TabIndex = 0;
             // 
             // buttonExportProductPDF
@@ -589,8 +623,8 @@
             tabPageInventory.Controls.Add(panelInventoryFilter);
             tabPageInventory.Location = new Point(4, 32);
             tabPageInventory.Name = "tabPageInventory";
-            tabPageInventory.Padding = new Padding(3, 3, 3, 3);
-            tabPageInventory.Size = new Size(1178, 612);
+            tabPageInventory.Padding = new Padding(3);
+            tabPageInventory.Size = new Size(1176, 602);
             tabPageInventory.TabIndex = 2;
             tabPageInventory.Text = "📊 Báo cáo tồn kho";
             // 
@@ -602,10 +636,10 @@
             panelInventorySummary.Controls.Add(labelLowStockCount);
             panelInventorySummary.Controls.Add(labelTotalStockValue);
             panelInventorySummary.Dock = DockStyle.Bottom;
-            panelInventorySummary.Location = new Point(3, 508);
+            panelInventorySummary.Location = new Point(3, 498);
             panelInventorySummary.Name = "panelInventorySummary";
-            panelInventorySummary.Padding = new Padding(15, 15, 15, 15);
-            panelInventorySummary.Size = new Size(1172, 101);
+            panelInventorySummary.Padding = new Padding(15);
+            panelInventorySummary.Size = new Size(1170, 101);
             panelInventorySummary.TabIndex = 2;
             // 
             // labelOutOfStockCount
@@ -655,7 +689,7 @@
             dataGridViewInventory.ReadOnly = true;
             dataGridViewInventory.RowHeadersWidth = 51;
             dataGridViewInventory.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewInventory.Size = new Size(1172, 505);
+            dataGridViewInventory.Size = new Size(1170, 495);
             dataGridViewInventory.TabIndex = 1;
             // 
             // panelInventoryFilter
@@ -671,8 +705,8 @@
             panelInventoryFilter.Dock = DockStyle.Top;
             panelInventoryFilter.Location = new Point(3, 3);
             panelInventoryFilter.Name = "panelInventoryFilter";
-            panelInventoryFilter.Padding = new Padding(15, 15, 15, 15);
-            panelInventoryFilter.Size = new Size(1172, 101);
+            panelInventoryFilter.Padding = new Padding(15);
+            panelInventoryFilter.Size = new Size(1170, 101);
             panelInventoryFilter.TabIndex = 0;
             // 
             // buttonExportInventoryPDF
@@ -767,38 +801,6 @@
             labelTitle.Size = new Size(177, 41);
             labelTitle.TabIndex = 1;
             labelTitle.Text = "📈 Báo cáo";
-            // 
-            // buttonAdminCSKH
-            // 
-            buttonAdminCSKH.BackColor = Color.FromArgb(95, 76, 59);
-            buttonAdminCSKH.FlatAppearance.BorderSize = 0;
-            buttonAdminCSKH.FlatStyle = FlatStyle.Flat;
-            buttonAdminCSKH.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            buttonAdminCSKH.ForeColor = Color.White;
-            buttonAdminCSKH.Location = new Point(10, 510);
-            buttonAdminCSKH.Name = "buttonAdminCSKH";
-            buttonAdminCSKH.Padding = new Padding(5, 0, 0, 0);
-            buttonAdminCSKH.Size = new Size(200, 51);
-            buttonAdminCSKH.TabIndex = 9;
-            buttonAdminCSKH.Text = "💬 Trang CSKH";
-            buttonAdminCSKH.TextAlign = ContentAlignment.MiddleLeft;
-            buttonAdminCSKH.UseVisualStyleBackColor = false;
-            // 
-            // buttonAdminHome
-            // 
-            buttonAdminHome.BackColor = Color.FromArgb(95, 76, 59);
-            buttonAdminHome.FlatAppearance.BorderSize = 0;
-            buttonAdminHome.FlatStyle = FlatStyle.Flat;
-            buttonAdminHome.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            buttonAdminHome.ForeColor = Color.White;
-            buttonAdminHome.Location = new Point(10, 150);
-            buttonAdminHome.Name = "buttonAdminHome";
-            buttonAdminHome.Padding = new Padding(5, 0, 0, 0);
-            buttonAdminHome.Size = new Size(200, 51);
-            buttonAdminHome.TabIndex = 10;
-            buttonAdminHome.Text = "🏠 Trang chủ HeartSteel Cosmetic";
-            buttonAdminHome.TextAlign = ContentAlignment.MiddleLeft;
-            buttonAdminHome.UseVisualStyleBackColor = false;
             // 
             // ReportsPage
             // 

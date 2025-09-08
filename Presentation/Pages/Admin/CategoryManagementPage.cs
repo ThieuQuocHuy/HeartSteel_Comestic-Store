@@ -43,7 +43,7 @@ namespace Presentation.Pages.Admin
                 SetupDataGridViews();
                 await LoadAllDataAsync();
                 AddHoverEffects();
-                
+
                 LoadLogo();
             }
             catch (Exception ex)
@@ -702,5 +702,7 @@ namespace Presentation.Pages.Admin
         {
             Presentation.Navigation.Navigator.Navigate(new CSKHAdminPage());
         }
+
+        
     }
 }

@@ -117,6 +117,7 @@ namespace Presentation.Pages.Admin
             panel1.Name = "panel1";
             panel1.Size = new Size(220, 709);
             panel1.TabIndex = 1;
+            
             // 
             // buttonAdminCSKH
             // 

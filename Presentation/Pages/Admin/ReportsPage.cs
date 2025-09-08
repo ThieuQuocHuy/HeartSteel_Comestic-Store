@@ -151,7 +151,7 @@ namespace Presentation.Pages.Admin
                 // Hiển thị thông báo nếu không có dữ liệu
                 if (!revenueData.Any() || revenueData.All(x => (int)x.OrderCount == 0))
                 {
-                    MessageBox.Show("Không có dữ liệu đơn hàng trong khoảng thời gian đã chọn.", 
+                    MessageBox.Show("Không có dữ liệu đơn hàng trong khoảng thời gian đã chọn.",
                         "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -632,6 +632,16 @@ namespace Presentation.Pages.Admin
         private void buttonManageOrders_Click(object sender, EventArgs e)
         {
             Presentation.Navigation.Navigator.Navigate(new OrderManagementPage());
+        }
+
+        private void buttonAdminHome_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new AdminHomePage());
+        }
+
+        private void buttonAdminCSKH_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new CSKHAdminPage());
         }
     }
 }
