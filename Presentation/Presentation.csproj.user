@@ -32,6 +32,9 @@
     <Compile Update="Pages\Admin\ReportsPage.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Pages\Admin\ResponseDialogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Pages\Customer\CartPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +63,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Pages\Customer\RegisterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Pages\Customer\SupportDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

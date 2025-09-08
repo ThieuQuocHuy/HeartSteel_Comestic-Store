@@ -95,12 +95,18 @@ namespace Presentation.Pages.Admin
             var entity = await _requirementRepo.GetByIdAsync(requirementId);
             if (entity == null) return;
 
-            var detail = $"Khách hàng: {entity.CustomerName}\nSĐT: {entity.Phone}\nNgày: {entity.RequestDate}\nTrạng thái: {entity.Status?.StatusName}\n\nNội dung:\n{entity.Content}";
+            using (var dlg = new ResponseDialogForm("Nhập phản hồi cho yêu cầu", string.Empty))
+            {
+                dlg.CustomerName = entity.CustomerName;
+                dlg.UserId = entity.UserId.ToString();
+                dlg.RequestDate = entity.RequestDate ?? DateTime.Now;
+                dlg.Status = entity.Status?.StatusName ?? string.Empty;
+                dlg.Content = entity.Content ?? string.Empty;
+                if (dlg.ShowDialog(this) != DialogResult.OK) return;
+                var response = dlg.ResponseText;
+                if (string.IsNullOrWhiteSpace(response)) return;
 
-            var response = ShowInputDialog("Nhập phản hồi cho yêu cầu", detail);
-            if (response == null) return; // user cancelled
-
-            var ok = await _requirementRepo.AddResponseAndMarkAnsweredAsync(requirementId, response);
+                var ok = await _requirementRepo.AddResponseAndMarkAnsweredAsync(requirementId, response);
             if (ok)
             {
                 await LoadDataAsync();
@@ -110,31 +116,9 @@ namespace Presentation.Pages.Admin
             {
                 MessageBox.Show("Không thể cập nhật yêu cầu.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            }
         }
 
-        private string? ShowInputDialog(string title, string detail)
-        {
-            using var form = new Form();
-            form.Text = title;
-            form.Width = 700;
-            form.Height = 500;
-            form.StartPosition = FormStartPosition.CenterParent;
-
-            var textDetail = new TextBox { Multiline = true, ReadOnly = true, Left = 10, Top = 10, Width = 660, Height = 260, ScrollBars = ScrollBars.Vertical, Text = detail };
-            var textResponse = new TextBox { Multiline = true, Left = 10, Top = 280, Width = 660, Height = 140, ScrollBars = ScrollBars.Vertical };
-            var buttonOk = new Button { Text = "Gửi phản hồi", Left = 480, Top = 430, Width = 90, DialogResult = DialogResult.OK };
-            var buttonCancel = new Button { Text = "Hủy", Left = 580, Top = 430, Width = 90, DialogResult = DialogResult.Cancel };
-
-            form.Controls.Add(textDetail);
-            form.Controls.Add(textResponse);
-            form.Controls.Add(buttonOk);
-            form.Controls.Add(buttonCancel);
-
-            form.AcceptButton = buttonOk;
-            form.CancelButton = buttonCancel;
-
-            return form.ShowDialog(this) == DialogResult.OK ? textResponse.Text : null;
-        }
 
         private void buttonManageProducts_Click(object sender, EventArgs e)
         {
