@@ -415,5 +415,15 @@ namespace Presentation.Pages.Admin
                 UpdateDataGridView(_allOrders);
             }
         }
+
+        private void buttonAdminHome_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new AdminHomePage());
+        }
+
+        private void buttonAdminCSKH_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new CSKHAdminPage());
+        }
     }
 }

@@ -289,7 +289,7 @@ namespace Presentation.Pages.Admin
                     {
                         MessageBox.Show(ex.Message, "Lỗi Database", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                }    
+                }
             }
         }
 
@@ -313,11 +313,21 @@ namespace Presentation.Pages.Admin
 
             MessageBox.Show(message, "Thông tin kiểm kê", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-      
+
 
         private async void buttonRefreshStock_Click(object sender, EventArgs e)
         {
             await LoadAllDataAsync();
+        }
+
+        private void buttonAdminHome_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new AdminHomePage());
+        }
+
+        private void buttonAdminCSKH_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new CSKHAdminPage());
         }
     }
     #endregion

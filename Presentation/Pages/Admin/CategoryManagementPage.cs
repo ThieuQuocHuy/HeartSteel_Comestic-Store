@@ -43,7 +43,7 @@ namespace Presentation.Pages.Admin
                 SetupDataGridViews();
                 await LoadAllDataAsync();
                 AddHoverEffects();
-                WireUpEventHandlers();
+                
                 LoadLogo();
             }
             catch (Exception ex)
@@ -135,36 +135,6 @@ namespace Presentation.Pages.Admin
         private bool _isDeleting = false;
         private bool _isSaving = false;
 
-        private void WireUpEventHandlers()
-        {
-            if (_eventHandlersWired) return; // Prevent duplicate event handler wiring
-
-            try
-            {
-                // Wire up event handlers
-                if (buttonSave != null) buttonSave.Click += buttonSave_Click;
-                if (buttonCancel != null) buttonCancel.Click += buttonCancel_Click;
-                if (buttonAdd != null) buttonAdd.Click += buttonAdd_Click;
-                if (buttonEdit != null) buttonEdit.Click += buttonEdit_Click;
-                if (buttonDelete != null) buttonDelete.Click += buttonDelete_Click;
-                if (buttonRefresh != null) buttonRefresh.Click += buttonRefresh_Click;
-                if (dataGridViewCategories != null) dataGridViewCategories.SelectionChanged += dataGridViewCategories_SelectionChanged;
-
-                // Sidebar buttons
-                if (buttonManageProducts != null) buttonManageProducts.Click += buttonManageProducts_Click;
-                if (buttonManageInventory != null) buttonManageInventory.Click += buttonManageInventory_Click;
-                if (buttonManageCategories != null) buttonManageCategories.Click += buttonManageCategories_Click;
-                if (buttonManageOrders != null) buttonManageOrders.Click += buttonManageOrders_Click;
-                if (buttonReports != null) buttonReports.Click += buttonReports_Click;
-                if (buttonLogout != null) buttonLogout.Click += buttonLogout_Click;
-
-                _eventHandlersWired = true;
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"WireUpEventHandlers Error: {ex.Message}");
-            }
-        }
 
         #endregion
 
@@ -721,6 +691,16 @@ namespace Presentation.Pages.Admin
         private void groupBoxCategoryInfo_Enter(object? sender, EventArgs e)
         {
 
+        }
+
+        private void buttonAdminHome_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new AdminHomePage());
+        }
+
+        private void buttonAdminCSKH_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new CSKHAdminPage());
         }
     }
 }

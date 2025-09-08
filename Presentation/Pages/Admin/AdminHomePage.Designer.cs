@@ -20,7 +20,6 @@
             buttonAdminCSKH = new Button();
             buttonAdminHome = new Button();
             buttonManageOrders = new Button();
-            buttonManageProducts = new Button();
             buttonManageInventory = new Button();
             buttonManageCategories = new Button();
             buttonReports = new Button();
@@ -52,6 +51,7 @@
             buttonQuickAddProduct = new Button();
             buttonQuickManageInventory = new Button();
             buttonQuickViewReports = new Button();
+            buttonManageProducts = new Button();
             panelSidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
             panelMain.SuspendLayout();
@@ -69,11 +69,11 @@
             // panelSidebar
             // 
             panelSidebar.BackColor = Color.FromArgb(77, 58, 41);
+            panelSidebar.Controls.Add(buttonManageProducts);
             panelSidebar.Controls.Add(pictureBoxLogo);
             panelSidebar.Controls.Add(buttonAdminCSKH);
             panelSidebar.Controls.Add(buttonAdminHome);
             panelSidebar.Controls.Add(buttonManageOrders);
-            panelSidebar.Controls.Add(buttonManageProducts);
             panelSidebar.Controls.Add(buttonManageInventory);
             panelSidebar.Controls.Add(buttonManageCategories);
             panelSidebar.Controls.Add(buttonReports);
@@ -110,10 +110,11 @@
             buttonAdminCSKH.Text = "💬 Trang CSKH";
             buttonAdminCSKH.TextAlign = ContentAlignment.MiddleLeft;
             buttonAdminCSKH.UseVisualStyleBackColor = false;
+            buttonAdminCSKH.Click += buttonAdminCSKH_Click;
             // 
             // buttonAdminHome
             // 
-            buttonAdminHome.BackColor = Color.FromArgb(95, 76, 59);
+            buttonAdminHome.BackColor = Color.FromArgb(221, 207, 182);
             buttonAdminHome.FlatAppearance.BorderSize = 0;
             buttonAdminHome.FlatStyle = FlatStyle.Flat;
             buttonAdminHome.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
@@ -143,23 +144,6 @@
             buttonManageOrders.TextAlign = ContentAlignment.MiddleLeft;
             buttonManageOrders.UseVisualStyleBackColor = false;
             buttonManageOrders.Click += buttonManageOrders_Click;
-            // 
-            // buttonManageProducts
-            // 
-            buttonManageProducts.BackColor = Color.FromArgb(221, 207, 182);
-            buttonManageProducts.FlatAppearance.BorderSize = 0;
-            buttonManageProducts.FlatStyle = FlatStyle.Flat;
-            buttonManageProducts.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            buttonManageProducts.ForeColor = Color.FromArgb(77, 58, 41);
-            buttonManageProducts.Location = new Point(10, 210);
-            buttonManageProducts.Name = "buttonManageProducts";
-            buttonManageProducts.Padding = new Padding(5, 0, 0, 0);
-            buttonManageProducts.Size = new Size(200, 50);
-            buttonManageProducts.TabIndex = 1;
-            buttonManageProducts.Text = "📦 Quản lý sản phẩm";
-            buttonManageProducts.TextAlign = ContentAlignment.MiddleLeft;
-            buttonManageProducts.UseVisualStyleBackColor = false;
-            buttonManageProducts.Click += buttonManageProducts_Click;
             // 
             // buttonManageInventory
             // 
@@ -541,6 +525,23 @@
             buttonQuickViewReports.UseVisualStyleBackColor = false;
             buttonQuickViewReports.Click += buttonReports_Click;
             // 
+            // buttonManageProducts
+            // 
+            buttonManageProducts.BackColor = Color.FromArgb(95, 76, 59);
+            buttonManageProducts.FlatAppearance.BorderSize = 0;
+            buttonManageProducts.FlatStyle = FlatStyle.Flat;
+            buttonManageProducts.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonManageProducts.ForeColor = Color.White;
+            buttonManageProducts.Location = new Point(10, 210);
+            buttonManageProducts.Name = "buttonManageProducts";
+            buttonManageProducts.Padding = new Padding(5, 0, 0, 0);
+            buttonManageProducts.Size = new Size(200, 50);
+            buttonManageProducts.TabIndex = 11;
+            buttonManageProducts.Text = "📦 Quản lý sản phẩm";
+            buttonManageProducts.TextAlign = ContentAlignment.MiddleLeft;
+            buttonManageProducts.UseVisualStyleBackColor = false;
+            buttonManageProducts.Click += buttonManageProducts_Click_1;
+            // 
             // AdminHomePage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -581,7 +582,6 @@
         #endregion
 
         private Panel panelSidebar;
-        private Button buttonManageProducts;
         private Button buttonManageInventory;
         private Button buttonManageCategories;
         private Button buttonReports;
@@ -617,5 +617,6 @@
         private Button buttonAdminHome;
         private PictureBox pictureBox2;
         private PictureBox pictureBoxLogo;
+        private Button buttonManageProducts;
     }
 }

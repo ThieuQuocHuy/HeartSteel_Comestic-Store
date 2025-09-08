@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             panelSidebar = new Panel();
+            buttonAdminHome = new Button();
+            buttonAdminCSKH = new Button();
             buttonManageOrders = new Button();
             pictureBoxLogo = new PictureBox();
             buttonManageProducts = new Button();
@@ -69,8 +71,6 @@
             labelSearch = new Label();
             panelHeader = new Panel();
             labelTitle = new Label();
-            buttonAdminCSKH = new Button();
-            buttonAdminHome = new Button();
             panelSidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
             panelMain.SuspendLayout();
@@ -102,6 +102,40 @@
             panelSidebar.Size = new Size(219, 707);
             panelSidebar.TabIndex = 0;
             // 
+            // buttonAdminHome
+            // 
+            buttonAdminHome.BackColor = Color.FromArgb(95, 76, 59);
+            buttonAdminHome.FlatAppearance.BorderSize = 0;
+            buttonAdminHome.FlatStyle = FlatStyle.Flat;
+            buttonAdminHome.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonAdminHome.ForeColor = Color.White;
+            buttonAdminHome.Location = new Point(10, 150);
+            buttonAdminHome.Name = "buttonAdminHome";
+            buttonAdminHome.Padding = new Padding(5, 0, 0, 0);
+            buttonAdminHome.Size = new Size(200, 51);
+            buttonAdminHome.TabIndex = 10;
+            buttonAdminHome.Text = "🏠 Trang chủ HeartSteel Cosmetic";
+            buttonAdminHome.TextAlign = ContentAlignment.MiddleLeft;
+            buttonAdminHome.UseVisualStyleBackColor = false;
+            buttonAdminHome.Click += buttonAdminHome_Click;
+            // 
+            // buttonAdminCSKH
+            // 
+            buttonAdminCSKH.BackColor = Color.FromArgb(95, 76, 59);
+            buttonAdminCSKH.FlatAppearance.BorderSize = 0;
+            buttonAdminCSKH.FlatStyle = FlatStyle.Flat;
+            buttonAdminCSKH.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonAdminCSKH.ForeColor = Color.White;
+            buttonAdminCSKH.Location = new Point(10, 510);
+            buttonAdminCSKH.Name = "buttonAdminCSKH";
+            buttonAdminCSKH.Padding = new Padding(5, 0, 0, 0);
+            buttonAdminCSKH.Size = new Size(200, 51);
+            buttonAdminCSKH.TabIndex = 9;
+            buttonAdminCSKH.Text = "💬 Trang CSKH";
+            buttonAdminCSKH.TextAlign = ContentAlignment.MiddleLeft;
+            buttonAdminCSKH.UseVisualStyleBackColor = false;
+            buttonAdminCSKH.Click += buttonAdminCSKH_Click;
+            // 
             // buttonManageOrders
             // 
             buttonManageOrders.BackColor = Color.FromArgb(95, 76, 59);
@@ -117,6 +151,7 @@
             buttonManageOrders.Text = "📜 Quản lý đơn hàng\r\n";
             buttonManageOrders.TextAlign = ContentAlignment.MiddleLeft;
             buttonManageOrders.UseVisualStyleBackColor = false;
+            buttonManageOrders.Click += buttonManageOrders_Click;
             // 
             // pictureBoxLogo
             // 
@@ -176,6 +211,7 @@
             buttonManageCategories.Text = "📂 Quản lý danh mục";
             buttonManageCategories.TextAlign = ContentAlignment.MiddleLeft;
             buttonManageCategories.UseVisualStyleBackColor = false;
+            buttonManageCategories.Click += buttonManageCategories_Click;
             // 
             // buttonReports
             // 
@@ -192,6 +228,7 @@
             buttonReports.Text = "📈 Báo cáo";
             buttonReports.TextAlign = ContentAlignment.MiddleLeft;
             buttonReports.UseVisualStyleBackColor = false;
+            buttonReports.Click += buttonReports_Click;
             // 
             // buttonLogout
             // 
@@ -208,6 +245,7 @@
             buttonLogout.Text = "🚪 Đăng xuất";
             buttonLogout.TextAlign = ContentAlignment.MiddleLeft;
             buttonLogout.UseVisualStyleBackColor = false;
+            buttonLogout.Click += buttonLogout_Click;
             // 
             // panelMain
             // 
@@ -531,7 +569,7 @@
             panelSearch.Dock = DockStyle.Top;
             panelSearch.Location = new Point(0, 69);
             panelSearch.Name = "panelSearch";
-            panelSearch.Padding = new Padding(15, 15, 15, 15);
+            panelSearch.Padding = new Padding(15);
             panelSearch.Size = new Size(1184, 79);
             panelSearch.TabIndex = 1;
             // 
@@ -609,38 +647,6 @@
             labelTitle.Size = new Size(319, 41);
             labelTitle.TabIndex = 1;
             labelTitle.Text = "📦 Quản lý sản phẩm";
-            // 
-            // buttonAdminCSKH
-            // 
-            buttonAdminCSKH.BackColor = Color.FromArgb(95, 76, 59);
-            buttonAdminCSKH.FlatAppearance.BorderSize = 0;
-            buttonAdminCSKH.FlatStyle = FlatStyle.Flat;
-            buttonAdminCSKH.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            buttonAdminCSKH.ForeColor = Color.White;
-            buttonAdminCSKH.Location = new Point(10, 510);
-            buttonAdminCSKH.Name = "buttonAdminCSKH";
-            buttonAdminCSKH.Padding = new Padding(5, 0, 0, 0);
-            buttonAdminCSKH.Size = new Size(200, 51);
-            buttonAdminCSKH.TabIndex = 9;
-            buttonAdminCSKH.Text = "💬 Trang CSKH";
-            buttonAdminCSKH.TextAlign = ContentAlignment.MiddleLeft;
-            buttonAdminCSKH.UseVisualStyleBackColor = false;
-            // 
-            // buttonAdminHome
-            // 
-            buttonAdminHome.BackColor = Color.FromArgb(95, 76, 59);
-            buttonAdminHome.FlatAppearance.BorderSize = 0;
-            buttonAdminHome.FlatStyle = FlatStyle.Flat;
-            buttonAdminHome.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            buttonAdminHome.ForeColor = Color.White;
-            buttonAdminHome.Location = new Point(10, 150);
-            buttonAdminHome.Name = "buttonAdminHome";
-            buttonAdminHome.Padding = new Padding(5, 0, 0, 0);
-            buttonAdminHome.Size = new Size(200, 51);
-            buttonAdminHome.TabIndex = 10;
-            buttonAdminHome.Text = "🏠 Trang chủ HeartSteel Cosmetic";
-            buttonAdminHome.TextAlign = ContentAlignment.MiddleLeft;
-            buttonAdminHome.UseVisualStyleBackColor = false;
             // 
             // ProductManagementPage
             // 

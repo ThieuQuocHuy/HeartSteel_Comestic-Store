@@ -36,9 +36,6 @@ namespace Presentation.Pages.Admin
             // Cập nhật thời gian ngay lập tức
             labelCurrentTime.Text = DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
 
-            // Load thống kê dashboard (giả lập dữ liệu)
-            LoadDashboardStats();
-
             // Thêm hiệu ứng hover cho các button
             AddHoverEffects();
 
@@ -87,19 +84,10 @@ namespace Presentation.Pages.Admin
         }
 
 
-        private void LoadDashboardStats()
-        {
-            // TODO: Thay thế bằng dữ liệu thực từ database
-            labelProductCount.Text = "25";
-            labelOrderCount.Text = "150"; // Tồn kho (kg)
-            labelCategoryCount.Text = "8";
-            labelRevenueAmount.Text = "₫125,500,000";
-        }
-
         private void AddHoverEffects()
         {
             // Thêm hiệu ứng hover cho sidebar buttons
-            AddButtonHoverEffect(buttonManageProducts, Color.FromArgb(221, 207, 182), Color.FromArgb(241, 227, 202));
+            AddButtonHoverEffect(buttonManageProducts, Color.FromArgb(95, 76, 59), Color.FromArgb(115, 96, 79));
             AddButtonHoverEffect(buttonManageInventory, Color.FromArgb(95, 76, 59), Color.FromArgb(115, 96, 79));
             AddButtonHoverEffect(buttonManageCategories, Color.FromArgb(95, 76, 59), Color.FromArgb(115, 96, 79));
             AddButtonHoverEffect(buttonManageOrders, Color.FromArgb(95, 76, 59), Color.FromArgb(115, 96, 79));
@@ -176,6 +164,16 @@ namespace Presentation.Pages.Admin
         private void pictureBoxLogo_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonManageProducts_Click_1(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new ProductManagementPage());
+        }
+
+        private void buttonAdminCSKH_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new CSKHAdminPage());
         }
     }
 }

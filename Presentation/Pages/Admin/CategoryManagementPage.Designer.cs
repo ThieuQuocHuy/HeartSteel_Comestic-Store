@@ -32,6 +32,8 @@ namespace Presentation.Pages.Admin
             labelTitle = new Label();
             panelSidebar = new Panel();
             panel1 = new Panel();
+            buttonAdminCSKH = new Button();
+            buttonAdminHome = new Button();
             buttonManageOrders = new Button();
             pictureBoxLogo = new PictureBox();
             buttonManageProducts = new Button();
@@ -55,8 +57,6 @@ namespace Presentation.Pages.Admin
             labelCategoryName = new Label();
             textBoxCategoryId = new TextBox();
             labelCategoryId = new Label();
-            buttonAdminHome = new Button();
-            buttonAdminCSKH = new Button();
             panelHeader.SuspendLayout();
             panelSidebar.SuspendLayout();
             panel1.SuspendLayout();
@@ -117,6 +117,40 @@ namespace Presentation.Pages.Admin
             panel1.Name = "panel1";
             panel1.Size = new Size(220, 709);
             panel1.TabIndex = 1;
+            // 
+            // buttonAdminCSKH
+            // 
+            buttonAdminCSKH.BackColor = Color.FromArgb(95, 76, 59);
+            buttonAdminCSKH.FlatAppearance.BorderSize = 0;
+            buttonAdminCSKH.FlatStyle = FlatStyle.Flat;
+            buttonAdminCSKH.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonAdminCSKH.ForeColor = Color.White;
+            buttonAdminCSKH.Location = new Point(10, 510);
+            buttonAdminCSKH.Name = "buttonAdminCSKH";
+            buttonAdminCSKH.Padding = new Padding(5, 0, 0, 0);
+            buttonAdminCSKH.Size = new Size(200, 50);
+            buttonAdminCSKH.TabIndex = 10;
+            buttonAdminCSKH.Text = "💬 Trang CSKH";
+            buttonAdminCSKH.TextAlign = ContentAlignment.MiddleLeft;
+            buttonAdminCSKH.UseVisualStyleBackColor = false;
+            buttonAdminCSKH.Click += buttonAdminCSKH_Click;
+            // 
+            // buttonAdminHome
+            // 
+            buttonAdminHome.BackColor = Color.FromArgb(95, 76, 59);
+            buttonAdminHome.FlatAppearance.BorderSize = 0;
+            buttonAdminHome.FlatStyle = FlatStyle.Flat;
+            buttonAdminHome.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonAdminHome.ForeColor = Color.White;
+            buttonAdminHome.Location = new Point(3, 150);
+            buttonAdminHome.Name = "buttonAdminHome";
+            buttonAdminHome.Padding = new Padding(5, 0, 0, 0);
+            buttonAdminHome.Size = new Size(200, 50);
+            buttonAdminHome.TabIndex = 9;
+            buttonAdminHome.Text = "🏠 Trang chủ HeartSteel Cosmetic";
+            buttonAdminHome.TextAlign = ContentAlignment.MiddleLeft;
+            buttonAdminHome.UseVisualStyleBackColor = false;
+            buttonAdminHome.Click += buttonAdminHome_Click;
             // 
             // buttonManageOrders
             // 
@@ -438,38 +472,6 @@ namespace Presentation.Pages.Admin
             labelCategoryId.Size = new Size(120, 23);
             labelCategoryId.TabIndex = 0;
             labelCategoryId.Text = "Mã danh mục:";
-            // 
-            // buttonAdminHome
-            // 
-            buttonAdminHome.BackColor = Color.FromArgb(95, 76, 59);
-            buttonAdminHome.FlatAppearance.BorderSize = 0;
-            buttonAdminHome.FlatStyle = FlatStyle.Flat;
-            buttonAdminHome.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            buttonAdminHome.ForeColor = Color.White;
-            buttonAdminHome.Location = new Point(3, 150);
-            buttonAdminHome.Name = "buttonAdminHome";
-            buttonAdminHome.Padding = new Padding(5, 0, 0, 0);
-            buttonAdminHome.Size = new Size(200, 50);
-            buttonAdminHome.TabIndex = 9;
-            buttonAdminHome.Text = "🏠 Trang chủ HeartSteel Cosmetic";
-            buttonAdminHome.TextAlign = ContentAlignment.MiddleLeft;
-            buttonAdminHome.UseVisualStyleBackColor = false;
-            // 
-            // buttonAdminCSKH
-            // 
-            buttonAdminCSKH.BackColor = Color.FromArgb(95, 76, 59);
-            buttonAdminCSKH.FlatAppearance.BorderSize = 0;
-            buttonAdminCSKH.FlatStyle = FlatStyle.Flat;
-            buttonAdminCSKH.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            buttonAdminCSKH.ForeColor = Color.White;
-            buttonAdminCSKH.Location = new Point(10, 510);
-            buttonAdminCSKH.Name = "buttonAdminCSKH";
-            buttonAdminCSKH.Padding = new Padding(5, 0, 0, 0);
-            buttonAdminCSKH.Size = new Size(200, 50);
-            buttonAdminCSKH.TabIndex = 10;
-            buttonAdminCSKH.Text = "💬 Trang CSKH";
-            buttonAdminCSKH.TextAlign = ContentAlignment.MiddleLeft;
-            buttonAdminCSKH.UseVisualStyleBackColor = false;
             // 
             // CategoryManagementPage
             // 
