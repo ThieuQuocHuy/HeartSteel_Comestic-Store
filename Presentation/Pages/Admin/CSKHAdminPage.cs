@@ -1,17 +1,18 @@
-﻿using System;
+﻿using DAL.Models;
+using DAL.Repositories;
+using Presentation.Navigation;
+using Presentation.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using DAL.Repositories;
-using DAL.Models;
 using System.Threading.Tasks;
-using System.Linq;
-using Presentation.Navigation;
+using System.Windows.Forms;
 
 namespace Presentation.Pages.Admin
 {
@@ -36,12 +37,37 @@ namespace Presentation.Pages.Admin
         private async void CSKHAdminPage_Load(object? sender, EventArgs e)
         {
             await LoadDataAsync();
+            LoadLogo();
         }
 
         private async Task LoadDataAsync()
         {
             _allRequirements = await _requirementRepo.GetAllAsync();
             BindGrid(_allRequirements);
+        }
+
+        private void LoadLogo()
+        {
+            try
+            {
+                if (pictureBoxLogo != null)
+                {
+                    var logoImage = ResourceImageLoader.LoadByFileName("logoden.png");
+                    if (logoImage != null)
+                    {
+                        pictureBoxLogo.Image = logoImage;
+                        System.Diagnostics.Debug.WriteLine("Logo loaded successfully for CategoryManagementPage");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Failed to load logo image for CategoryManagementPage");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"LoadLogo Error: {ex.Message}");
+            }
         }
 
         private void BindGrid(List<CustomerRequirement> data)
