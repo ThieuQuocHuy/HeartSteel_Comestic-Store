@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomePage));
             panelSidebar = new Panel();
+            buttonCSKH = new Button();
             pictureBoxLogo = new PictureBox();
             buttonHome = new Button();
             buttonProducts = new Button();
@@ -53,6 +53,7 @@
             // panelSidebar
             // 
             panelSidebar.BackColor = Color.FromArgb(77, 58, 41);
+            panelSidebar.Controls.Add(buttonCSKH);
             panelSidebar.Controls.Add(pictureBoxLogo);
             panelSidebar.Controls.Add(buttonHome);
             panelSidebar.Controls.Add(buttonProducts);
@@ -62,12 +63,28 @@
             panelSidebar.Dock = DockStyle.Left;
             panelSidebar.Location = new Point(0, 0);
             panelSidebar.Name = "panelSidebar";
-            panelSidebar.Size = new Size(200, 544);
+            panelSidebar.Size = new Size(200, 553);
             panelSidebar.TabIndex = 0;
+            // 
+            // buttonCSKH
+            // 
+            buttonCSKH.BackColor = Color.FromArgb(77, 58, 41);
+            buttonCSKH.FlatAppearance.BorderSize = 0;
+            buttonCSKH.FlatStyle = FlatStyle.Flat;
+            buttonCSKH.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            buttonCSKH.ForeColor = Color.White;
+            buttonCSKH.Location = new Point(0, 380);
+            buttonCSKH.Name = "buttonCSKH";
+            buttonCSKH.Padding = new Padding(30, 0, 0, 0);
+            buttonCSKH.Size = new Size(200, 50);
+            buttonCSKH.TabIndex = 6;
+            buttonCSKH.Text = "CSKH";
+            buttonCSKH.TextAlign = ContentAlignment.MiddleLeft;
+            buttonCSKH.UseVisualStyleBackColor = false;
+            buttonCSKH.Click += buttonCSKH_Click;
             // 
             // pictureBoxLogo
             // 
-            pictureBoxLogo.Image = (Image)resources.GetObject("pictureBoxLogo.Image");
             pictureBoxLogo.Location = new Point(0, 0);
             pictureBoxLogo.Name = "pictureBoxLogo";
             pictureBoxLogo.Size = new Size(200, 182);
@@ -139,7 +156,6 @@
             buttonOrders.Text = "Đơn mua";
             buttonOrders.TextAlign = ContentAlignment.MiddleLeft;
             buttonOrders.UseVisualStyleBackColor = false;
-
             // 
             // buttonLogout
             // 
@@ -148,7 +164,7 @@
             buttonLogout.FlatStyle = FlatStyle.Flat;
             buttonLogout.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             buttonLogout.ForeColor = Color.White;
-            buttonLogout.Location = new Point(0, 380);
+            buttonLogout.Location = new Point(0, 430);
             buttonLogout.Name = "buttonLogout";
             buttonLogout.Padding = new Padding(30, 0, 0, 0);
             buttonLogout.Size = new Size(200, 50);
@@ -174,7 +190,7 @@
             label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.Location = new Point(237, 9);
             label1.Name = "label1";
-            label1.Size = new Size(336, 29);
+            label1.Size = new Size(277, 25);
             label1.TabIndex = 10;
             label1.Text = "Cửa hàng HeartSteelComestic";
             label1.Click += label1_Click;
@@ -197,7 +213,7 @@
             label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.Location = new Point(237, 59);
             label2.Name = "label2";
-            label2.Size = new Size(555, 29);
+            label2.Size = new Size(460, 25);
             label2.TabIndex = 12;
             label2.Text = "Chào mừng bạn đã đến với cửa hàng của chúng tôi!";
             // 
@@ -207,7 +223,7 @@
             label3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.Location = new Point(237, 105);
             label3.Name = "label3";
-            label3.Size = new Size(145, 29);
+            label3.Size = new Size(124, 25);
             label3.TabIndex = 13;
             label3.Text = "Khách hàng:";
             // 
@@ -217,13 +233,12 @@
             label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.Location = new Point(377, 105);
             label4.Name = "label4";
-            label4.Size = new Size(186, 29);
+            label4.Size = new Size(155, 25);
             label4.TabIndex = 14;
             label4.Text = "Thiều Quốc Huy";
             // 
             // pictureBox2
             // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
             pictureBox2.Location = new Point(200, 151);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(938, 393);
@@ -234,7 +249,7 @@
             // HomePage
             // 
             BackColor = Color.FromArgb(237, 224, 207);
-            ClientSize = new Size(1138, 544);
+            ClientSize = new Size(1142, 553);
             Controls.Add(pictureBox2);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -275,5 +290,6 @@
         private Label label4;
         private PictureBox pictureBox2;
         private Button buttonLogout;
+        private Button buttonCSKH;
     }
 }

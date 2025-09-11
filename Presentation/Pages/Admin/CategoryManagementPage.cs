@@ -15,7 +15,7 @@ namespace Presentation.Pages.Admin
 {
     public partial class CategoryManagementPage : Form
     {
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly ICategoryRepository _categoryRepository = null!;
         private List<Category> _allCategories = new List<Category>();
         private bool _isEditing = false;
         private int? _currentCategoryId = null;
@@ -43,7 +43,7 @@ namespace Presentation.Pages.Admin
                 SetupDataGridViews();
                 await LoadAllDataAsync();
                 AddHoverEffects();
-                WireUpEventHandlers();
+
                 LoadLogo();
             }
             catch (Exception ex)
@@ -135,36 +135,6 @@ namespace Presentation.Pages.Admin
         private bool _isDeleting = false;
         private bool _isSaving = false;
 
-        private void WireUpEventHandlers()
-        {
-            if (_eventHandlersWired) return; // Prevent duplicate event handler wiring
-
-            try
-            {
-                // Wire up event handlers
-                if (buttonSave != null) buttonSave.Click += buttonSave_Click;
-                if (buttonCancel != null) buttonCancel.Click += buttonCancel_Click;
-                if (buttonAdd != null) buttonAdd.Click += buttonAdd_Click;
-                if (buttonEdit != null) buttonEdit.Click += buttonEdit_Click;
-                if (buttonDelete != null) buttonDelete.Click += buttonDelete_Click;
-                if (buttonRefresh != null) buttonRefresh.Click += buttonRefresh_Click;
-                if (dataGridViewCategories != null) dataGridViewCategories.SelectionChanged += dataGridViewCategories_SelectionChanged;
-
-                // Sidebar buttons
-                if (buttonManageProducts != null) buttonManageProducts.Click += buttonManageProducts_Click;
-                if (buttonManageInventory != null) buttonManageInventory.Click += buttonManageInventory_Click;
-                if (buttonManageCategories != null) buttonManageCategories.Click += buttonManageCategories_Click;
-                if (buttonManageOrders != null) buttonManageOrders.Click += buttonManageOrders_Click;
-                if (buttonReports != null) buttonReports.Click += buttonReports_Click;
-                if (buttonLogout != null) buttonLogout.Click += buttonLogout_Click;
-
-                _eventHandlersWired = true;
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"WireUpEventHandlers Error: {ex.Message}");
-            }
-        }
 
         #endregion
 
@@ -216,7 +186,7 @@ namespace Presentation.Pages.Admin
                 var testCategory = new Category { CategoryName = "TestCategory_" + DateTime.Now.Ticks };
                 var result = await _categoryRepository.CreateCategoryAsync(testCategory);
                 System.Diagnostics.Debug.WriteLine($"Test creation result: {result}, CategoryId: {testCategory.CategoryId}");
-                
+
                 if (result)
                 {
                     // Clean up test category
@@ -354,18 +324,18 @@ namespace Presentation.Pages.Admin
                 }
 
                 var categoryName = textBoxCategoryName.Text.Trim();
-                
+
                 // Check for duplicate category name (only for new categories or when name is changed)
-                if (!_currentCategoryId.HasValue || 
+                if (!_currentCategoryId.HasValue ||
                     (_allCategories.FirstOrDefault(c => c.CategoryId == _currentCategoryId)?.CategoryName?.ToLower() != categoryName.ToLower()))
                 {
-                    var existingCategory = _allCategories.FirstOrDefault(c => 
-                        c.CategoryName?.ToLower() == categoryName.ToLower() && 
+                    var existingCategory = _allCategories.FirstOrDefault(c =>
+                        c.CategoryName?.ToLower() == categoryName.ToLower() &&
                         c.CategoryId != _currentCategoryId);
 
                     if (existingCategory != null)
                     {
-                        MessageBox.Show("Tên danh mục đã tồn tại! Vui lòng chọn tên khác.", "Validation", 
+                        MessageBox.Show("Tên danh mục đã tồn tại! Vui lòng chọn tên khác.", "Validation",
                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         textBoxCategoryName?.Focus();
                         return false;
@@ -386,27 +356,27 @@ namespace Presentation.Pages.Admin
         #region Event Handlers
 
         // Sidebar Event Handlers
-        private void buttonManageProducts_Click(object sender, EventArgs e)
+        private void buttonManageProducts_Click(object? sender, EventArgs e)
         {
             Presentation.Navigation.Navigator.Navigate(new ProductManagementPage());
         }
 
-        private void buttonManageInventory_Click(object sender, EventArgs e)
+        private void buttonManageInventory_Click(object? sender, EventArgs e)
         {
             Presentation.Navigation.Navigator.Navigate(new InventoryManagementPage());
         }
 
-        private void buttonManageCategories_Click(object sender, EventArgs e)
+        private void buttonManageCategories_Click(object? sender, EventArgs e)
         {
             MessageBox.Show("Bạn đang ở trang quản lý danh mục!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void buttonManageOrders_Click(object sender, EventArgs e)
+        private void buttonManageOrders_Click(object? sender, EventArgs e)
         {
             Presentation.Navigation.Navigator.Navigate(new OrderManagementPage());
         }
 
-        private void buttonReports_Click(object sender, EventArgs e)
+        private void buttonReports_Click(object? sender, EventArgs e)
         {
             try
             {
@@ -420,21 +390,21 @@ namespace Presentation.Pages.Admin
             }
         }
 
-        private void buttonLogout_Click(object sender, EventArgs e)
+        private void buttonLogout_Click(object? sender, EventArgs e)
         {
             Presentation.Auth.UserSession.Clear();
             Presentation.Navigation.Navigator.Navigate(new Customer.LoginForm());
         }
 
         // Category Management Event Handlers
-        private void buttonAdd_Click(object sender, EventArgs e)
+        private void buttonAdd_Click(object? sender, EventArgs e)
         {
             ClearForm();
             SetFormMode(true);
             textBoxCategoryName?.Focus();
         }
 
-        private void buttonEdit_Click(object sender, EventArgs e)
+        private void buttonEdit_Click(object? sender, EventArgs e)
         {
             try
             {
@@ -460,14 +430,14 @@ namespace Presentation.Pages.Admin
             }
         }
 
-        private async void buttonDelete_Click(object sender, EventArgs e)
+        private async void buttonDelete_Click(object? sender, EventArgs e)
         {
             // Prevent multiple delete operations
-            if (_isDeleting) 
+            if (_isDeleting)
             {
                 return;
             }
-            
+
             try
             {
                 if (dataGridViewCategories?.CurrentRow != null)
@@ -498,7 +468,7 @@ namespace Presentation.Pages.Admin
                         if (result == DialogResult.Yes)
                         {
                             _isDeleting = true; // Set flag to prevent multiple operations
-                            
+
                             try
                             {
                                 var success = await _categoryRepository.DeleteCategoryAsync(categoryId);
@@ -531,10 +501,10 @@ namespace Presentation.Pages.Admin
             }
         }
 
-        private async void buttonSave_Click(object sender, EventArgs e)
+        private async void buttonSave_Click(object? sender, EventArgs e)
         {
             // Prevent multiple save operations
-            if (_isSaving) 
+            if (_isSaving)
             {
                 return;
             }
@@ -583,10 +553,10 @@ namespace Presentation.Pages.Admin
                     {
                         // Check for specific error conditions
                         var categoryName = category.CategoryName?.Trim();
-                        var existingCategory = _allCategories.FirstOrDefault(c => 
-                            c.CategoryName?.ToLower() == categoryName?.ToLower() && 
+                        var existingCategory = _allCategories.FirstOrDefault(c =>
+                            c.CategoryName?.ToLower() == categoryName?.ToLower() &&
                             c.CategoryId != _currentCategoryId);
-                        
+
                         if (existingCategory != null)
                         {
                             MessageBox.Show($"Tên danh mục '{categoryName}' đã tồn tại!\n\nVui lòng chọn tên khác.", "Lỗi",
@@ -606,7 +576,7 @@ namespace Presentation.Pages.Admin
                     System.Diagnostics.Debug.WriteLine($"Creating new category: '{category.CategoryName}'");
                     success = await _categoryRepository.CreateCategoryAsync(category);
                     System.Diagnostics.Debug.WriteLine($"CreateCategoryAsync result: {success}");
-                    
+
                     if (success)
                     {
                         System.Diagnostics.Debug.WriteLine($"Category created successfully with ID: {category.CategoryId}");
@@ -622,9 +592,9 @@ namespace Presentation.Pages.Admin
                         // Reload categories to check if it was actually created despite false return
                         await LoadCategoriesAsync();
                         var categoryName = category.CategoryName?.Trim();
-                        var newlyCreatedCategory = _allCategories.FirstOrDefault(c => 
+                        var newlyCreatedCategory = _allCategories.FirstOrDefault(c =>
                             c.CategoryName?.ToLower() == categoryName?.ToLower());
-                        
+
                         if (newlyCreatedCategory != null)
                         {
                             // Category was actually created successfully, just the return value was wrong
@@ -637,9 +607,9 @@ namespace Presentation.Pages.Admin
                         else
                         {
                             // Check for specific error conditions
-                            var existingCategory = _allCategories.FirstOrDefault(c => 
+                            var existingCategory = _allCategories.FirstOrDefault(c =>
                                 c.CategoryName?.ToLower() == categoryName?.ToLower());
-                            
+
                             if (existingCategory != null)
                             {
                                 System.Diagnostics.Debug.WriteLine($"Category name '{categoryName}' already exists in local list");
@@ -669,13 +639,13 @@ namespace Presentation.Pages.Admin
             }
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void buttonCancel_Click(object? sender, EventArgs e)
         {
             SetFormMode(false);
             ClearForm();
         }
 
-        private async void buttonRefresh_Click(object sender, EventArgs e)
+        private async void buttonRefresh_Click(object? sender, EventArgs e)
         {
             try
             {
@@ -689,7 +659,7 @@ namespace Presentation.Pages.Admin
             }
         }
 
-        private void dataGridViewCategories_SelectionChanged(object sender, EventArgs e)
+        private void dataGridViewCategories_SelectionChanged(object? sender, EventArgs e)
         {
             try
             {
@@ -717,5 +687,22 @@ namespace Presentation.Pages.Admin
         }
 
         #endregion
+
+        private void groupBoxCategoryInfo_Enter(object? sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonAdminHome_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new AdminHomePage());
+        }
+
+        private void buttonAdminCSKH_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new CSKHAdminPage());
+        }
+
+        
     }
 }

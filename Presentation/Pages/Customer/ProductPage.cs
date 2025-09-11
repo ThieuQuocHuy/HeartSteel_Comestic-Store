@@ -28,7 +28,7 @@ namespace Presentation.Pages.Customer
             {
                 _currentUserId = Presentation.Auth.UserSession.CurrentUserId.Value;
             }
-            
+
             // Gán sự kiện cho các nút điều hướng
             buttonHome.Click += buttonHome_Click;
             buttonCart.Click += buttonCart_Click;
@@ -37,8 +37,34 @@ namespace Presentation.Pages.Customer
             {
                 buttonLogout.Click += buttonLogout_Click;
             }
+            // Load ảnh
+            LoadImages();
         }
 
+        private void LoadImages()
+        {
+            try
+            {
+                // Load logo
+                if (pictureBoxLogo != null)
+                {
+                    var logoImage = Presentation.Services.ResourceImageLoader.LoadByFileName("logoden.png");
+                    if (logoImage != null)
+                    {
+                        pictureBoxLogo.Image = logoImage;
+                        System.Diagnostics.Debug.WriteLine("Logo loaded successfully for ProductPage");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Failed to load logo image for ProductPage");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"LoadImages Error: {ex.Message}");
+            }
+        }
         private void buttonLogout_Click(object? sender, EventArgs e)
         {
             Presentation.Auth.UserSession.Clear();
@@ -132,18 +158,19 @@ namespace Presentation.Pages.Customer
                 System.Diagnostics.Debug.WriteLine($"Failed to load image for {product.ProductName}: {product.Img}");
             }
 
-            // Tên sản phẩm (giữa, dưới ảnh)
+            // Tên sản phẩm (giữa, dưới ảnh) - Có thể xuống hàng
             var labelName = new Label
             {
                 BackColor = SystemColors.ControlLightLight,
-                AutoSize = false,
-                Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular),
+                AutoSize = false, // Tắt AutoSize để kiểm soát kích thước
+                Font = new Font("Arial Rounded MT Bold", 11F, FontStyle.Regular), // Giảm font size một chút
                 Location = new Point(10, 201),
-                Size = new Size(262, 40),
+                Size = new Size(262, 50), // Tăng chiều cao để chứa text 2 hàng
                 TextAlign = ContentAlignment.MiddleCenter,
                 Text = product.ProductName ?? "Không có tên",
                 Cursor = Cursors.Hand,
-                Tag = product.ProductId
+                Tag = product.ProductId,
+                UseMnemonic = false // Tắt mnemonic để hiển thị & bình thường
             };
             labelName.Click += ProductCard_Click;
 
@@ -153,7 +180,7 @@ namespace Presentation.Pages.Customer
                 BackColor = SystemColors.ControlLightLight,
                 AutoSize = false,
                 Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular),
-                Location = new Point(10, 260),
+                Location = new Point(10, 260), // Giữ nguyên vị trí
                 Size = new Size(130, 25),
                 TextAlign = ContentAlignment.MiddleLeft,
                 ForeColor = Color.Red,
@@ -165,7 +192,7 @@ namespace Presentation.Pages.Customer
                 BackColor = SystemColors.ControlLightLight,
                 AutoSize = false,
                 Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular),
-                Location = new Point(142, 260), // 262 - 10 (padding phải) - 110 (width) = 142
+                Location = new Point(142, 260), // Giữ nguyên vị trí
                 Size = new Size(130, 25),
                 TextAlign = ContentAlignment.MiddleRight,
                 Text = $"đã bán: {product.SoldCount}"
@@ -177,7 +204,7 @@ namespace Presentation.Pages.Customer
                 BackColor = Color.FromArgb(237, 224, 207),
                 FlatStyle = FlatStyle.Flat,
                 Font = new Font("Times New Roman", 13.8F, FontStyle.Bold),
-                Location = new Point(44, 322),
+                Location = new Point(44, 322), // Giữ nguyên vị trí
                 Size = new Size(186, 41),
                 Text = "Thêm vào giỏ hàng",
                 UseVisualStyleBackColor = false,
@@ -348,6 +375,10 @@ namespace Presentation.Pages.Customer
 
         }
 
+        private void buttonCSKH_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new CSKHPage());
+        }
     }
 }
 

@@ -82,14 +82,7 @@ namespace Presentation.Pages.Admin
                 if (dataGridViewProducts != null) dataGridViewProducts.SelectionChanged += dataGridViewProducts_SelectionChanged;
                 if (comboBoxCategory != null) comboBoxCategory.SelectedIndexChanged += comboBoxCategory_SelectedIndexChanged;
                 if (buttonChangeImage != null) buttonChangeImage.Click += buttonChangeImage_Click;
-
-                // Sidebar buttons
-                if (buttonManageProducts != null) buttonManageProducts.Click += buttonManageProducts_Click;
-                if (buttonManageInventory != null) buttonManageInventory.Click += buttonManageInventory_Click;
-                if (buttonManageCategories != null) buttonManageCategories.Click += buttonManageCategories_Click;
-                if (buttonManageOrders != null) buttonManageOrders.Click += buttonManageOrders_Click;
-                if (buttonReports != null) buttonReports.Click += buttonReports_Click;
-                if (buttonLogout != null) buttonLogout.Click += buttonLogout_Click;
+                
 
                 _eventHandlersWired = true;
             }
@@ -424,7 +417,7 @@ namespace Presentation.Pages.Admin
                 }
 
                 // Get existing product data if editing
-                var existingProduct = _currentProductId.HasValue ? 
+                var existingProduct = _currentProductId.HasValue ?
                     _allProducts?.FirstOrDefault(p => p.ProductId == _currentProductId) : null;
 
                 var product = new Product
@@ -503,22 +496,22 @@ namespace Presentation.Pages.Admin
                         // Get the source file path
                         string sourceFilePath = openFileDialog.FileName;
                         string fileName = System.IO.Path.GetFileName(sourceFilePath);
-                        
+
                         // Get the Resource directory path
                         string resourceDir = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resource");
-                        
+
                         // Ensure Resource directory exists
                         if (!Directory.Exists(resourceDir))
                         {
                             Directory.CreateDirectory(resourceDir);
                         }
-                        
+
                         // Create destination path
                         string destinationPath = System.IO.Path.Combine(resourceDir, fileName);
-                        
+
                         // Copy the file to Resource directory
                         File.Copy(sourceFilePath, destinationPath, true);
-                        
+
                         // Store just the filename for database
                         _selectedImagePath = fileName;
 
@@ -653,11 +646,11 @@ namespace Presentation.Pages.Admin
         private async void buttonDelete_Click(object? sender, EventArgs e)
         {
             // Prevent multiple delete operations
-            if (_isDeleting) 
+            if (_isDeleting)
             {
                 return;
             }
-            
+
             try
             {
                 if (dataGridViewProducts?.CurrentRow != null)
@@ -679,7 +672,7 @@ namespace Presentation.Pages.Admin
                         if (result == DialogResult.Yes)
                         {
                             _isDeleting = true; // Set flag to prevent multiple operations
-                            
+
                             try
                             {
                                 var success = await _productRepository.DeleteProductAsync(productId);
@@ -715,7 +708,7 @@ namespace Presentation.Pages.Admin
         private async void buttonSave_Click(object? sender, EventArgs e)
         {
             // Prevent multiple save operations
-            if (_isSaving) 
+            if (_isSaving)
             {
                 return;
             }
@@ -725,7 +718,7 @@ namespace Presentation.Pages.Admin
             try
             {
                 _isSaving = true; // Set flag to prevent multiple operations
-                
+
                 var product = CreateProductFromForm();
                 bool success;
 
@@ -843,5 +836,15 @@ namespace Presentation.Pages.Admin
         }
 
         #endregion
+
+        private void buttonAdminHome_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new AdminHomePage());
+        }
+
+        private void buttonAdminCSKH_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new CSKHAdminPage());
+        }
     }
 }

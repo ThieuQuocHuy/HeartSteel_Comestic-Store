@@ -15,11 +15,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminHomePage));
             panelSidebar = new Panel();
-            buttonManageOrders = new Button();
             pictureBoxLogo = new PictureBox();
-            buttonManageProducts = new Button();
+            buttonAdminCSKH = new Button();
+            buttonAdminHome = new Button();
+            buttonManageOrders = new Button();
             buttonManageInventory = new Button();
             buttonManageCategories = new Button();
             buttonReports = new Button();
@@ -31,6 +31,7 @@
             labelWelcome = new Label();
             labelTitle = new Label();
             panelContent = new Panel();
+            pictureBox2 = new PictureBox();
             panelStats = new Panel();
             panelStatProducts = new Panel();
             labelProductCount = new Label();
@@ -44,35 +45,35 @@
             panelStatRevenue = new Panel();
             labelRevenueAmount = new Label();
             labelRevenueTitle = new Label();
-            panelImageContainer = new Panel();
-            pictureBoxMain = new PictureBox();
             labelImageDescription = new Label();
             panelQuickActions = new Panel();
             labelQuickActions = new Label();
             buttonQuickAddProduct = new Button();
             buttonQuickManageInventory = new Button();
             buttonQuickViewReports = new Button();
+            buttonManageProducts = new Button();
             panelSidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
             panelMain.SuspendLayout();
             panelHeader.SuspendLayout();
             panelContent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panelStats.SuspendLayout();
             panelStatProducts.SuspendLayout();
             panelStatOrders.SuspendLayout();
             panelStatCategories.SuspendLayout();
             panelStatRevenue.SuspendLayout();
-            panelImageContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBoxMain).BeginInit();
             panelQuickActions.SuspendLayout();
             SuspendLayout();
             // 
             // panelSidebar
             // 
             panelSidebar.BackColor = Color.FromArgb(77, 58, 41);
-            panelSidebar.Controls.Add(buttonManageOrders);
-            panelSidebar.Controls.Add(pictureBoxLogo);
             panelSidebar.Controls.Add(buttonManageProducts);
+            panelSidebar.Controls.Add(pictureBoxLogo);
+            panelSidebar.Controls.Add(buttonAdminCSKH);
+            panelSidebar.Controls.Add(buttonAdminHome);
+            panelSidebar.Controls.Add(buttonManageOrders);
             panelSidebar.Controls.Add(buttonManageInventory);
             panelSidebar.Controls.Add(buttonManageCategories);
             panelSidebar.Controls.Add(buttonReports);
@@ -82,6 +83,50 @@
             panelSidebar.Name = "panelSidebar";
             panelSidebar.Size = new Size(220, 709);
             panelSidebar.TabIndex = 0;
+            panelSidebar.Paint += panelSidebar_Paint;
+            // 
+            // pictureBoxLogo
+            // 
+            pictureBoxLogo.Location = new Point(4, 3);
+            pictureBoxLogo.Name = "pictureBoxLogo";
+            pictureBoxLogo.Size = new Size(213, 141);
+            pictureBoxLogo.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxLogo.TabIndex = 10;
+            pictureBoxLogo.TabStop = false;
+            pictureBoxLogo.Click += pictureBoxLogo_Click;
+            // 
+            // buttonAdminCSKH
+            // 
+            buttonAdminCSKH.BackColor = Color.FromArgb(95, 76, 59);
+            buttonAdminCSKH.FlatAppearance.BorderSize = 0;
+            buttonAdminCSKH.FlatStyle = FlatStyle.Flat;
+            buttonAdminCSKH.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonAdminCSKH.ForeColor = Color.White;
+            buttonAdminCSKH.Location = new Point(10, 510);
+            buttonAdminCSKH.Name = "buttonAdminCSKH";
+            buttonAdminCSKH.Padding = new Padding(5, 0, 0, 0);
+            buttonAdminCSKH.Size = new Size(200, 50);
+            buttonAdminCSKH.TabIndex = 9;
+            buttonAdminCSKH.Text = "💬 Trang CSKH";
+            buttonAdminCSKH.TextAlign = ContentAlignment.MiddleLeft;
+            buttonAdminCSKH.UseVisualStyleBackColor = false;
+            buttonAdminCSKH.Click += buttonAdminCSKH_Click;
+            // 
+            // buttonAdminHome
+            // 
+            buttonAdminHome.BackColor = Color.FromArgb(221, 207, 182);
+            buttonAdminHome.FlatAppearance.BorderSize = 0;
+            buttonAdminHome.FlatStyle = FlatStyle.Flat;
+            buttonAdminHome.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonAdminHome.ForeColor = Color.White;
+            buttonAdminHome.Location = new Point(10, 150);
+            buttonAdminHome.Name = "buttonAdminHome";
+            buttonAdminHome.Padding = new Padding(5, 0, 0, 0);
+            buttonAdminHome.Size = new Size(200, 50);
+            buttonAdminHome.TabIndex = 8;
+            buttonAdminHome.Text = "🏠 Trang chủ HeartSteel Cosmetic";
+            buttonAdminHome.TextAlign = ContentAlignment.MiddleLeft;
+            buttonAdminHome.UseVisualStyleBackColor = false;
             // 
             // buttonManageOrders
             // 
@@ -90,7 +135,7 @@
             buttonManageOrders.FlatStyle = FlatStyle.Flat;
             buttonManageOrders.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonManageOrders.ForeColor = Color.White;
-            buttonManageOrders.Location = new Point(10, 330);
+            buttonManageOrders.Location = new Point(10, 390);
             buttonManageOrders.Name = "buttonManageOrders";
             buttonManageOrders.Padding = new Padding(5, 0, 0, 0);
             buttonManageOrders.Size = new Size(200, 50);
@@ -100,33 +145,6 @@
             buttonManageOrders.UseVisualStyleBackColor = false;
             buttonManageOrders.Click += buttonManageOrders_Click;
             // 
-            // pictureBoxLogo
-            // 
-            pictureBoxLogo.Image = (Image)resources.GetObject("pictureBoxLogo.Image");
-            pictureBoxLogo.Location = new Point(10, 10);
-            pictureBoxLogo.Name = "pictureBoxLogo";
-            pictureBoxLogo.Size = new Size(200, 120);
-            pictureBoxLogo.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBoxLogo.TabIndex = 0;
-            pictureBoxLogo.TabStop = false;
-            // 
-            // buttonManageProducts
-            // 
-            buttonManageProducts.BackColor = Color.FromArgb(221, 207, 182);
-            buttonManageProducts.FlatAppearance.BorderSize = 0;
-            buttonManageProducts.FlatStyle = FlatStyle.Flat;
-            buttonManageProducts.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            buttonManageProducts.ForeColor = Color.FromArgb(77, 58, 41);
-            buttonManageProducts.Location = new Point(10, 150);
-            buttonManageProducts.Name = "buttonManageProducts";
-            buttonManageProducts.Padding = new Padding(5, 0, 0, 0);
-            buttonManageProducts.Size = new Size(200, 50);
-            buttonManageProducts.TabIndex = 1;
-            buttonManageProducts.Text = "📦 Quản lý sản phẩm";
-            buttonManageProducts.TextAlign = ContentAlignment.MiddleLeft;
-            buttonManageProducts.UseVisualStyleBackColor = false;
-            buttonManageProducts.Click += buttonManageProducts_Click;
-            // 
             // buttonManageInventory
             // 
             buttonManageInventory.BackColor = Color.FromArgb(95, 76, 59);
@@ -134,7 +152,7 @@
             buttonManageInventory.FlatStyle = FlatStyle.Flat;
             buttonManageInventory.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonManageInventory.ForeColor = Color.White;
-            buttonManageInventory.Location = new Point(10, 210);
+            buttonManageInventory.Location = new Point(10, 270);
             buttonManageInventory.Name = "buttonManageInventory";
             buttonManageInventory.Padding = new Padding(5, 0, 0, 0);
             buttonManageInventory.Size = new Size(200, 50);
@@ -151,7 +169,7 @@
             buttonManageCategories.FlatStyle = FlatStyle.Flat;
             buttonManageCategories.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonManageCategories.ForeColor = Color.White;
-            buttonManageCategories.Location = new Point(10, 270);
+            buttonManageCategories.Location = new Point(10, 330);
             buttonManageCategories.Name = "buttonManageCategories";
             buttonManageCategories.Padding = new Padding(5, 0, 0, 0);
             buttonManageCategories.Size = new Size(200, 50);
@@ -168,7 +186,7 @@
             buttonReports.FlatStyle = FlatStyle.Flat;
             buttonReports.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonReports.ForeColor = Color.White;
-            buttonReports.Location = new Point(10, 390);
+            buttonReports.Location = new Point(10, 450);
             buttonReports.Name = "buttonReports";
             buttonReports.Padding = new Padding(5, 0, 0, 0);
             buttonReports.Size = new Size(200, 50);
@@ -267,8 +285,9 @@
             // 
             // panelContent
             // 
+            panelContent.Controls.Add(pictureBox2);
             panelContent.Controls.Add(panelStats);
-            panelContent.Controls.Add(panelImageContainer);
+            panelContent.Controls.Add(labelImageDescription);
             panelContent.Controls.Add(panelQuickActions);
             panelContent.Dock = DockStyle.Fill;
             panelContent.Location = new Point(0, 0);
@@ -276,6 +295,15 @@
             panelContent.Padding = new Padding(20);
             panelContent.Size = new Size(1184, 709);
             panelContent.TabIndex = 1;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Location = new Point(31, 199);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(852, 482);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 3;
+            pictureBox2.TabStop = false;
             // 
             // panelStats
             // 
@@ -286,7 +314,7 @@
             panelStats.Dock = DockStyle.Top;
             panelStats.Location = new Point(20, 20);
             panelStats.Name = "panelStats";
-            panelStats.Size = new Size(1144, 120);
+            panelStats.Size = new Size(1144, 100);
             panelStats.TabIndex = 0;
             // 
             // panelStatProducts
@@ -417,33 +445,12 @@
             labelRevenueTitle.TabIndex = 0;
             labelRevenueTitle.Text = "Doanh thu";
             // 
-            // panelImageContainer
-            // 
-            panelImageContainer.BackColor = Color.White;
-            panelImageContainer.BorderStyle = BorderStyle.FixedSingle;
-            panelImageContainer.Controls.Add(pictureBoxMain);
-            panelImageContainer.Controls.Add(labelImageDescription);
-            panelImageContainer.Location = new Point(20, 160);
-            panelImageContainer.Name = "panelImageContainer";
-            panelImageContainer.Size = new Size(860, 400);
-            panelImageContainer.TabIndex = 1;
-            // 
-            // pictureBoxMain
-            // 
-            pictureBoxMain.Image = (Image)resources.GetObject("pictureBoxMain.Image");
-            pictureBoxMain.Location = new Point(10, 40);
-            pictureBoxMain.Name = "pictureBoxMain";
-            pictureBoxMain.Size = new Size(840, 320);
-            pictureBoxMain.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBoxMain.TabIndex = 0;
-            pictureBoxMain.TabStop = false;
-            // 
             // labelImageDescription
             // 
             labelImageDescription.AutoSize = true;
             labelImageDescription.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             labelImageDescription.ForeColor = Color.FromArgb(77, 58, 41);
-            labelImageDescription.Location = new Point(10, 8);
+            labelImageDescription.Location = new Point(23, 141);
             labelImageDescription.Name = "labelImageDescription";
             labelImageDescription.Size = new Size(404, 32);
             labelImageDescription.TabIndex = 1;
@@ -457,9 +464,9 @@
             panelQuickActions.Controls.Add(buttonQuickAddProduct);
             panelQuickActions.Controls.Add(buttonQuickManageInventory);
             panelQuickActions.Controls.Add(buttonQuickViewReports);
-            panelQuickActions.Location = new Point(900, 160);
+            panelQuickActions.Location = new Point(904, 199);
             panelQuickActions.Name = "panelQuickActions";
-            panelQuickActions.Size = new Size(260, 400);
+            panelQuickActions.Size = new Size(260, 481);
             panelQuickActions.TabIndex = 2;
             // 
             // labelQuickActions
@@ -518,6 +525,23 @@
             buttonQuickViewReports.UseVisualStyleBackColor = false;
             buttonQuickViewReports.Click += buttonReports_Click;
             // 
+            // buttonManageProducts
+            // 
+            buttonManageProducts.BackColor = Color.FromArgb(95, 76, 59);
+            buttonManageProducts.FlatAppearance.BorderSize = 0;
+            buttonManageProducts.FlatStyle = FlatStyle.Flat;
+            buttonManageProducts.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonManageProducts.ForeColor = Color.White;
+            buttonManageProducts.Location = new Point(10, 210);
+            buttonManageProducts.Name = "buttonManageProducts";
+            buttonManageProducts.Padding = new Padding(5, 0, 0, 0);
+            buttonManageProducts.Size = new Size(200, 50);
+            buttonManageProducts.TabIndex = 11;
+            buttonManageProducts.Text = "📦 Quản lý sản phẩm";
+            buttonManageProducts.TextAlign = ContentAlignment.MiddleLeft;
+            buttonManageProducts.UseVisualStyleBackColor = false;
+            buttonManageProducts.Click += buttonManageProducts_Click_1;
+            // 
             // AdminHomePage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -539,6 +563,8 @@
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();
             panelContent.ResumeLayout(false);
+            panelContent.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panelStats.ResumeLayout(false);
             panelStatProducts.ResumeLayout(false);
             panelStatProducts.PerformLayout();
@@ -548,9 +574,6 @@
             panelStatCategories.PerformLayout();
             panelStatRevenue.ResumeLayout(false);
             panelStatRevenue.PerformLayout();
-            panelImageContainer.ResumeLayout(false);
-            panelImageContainer.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBoxMain).EndInit();
             panelQuickActions.ResumeLayout(false);
             panelQuickActions.PerformLayout();
             ResumeLayout(false);
@@ -559,8 +582,6 @@
         #endregion
 
         private Panel panelSidebar;
-        private PictureBox pictureBoxLogo;
-        private Button buttonManageProducts;
         private Button buttonManageInventory;
         private Button buttonManageCategories;
         private Button buttonReports;
@@ -585,8 +606,6 @@
         private Panel panelStatRevenue;
         private Label labelRevenueAmount;
         private Label labelRevenueTitle;
-        private Panel panelImageContainer;
-        private PictureBox pictureBoxMain;
         private Label labelImageDescription;
         private Panel panelQuickActions;
         private Label labelQuickActions;
@@ -594,5 +613,10 @@
         private Button buttonQuickManageInventory;
         private Button buttonQuickViewReports;
         private Button buttonManageOrders;
+        private Button buttonAdminCSKH;
+        private Button buttonAdminHome;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBoxLogo;
+        private Button buttonManageProducts;
     }
 }

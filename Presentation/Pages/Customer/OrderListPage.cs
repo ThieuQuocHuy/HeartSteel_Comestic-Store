@@ -6,6 +6,7 @@ using BLL.Services;
 using DAL.Models;
 using System.Drawing;
 using System.Linq;
+using DAL.Repositories;
 
 namespace Presentation.Pages.Customer
 {
@@ -36,6 +37,33 @@ namespace Presentation.Pages.Customer
             if (buttonLogout != null)
             {
                 buttonLogout.Click += buttonLogout_Click!;
+            }
+            // Load ảnh
+            LoadImages();
+        }
+
+        private void LoadImages()
+        {
+            try
+            {
+                // Load logo
+                if (pictureBoxLogo != null)
+                {
+                    var logoImage = Presentation.Services.ResourceImageLoader.LoadByFileName("logoden.png");
+                    if (logoImage != null)
+                    {
+                        pictureBoxLogo.Image = logoImage;
+                        System.Diagnostics.Debug.WriteLine("Logo loaded successfully for OrderListPage");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Failed to load logo image for OrderListPage");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"LoadImages Error: {ex.Message}");
             }
         }
 
@@ -74,6 +102,12 @@ namespace Presentation.Pages.Customer
         {
             flowLayoutPanelOrders.Controls.Clear();
 
+            // Cải thiện cấu hình FlowLayoutPanel
+            flowLayoutPanelOrders.FlowDirection = FlowDirection.TopDown;
+            flowLayoutPanelOrders.WrapContents = false;
+            flowLayoutPanelOrders.AutoScroll = true;
+            flowLayoutPanelOrders.Padding = new Padding(10);
+
             if (_orders == null || _orders.Count == 0)
             {
                 var emptyLabel = new Label
@@ -82,7 +116,7 @@ namespace Presentation.Pages.Customer
                     Font = new Font("Segoe UI", 14, FontStyle.Regular),
                     ForeColor = Color.Gray,
                     TextAlign = ContentAlignment.MiddleCenter,
-                    Size = new Size(600, 100),
+                    Size = new Size(800, 100),
                     Dock = DockStyle.Fill
                 };
                 flowLayoutPanelOrders.Controls.Add(emptyLabel);
@@ -101,9 +135,11 @@ namespace Presentation.Pages.Customer
             var panel = new Panel
             {
                 BackColor = Color.FromArgb(237, 224, 207),
-                Size = new Size(700, 120),
+                Size = new Size(800, 140),
                 Margin = new Padding(10),
-                Tag = order.OrderId
+                Tag = order.OrderId,
+                Padding = new Padding(15),
+
             };
 
             // Mã đơn hàng
@@ -113,7 +149,7 @@ namespace Presentation.Pages.Customer
                 Font = new Font("Segoe UI", 14, FontStyle.Bold),
                 ForeColor = Color.FromArgb(77, 58, 41),
                 Location = new Point(15, 15),
-                Size = new Size(200, 25),
+                Size = new Size(200, 35),
                 AutoSize = false
             };
 
@@ -124,7 +160,7 @@ namespace Presentation.Pages.Customer
                 Font = new Font("Segoe UI", 10, FontStyle.Regular),
                 ForeColor = Color.FromArgb(77, 58, 41),
                 Location = new Point(15, 45),
-                Size = new Size(200, 20),
+                Size = new Size(200, 25),
                 AutoSize = false
             };
 
@@ -135,7 +171,7 @@ namespace Presentation.Pages.Customer
                 Font = new Font("Segoe UI", 12, FontStyle.Bold),
                 ForeColor = Color.FromArgb(77, 58, 41),
                 Location = new Point(15, 70),
-                Size = new Size(200, 20),
+                Size = new Size(200, 35),
                 AutoSize = false
             };
 
@@ -170,9 +206,23 @@ namespace Presentation.Pages.Customer
                 Font = new Font("Segoe UI", 10, FontStyle.Bold),
                 ForeColor = GetStatusColor(latestStatus),
                 Location = new Point(250, 70),
-                Size = new Size(200, 20),
+                Size = new Size(200, 30),
                 AutoSize = false
             };
+
+            // Nút hoàn trả
+            var buttonReturn = new Button
+            {
+                Text = "Hoàn trả",
+                BackColor = Color.FromArgb(220, 53, 69),
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                Location = new Point(550, 100),
+                Size = new Size(120, 35),
+                Tag = order.OrderId
+            };
+            buttonReturn.Click += ButtonReturn_Click;
 
             // Nút xem chi tiết
             var buttonViewDetail = new Button
@@ -195,6 +245,7 @@ namespace Presentation.Pages.Customer
             panel.Controls.Add(labelItemCount);
             panel.Controls.Add(labelAddress);
             panel.Controls.Add(labelStatus);
+            panel.Controls.Add(buttonReturn);
             panel.Controls.Add(buttonViewDetail);
 
             return panel;
@@ -213,6 +264,17 @@ namespace Presentation.Pages.Customer
             };
         }
 
+        private string TruncateText(string text, int maxLength)
+        {
+            if (string.IsNullOrEmpty(text))
+                return "N/A";
+
+            if (text.Length <= maxLength)
+                return text;
+
+            return text.Substring(0, maxLength - 3) + "...";
+        }
+
         private void ButtonViewDetail_Click(object? sender, EventArgs e)
         {
             if (sender is Button button && button.Tag is int orderId)
@@ -224,6 +286,72 @@ namespace Presentation.Pages.Customer
                     Presentation.Navigation.Navigator.Navigate(orderDetailPage);
                 }
             }
+        }
+
+        private async void ButtonReturn_Click(object? sender, EventArgs e)
+        {
+            if (sender is not Button button || button.Tag is not int orderId) return;
+            var order = _orders.FirstOrDefault(o => o.OrderId == orderId);
+            if (order == null) return;
+
+            // Prompt reason using a simple modal textbox form
+            var reason = PromptText("Lý do hoàn trả", "Vui lòng nhập lý do hoàn trả:");
+            if (string.IsNullOrWhiteSpace(reason)) return;
+
+            try
+            {
+                var cancelRepo = new CancelReasonRepository();
+                var statusRepo = new OrderStatusRepository();
+                var orderRepo = new OrderRepository();
+
+                // Create cancel reason
+                var cancel = await cancelRepo.CreateAsync(reason.Trim());
+
+                // Update order with cancel reason id
+                order.CancelReasonId = cancel.CancelId;
+                var updated = await orderRepo.UpdateOrderAsync(order);
+                if (!updated)
+                {
+                    MessageBox.Show("Không thể cập nhật đơn hàng.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Add status record
+                await statusRepo.AddAsync(new OrderStatus
+                {
+                    OrderId = order.OrderId,
+                    Status = "Hoàn trả",
+                    ChangedAt = DateTime.Now
+                });
+
+                MessageBox.Show("Đã gửi yêu cầu hoàn trả.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                await LoadOrders();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi hoàn trả: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private string? PromptText(string title, string prompt)
+        {
+            using var form = new Form();
+            form.Text = title;
+            form.Width = 480;
+            form.Height = 180;
+            form.StartPosition = FormStartPosition.CenterParent;
+
+            var label = new Label { Left = 10, Top = 15, Width = 440, Text = prompt };
+            var text = new TextBox { Left = 10, Top = 40, Width = 440 };
+            var ok = new Button { Text = "OK", Left = 280, Top = 80, Width = 80, DialogResult = DialogResult.OK };
+            var cancel = new Button { Text = "Hủy", Left = 370, Top = 80, Width = 80, DialogResult = DialogResult.Cancel };
+            form.Controls.Add(label);
+            form.Controls.Add(text);
+            form.Controls.Add(ok);
+            form.Controls.Add(cancel);
+            form.AcceptButton = ok;
+            form.CancelButton = cancel;
+            return form.ShowDialog(this) == DialogResult.OK ? text.Text : null;
         }
 
         private void buttonHome_Click(object? sender, EventArgs e)
@@ -244,6 +372,11 @@ namespace Presentation.Pages.Customer
         private void buttonOrders_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonLogout1_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new CSKHPage());
         }
     }
 }

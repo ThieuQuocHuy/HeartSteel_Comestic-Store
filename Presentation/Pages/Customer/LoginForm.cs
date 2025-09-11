@@ -14,6 +14,32 @@ namespace Presentation.Pages.Customer
             InitializeComponent();
             var userRepository = new DAL.Repositories.UserRepository();
             _authService = new AuthService(userRepository);
+            LoadImages();
+        }
+
+        private void LoadImages()
+        {
+            try
+            {
+                // Load user.png vào pictureBoxLogo
+                if (pictureBoxLogo != null)
+                {
+                    var userImage = Presentation.Services.ResourceImageLoader.LoadByFileName("user.png");
+                    if (userImage != null)
+                    {
+                        pictureBoxLogo.Image = userImage;
+                        System.Diagnostics.Debug.WriteLine("User image loaded successfully for LoginForm");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Failed to load user image for LoginForm");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"LoadImages Error: {ex.Message}");
+            }
         }
 
         private async void buttonLogin_Click(object sender, EventArgs e)

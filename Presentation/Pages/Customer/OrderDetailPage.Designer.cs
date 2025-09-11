@@ -185,13 +185,7 @@ namespace Presentation.Pages.Customer
             // 
             // panelStatusHistory
             // 
-            panelStatusHistory.BackColor = Color.FromArgb(255, 255, 255);
-            panelStatusHistory.Controls.Add(flowLayoutPanelStatusHistory);
-            panelStatusHistory.Controls.Add(labelStatusHistory);
-            panelStatusHistory.Location = new Point(580, 240);
-            panelStatusHistory.Name = "panelStatusHistory";
-            panelStatusHistory.Size = new Size(300, 400);
-            panelStatusHistory.TabIndex = 3;
+            panelStatusHistory.Visible = false;
             // 
             // labelStatusHistory
             // 
@@ -218,7 +212,7 @@ namespace Presentation.Pages.Customer
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(255, 255, 255);
             ClientSize = new Size(900, 660);
-            Controls.Add(panelStatusHistory);
+            // status history removed when not used
             Controls.Add(panelOrderItems);
             Controls.Add(panelOrderInfo);
             Controls.Add(panelHeader);

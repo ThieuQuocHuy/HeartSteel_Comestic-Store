@@ -28,11 +28,12 @@ namespace Presentation.Pages.Admin
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CategoryManagementPage));
             panelHeader = new Panel();
             labelTitle = new Label();
             panelSidebar = new Panel();
             panel1 = new Panel();
+            buttonAdminCSKH = new Button();
+            buttonAdminHome = new Button();
             buttonManageOrders = new Button();
             pictureBoxLogo = new PictureBox();
             buttonManageProducts = new Button();
@@ -50,12 +51,12 @@ namespace Presentation.Pages.Admin
             buttonEdit = new Button();
             buttonAdd = new Button();
             groupBoxCategoryInfo = new GroupBox();
+            buttonCancel = new Button();
+            buttonSave = new Button();
             textBoxCategoryName = new TextBox();
             labelCategoryName = new Label();
             textBoxCategoryId = new TextBox();
             labelCategoryId = new Label();
-            buttonSave = new Button();
-            buttonCancel = new Button();
             panelHeader.SuspendLayout();
             panelSidebar.SuspendLayout();
             panel1.SuspendLayout();
@@ -85,7 +86,7 @@ namespace Presentation.Pages.Admin
             labelTitle.ForeColor = Color.White;
             labelTitle.Location = new Point(30, 20);
             labelTitle.Name = "labelTitle";
-            labelTitle.Size = new Size(316, 41);
+            labelTitle.Size = new Size(322, 41);
             labelTitle.TabIndex = 1;
             labelTitle.Text = "📂 Quản lý danh mục";
             // 
@@ -102,6 +103,8 @@ namespace Presentation.Pages.Admin
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(77, 58, 41);
+            panel1.Controls.Add(buttonAdminCSKH);
+            panel1.Controls.Add(buttonAdminHome);
             panel1.Controls.Add(buttonManageOrders);
             panel1.Controls.Add(pictureBoxLogo);
             panel1.Controls.Add(buttonManageProducts);
@@ -114,6 +117,41 @@ namespace Presentation.Pages.Admin
             panel1.Name = "panel1";
             panel1.Size = new Size(220, 709);
             panel1.TabIndex = 1;
+            
+            // 
+            // buttonAdminCSKH
+            // 
+            buttonAdminCSKH.BackColor = Color.FromArgb(95, 76, 59);
+            buttonAdminCSKH.FlatAppearance.BorderSize = 0;
+            buttonAdminCSKH.FlatStyle = FlatStyle.Flat;
+            buttonAdminCSKH.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonAdminCSKH.ForeColor = Color.White;
+            buttonAdminCSKH.Location = new Point(10, 510);
+            buttonAdminCSKH.Name = "buttonAdminCSKH";
+            buttonAdminCSKH.Padding = new Padding(5, 0, 0, 0);
+            buttonAdminCSKH.Size = new Size(200, 50);
+            buttonAdminCSKH.TabIndex = 10;
+            buttonAdminCSKH.Text = "💬 Trang CSKH";
+            buttonAdminCSKH.TextAlign = ContentAlignment.MiddleLeft;
+            buttonAdminCSKH.UseVisualStyleBackColor = false;
+            buttonAdminCSKH.Click += buttonAdminCSKH_Click;
+            // 
+            // buttonAdminHome
+            // 
+            buttonAdminHome.BackColor = Color.FromArgb(95, 76, 59);
+            buttonAdminHome.FlatAppearance.BorderSize = 0;
+            buttonAdminHome.FlatStyle = FlatStyle.Flat;
+            buttonAdminHome.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonAdminHome.ForeColor = Color.White;
+            buttonAdminHome.Location = new Point(3, 150);
+            buttonAdminHome.Name = "buttonAdminHome";
+            buttonAdminHome.Padding = new Padding(5, 0, 0, 0);
+            buttonAdminHome.Size = new Size(200, 50);
+            buttonAdminHome.TabIndex = 9;
+            buttonAdminHome.Text = "🏠 Trang chủ HeartSteel Cosmetic";
+            buttonAdminHome.TextAlign = ContentAlignment.MiddleLeft;
+            buttonAdminHome.UseVisualStyleBackColor = false;
+            buttonAdminHome.Click += buttonAdminHome_Click;
             // 
             // buttonManageOrders
             // 
@@ -122,7 +160,7 @@ namespace Presentation.Pages.Admin
             buttonManageOrders.FlatStyle = FlatStyle.Flat;
             buttonManageOrders.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonManageOrders.ForeColor = Color.White;
-            buttonManageOrders.Location = new Point(10, 330);
+            buttonManageOrders.Location = new Point(10, 390);
             buttonManageOrders.Name = "buttonManageOrders";
             buttonManageOrders.Padding = new Padding(5, 0, 0, 0);
             buttonManageOrders.Size = new Size(200, 50);
@@ -148,7 +186,7 @@ namespace Presentation.Pages.Admin
             buttonManageProducts.FlatStyle = FlatStyle.Flat;
             buttonManageProducts.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonManageProducts.ForeColor = Color.White;
-            buttonManageProducts.Location = new Point(10, 150);
+            buttonManageProducts.Location = new Point(10, 210);
             buttonManageProducts.Name = "buttonManageProducts";
             buttonManageProducts.Padding = new Padding(5, 0, 0, 0);
             buttonManageProducts.Size = new Size(200, 50);
@@ -165,7 +203,7 @@ namespace Presentation.Pages.Admin
             buttonManageInventory.FlatStyle = FlatStyle.Flat;
             buttonManageInventory.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonManageInventory.ForeColor = Color.White;
-            buttonManageInventory.Location = new Point(10, 210);
+            buttonManageInventory.Location = new Point(10, 270);
             buttonManageInventory.Name = "buttonManageInventory";
             buttonManageInventory.Padding = new Padding(5, 0, 0, 0);
             buttonManageInventory.Size = new Size(200, 50);
@@ -182,7 +220,7 @@ namespace Presentation.Pages.Admin
             buttonManageCategories.FlatStyle = FlatStyle.Flat;
             buttonManageCategories.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonManageCategories.ForeColor = Color.FromArgb(77, 58, 41);
-            buttonManageCategories.Location = new Point(10, 270);
+            buttonManageCategories.Location = new Point(10, 330);
             buttonManageCategories.Name = "buttonManageCategories";
             buttonManageCategories.Padding = new Padding(5, 0, 0, 0);
             buttonManageCategories.Size = new Size(200, 50);
@@ -199,7 +237,7 @@ namespace Presentation.Pages.Admin
             buttonReports.FlatStyle = FlatStyle.Flat;
             buttonReports.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonReports.ForeColor = Color.White;
-            buttonReports.Location = new Point(10, 390);
+            buttonReports.Location = new Point(10, 450);
             buttonReports.Name = "buttonReports";
             buttonReports.Padding = new Padding(5, 0, 0, 0);
             buttonReports.Size = new Size(200, 50);
@@ -362,11 +400,44 @@ namespace Presentation.Pages.Admin
             groupBoxCategoryInfo.TabIndex = 0;
             groupBoxCategoryInfo.TabStop = false;
             groupBoxCategoryInfo.Text = "Thông tin danh mục";
+            groupBoxCategoryInfo.Enter += groupBoxCategoryInfo_Enter;
+            // 
+            // buttonCancel
+            // 
+            buttonCancel.BackColor = Color.FromArgb(108, 117, 125);
+            buttonCancel.FlatAppearance.BorderSize = 0;
+            buttonCancel.FlatStyle = FlatStyle.Flat;
+            buttonCancel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonCancel.ForeColor = Color.White;
+            buttonCancel.Location = new Point(591, 40);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new Size(100, 40);
+            buttonCancel.TabIndex = 5;
+            buttonCancel.Text = "❌ Hủy";
+            buttonCancel.UseVisualStyleBackColor = false;
+            buttonCancel.Visible = false;
+            buttonCancel.Click += buttonCancel_Click;
+            // 
+            // buttonSave
+            // 
+            buttonSave.BackColor = Color.FromArgb(40, 167, 69);
+            buttonSave.FlatAppearance.BorderSize = 0;
+            buttonSave.FlatStyle = FlatStyle.Flat;
+            buttonSave.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonSave.ForeColor = Color.White;
+            buttonSave.Location = new Point(481, 40);
+            buttonSave.Name = "buttonSave";
+            buttonSave.Size = new Size(100, 40);
+            buttonSave.TabIndex = 4;
+            buttonSave.Text = "💾 Lưu";
+            buttonSave.UseVisualStyleBackColor = false;
+            buttonSave.Visible = false;
+            buttonSave.Click += buttonSave_Click;
             // 
             // textBoxCategoryName
             // 
             textBoxCategoryName.Font = new Font("Segoe UI", 10F);
-            textBoxCategoryName.Location = new Point(120, 50);
+            textBoxCategoryName.Location = new Point(146, 50);
             textBoxCategoryName.Name = "textBoxCategoryName";
             textBoxCategoryName.Size = new Size(300, 30);
             textBoxCategoryName.TabIndex = 3;
@@ -378,14 +449,14 @@ namespace Presentation.Pages.Admin
             labelCategoryName.ForeColor = Color.FromArgb(77, 58, 41);
             labelCategoryName.Location = new Point(20, 53);
             labelCategoryName.Name = "labelCategoryName";
-            labelCategoryName.Size = new Size(95, 23);
+            labelCategoryName.Size = new Size(122, 23);
             labelCategoryName.TabIndex = 2;
             labelCategoryName.Text = "Tên danh mục:";
             // 
             // textBoxCategoryId
             // 
             textBoxCategoryId.Font = new Font("Segoe UI", 10F);
-            textBoxCategoryId.Location = new Point(120, 20);
+            textBoxCategoryId.Location = new Point(146, 20);
             textBoxCategoryId.Name = "textBoxCategoryId";
             textBoxCategoryId.ReadOnly = true;
             textBoxCategoryId.Size = new Size(100, 30);
@@ -399,41 +470,9 @@ namespace Presentation.Pages.Admin
             labelCategoryId.ForeColor = Color.FromArgb(77, 58, 41);
             labelCategoryId.Location = new Point(20, 23);
             labelCategoryId.Name = "labelCategoryId";
-            labelCategoryId.Size = new Size(90, 23);
+            labelCategoryId.Size = new Size(120, 23);
             labelCategoryId.TabIndex = 0;
             labelCategoryId.Text = "Mã danh mục:";
-            // 
-            // buttonSave
-            // 
-            buttonSave.BackColor = Color.FromArgb(40, 167, 69);
-            buttonSave.FlatAppearance.BorderSize = 0;
-            buttonSave.FlatStyle = FlatStyle.Flat;
-            buttonSave.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            buttonSave.ForeColor = Color.White;
-            buttonSave.Location = new Point(450, 20);
-            buttonSave.Name = "buttonSave";
-            buttonSave.Size = new Size(100, 40);
-            buttonSave.TabIndex = 4;
-            buttonSave.Text = "💾 Lưu";
-            buttonSave.UseVisualStyleBackColor = false;
-            buttonSave.Visible = false;
-            buttonSave.Click += buttonSave_Click;
-            // 
-            // buttonCancel
-            // 
-            buttonCancel.BackColor = Color.FromArgb(108, 117, 125);
-            buttonCancel.FlatAppearance.BorderSize = 0;
-            buttonCancel.FlatStyle = FlatStyle.Flat;
-            buttonCancel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            buttonCancel.ForeColor = Color.White;
-            buttonCancel.Location = new Point(560, 20);
-            buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(100, 40);
-            buttonCancel.TabIndex = 5;
-            buttonCancel.Text = "❌ Hủy";
-            buttonCancel.UseVisualStyleBackColor = false;
-            buttonCancel.Visible = false;
-            buttonCancel.Click += buttonCancel_Click;
             // 
             // CategoryManagementPage
             // 
@@ -488,5 +527,7 @@ namespace Presentation.Pages.Admin
         private Button buttonManageCategories;
         private Button buttonReports;
         private Button buttonLogout;
+        private Button buttonAdminCSKH;
+        private Button buttonAdminHome;
     }
 }

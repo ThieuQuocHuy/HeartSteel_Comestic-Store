@@ -22,6 +22,33 @@ namespace Presentation.Pages.Admin
             InitializeComponent();
             _productRepository = new ProductRepository();
             this.Load += InventoryManagementPage_Load;
+            // Load ảnh
+            LoadImages();
+        }
+
+        private void LoadImages()
+        {
+            try
+            {
+                // Load logo
+                if (pictureBoxLogo != null)
+                {
+                    var logoImage = Presentation.Services.ResourceImageLoader.LoadByFileName("logoden.png");
+                    if (logoImage != null)
+                    {
+                        pictureBoxLogo.Image = logoImage;
+                        System.Diagnostics.Debug.WriteLine("Logo loaded successfully for InventoryManagementPage");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Failed to load logo image for InventoryManagementPage");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"LoadImages Error: {ex.Message}");
+            }
         }
 
         private async void InventoryManagementPage_Load(object? sender, EventArgs e)
@@ -262,7 +289,7 @@ namespace Presentation.Pages.Admin
                     {
                         MessageBox.Show(ex.Message, "Lỗi Database", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                }    
+                }
             }
         }
 
@@ -286,11 +313,21 @@ namespace Presentation.Pages.Admin
 
             MessageBox.Show(message, "Thông tin kiểm kê", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-      
+
 
         private async void buttonRefreshStock_Click(object sender, EventArgs e)
         {
             await LoadAllDataAsync();
+        }
+
+        private void buttonAdminHome_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new AdminHomePage());
+        }
+
+        private void buttonAdminCSKH_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new CSKHAdminPage());
         }
     }
     #endregion

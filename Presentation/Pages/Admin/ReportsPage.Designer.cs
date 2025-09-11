@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             panelSidebar = new Panel();
+            buttonAdminHome = new Button();
+            buttonAdminCSKH = new Button();
             buttonManageOrders = new Button();
             pictureBoxLogo = new PictureBox();
             buttonManageProducts = new Button();
@@ -102,6 +104,8 @@
             // panelSidebar
             // 
             panelSidebar.BackColor = Color.FromArgb(77, 58, 41);
+            panelSidebar.Controls.Add(buttonAdminHome);
+            panelSidebar.Controls.Add(buttonAdminCSKH);
             panelSidebar.Controls.Add(buttonManageOrders);
             panelSidebar.Controls.Add(pictureBoxLogo);
             panelSidebar.Controls.Add(buttonManageProducts);
@@ -111,10 +115,43 @@
             panelSidebar.Controls.Add(buttonLogout);
             panelSidebar.Dock = DockStyle.Left;
             panelSidebar.Location = new Point(0, 0);
-            panelSidebar.Margin = new Padding(3, 2, 3, 2);
             panelSidebar.Name = "panelSidebar";
-            panelSidebar.Size = new Size(192, 538);
+            panelSidebar.Size = new Size(219, 707);
             panelSidebar.TabIndex = 0;
+            // 
+            // buttonAdminHome
+            // 
+            buttonAdminHome.BackColor = Color.FromArgb(95, 76, 59);
+            buttonAdminHome.FlatAppearance.BorderSize = 0;
+            buttonAdminHome.FlatStyle = FlatStyle.Flat;
+            buttonAdminHome.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonAdminHome.ForeColor = Color.White;
+            buttonAdminHome.Location = new Point(10, 150);
+            buttonAdminHome.Name = "buttonAdminHome";
+            buttonAdminHome.Padding = new Padding(5, 0, 0, 0);
+            buttonAdminHome.Size = new Size(200, 51);
+            buttonAdminHome.TabIndex = 10;
+            buttonAdminHome.Text = "🏠 Trang chủ HeartSteel Cosmetic";
+            buttonAdminHome.TextAlign = ContentAlignment.MiddleLeft;
+            buttonAdminHome.UseVisualStyleBackColor = false;
+            buttonAdminHome.Click += buttonAdminHome_Click;
+            // 
+            // buttonAdminCSKH
+            // 
+            buttonAdminCSKH.BackColor = Color.FromArgb(95, 76, 59);
+            buttonAdminCSKH.FlatAppearance.BorderSize = 0;
+            buttonAdminCSKH.FlatStyle = FlatStyle.Flat;
+            buttonAdminCSKH.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonAdminCSKH.ForeColor = Color.White;
+            buttonAdminCSKH.Location = new Point(10, 510);
+            buttonAdminCSKH.Name = "buttonAdminCSKH";
+            buttonAdminCSKH.Padding = new Padding(5, 0, 0, 0);
+            buttonAdminCSKH.Size = new Size(200, 51);
+            buttonAdminCSKH.TabIndex = 9;
+            buttonAdminCSKH.Text = "💬 Trang CSKH";
+            buttonAdminCSKH.TextAlign = ContentAlignment.MiddleLeft;
+            buttonAdminCSKH.UseVisualStyleBackColor = false;
+            buttonAdminCSKH.Click += buttonAdminCSKH_Click;
             // 
             // buttonManageOrders
             // 
@@ -123,11 +160,10 @@
             buttonManageOrders.FlatStyle = FlatStyle.Flat;
             buttonManageOrders.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonManageOrders.ForeColor = Color.White;
-            buttonManageOrders.Location = new Point(9, 248);
-            buttonManageOrders.Margin = new Padding(3, 2, 3, 2);
+            buttonManageOrders.Location = new Point(10, 390);
             buttonManageOrders.Name = "buttonManageOrders";
-            buttonManageOrders.Padding = new Padding(4, 0, 0, 0);
-            buttonManageOrders.Size = new Size(175, 38);
+            buttonManageOrders.Padding = new Padding(5, 0, 0, 0);
+            buttonManageOrders.Size = new Size(200, 51);
             buttonManageOrders.TabIndex = 8;
             buttonManageOrders.Text = "📜 Quản lý đơn hàng\r\n";
             buttonManageOrders.TextAlign = ContentAlignment.MiddleLeft;
@@ -136,10 +172,9 @@
             // 
             // pictureBoxLogo
             // 
-            pictureBoxLogo.Location = new Point(9, 8);
-            pictureBoxLogo.Margin = new Padding(3, 2, 3, 2);
+            pictureBoxLogo.Location = new Point(10, 11);
             pictureBoxLogo.Name = "pictureBoxLogo";
-            pictureBoxLogo.Size = new Size(175, 90);
+            pictureBoxLogo.Size = new Size(200, 120);
             pictureBoxLogo.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBoxLogo.TabIndex = 0;
             pictureBoxLogo.TabStop = false;
@@ -151,11 +186,10 @@
             buttonManageProducts.FlatStyle = FlatStyle.Flat;
             buttonManageProducts.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonManageProducts.ForeColor = Color.White;
-            buttonManageProducts.Location = new Point(9, 112);
-            buttonManageProducts.Margin = new Padding(3, 2, 3, 2);
+            buttonManageProducts.Location = new Point(10, 210);
             buttonManageProducts.Name = "buttonManageProducts";
-            buttonManageProducts.Padding = new Padding(4, 0, 0, 0);
-            buttonManageProducts.Size = new Size(175, 38);
+            buttonManageProducts.Padding = new Padding(5, 0, 0, 0);
+            buttonManageProducts.Size = new Size(200, 51);
             buttonManageProducts.TabIndex = 1;
             buttonManageProducts.Text = "📦 Quản lý sản phẩm";
             buttonManageProducts.TextAlign = ContentAlignment.MiddleLeft;
@@ -169,11 +203,10 @@
             buttonManageInventory.FlatStyle = FlatStyle.Flat;
             buttonManageInventory.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonManageInventory.ForeColor = Color.White;
-            buttonManageInventory.Location = new Point(9, 158);
-            buttonManageInventory.Margin = new Padding(3, 2, 3, 2);
+            buttonManageInventory.Location = new Point(10, 270);
             buttonManageInventory.Name = "buttonManageInventory";
-            buttonManageInventory.Padding = new Padding(4, 0, 0, 0);
-            buttonManageInventory.Size = new Size(175, 38);
+            buttonManageInventory.Padding = new Padding(5, 0, 0, 0);
+            buttonManageInventory.Size = new Size(200, 51);
             buttonManageInventory.TabIndex = 2;
             buttonManageInventory.Text = "📊 Quản lý kho hàng";
             buttonManageInventory.TextAlign = ContentAlignment.MiddleLeft;
@@ -187,11 +220,10 @@
             buttonManageCategories.FlatStyle = FlatStyle.Flat;
             buttonManageCategories.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonManageCategories.ForeColor = Color.White;
-            buttonManageCategories.Location = new Point(9, 202);
-            buttonManageCategories.Margin = new Padding(3, 2, 3, 2);
+            buttonManageCategories.Location = new Point(10, 330);
             buttonManageCategories.Name = "buttonManageCategories";
-            buttonManageCategories.Padding = new Padding(4, 0, 0, 0);
-            buttonManageCategories.Size = new Size(175, 38);
+            buttonManageCategories.Padding = new Padding(5, 0, 0, 0);
+            buttonManageCategories.Size = new Size(200, 51);
             buttonManageCategories.TabIndex = 3;
             buttonManageCategories.Text = "📂 Quản lý danh mục";
             buttonManageCategories.TextAlign = ContentAlignment.MiddleLeft;
@@ -205,11 +237,10 @@
             buttonReports.FlatStyle = FlatStyle.Flat;
             buttonReports.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonReports.ForeColor = Color.FromArgb(77, 58, 41);
-            buttonReports.Location = new Point(9, 292);
-            buttonReports.Margin = new Padding(3, 2, 3, 2);
+            buttonReports.Location = new Point(10, 450);
             buttonReports.Name = "buttonReports";
-            buttonReports.Padding = new Padding(4, 0, 0, 0);
-            buttonReports.Size = new Size(175, 38);
+            buttonReports.Padding = new Padding(5, 0, 0, 0);
+            buttonReports.Size = new Size(200, 51);
             buttonReports.TabIndex = 4;
             buttonReports.Text = "📈 Báo cáo";
             buttonReports.TextAlign = ContentAlignment.MiddleLeft;
@@ -223,11 +254,10 @@
             buttonLogout.FlatStyle = FlatStyle.Flat;
             buttonLogout.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonLogout.ForeColor = Color.White;
-            buttonLogout.Location = new Point(9, 472);
-            buttonLogout.Margin = new Padding(3, 2, 3, 2);
+            buttonLogout.Location = new Point(10, 629);
             buttonLogout.Name = "buttonLogout";
-            buttonLogout.Padding = new Padding(4, 0, 0, 0);
-            buttonLogout.Size = new Size(175, 38);
+            buttonLogout.Padding = new Padding(5, 0, 0, 0);
+            buttonLogout.Size = new Size(200, 51);
             buttonLogout.TabIndex = 5;
             buttonLogout.Text = "🚪 Đăng xuất";
             buttonLogout.TextAlign = ContentAlignment.MiddleLeft;
@@ -239,10 +269,9 @@
             panelMain.Controls.Add(tabControlReports);
             panelMain.Controls.Add(panelHeader);
             panelMain.Dock = DockStyle.Fill;
-            panelMain.Location = new Point(192, 0);
-            panelMain.Margin = new Padding(3, 2, 3, 2);
+            panelMain.Location = new Point(219, 0);
             panelMain.Name = "panelMain";
-            panelMain.Size = new Size(1038, 538);
+            panelMain.Size = new Size(1184, 707);
             panelMain.TabIndex = 1;
             // 
             // tabControlReports
@@ -252,11 +281,10 @@
             tabControlReports.Controls.Add(tabPageInventory);
             tabControlReports.Dock = DockStyle.Fill;
             tabControlReports.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            tabControlReports.Location = new Point(0, 52);
-            tabControlReports.Margin = new Padding(3, 2, 3, 2);
+            tabControlReports.Location = new Point(0, 69);
             tabControlReports.Name = "tabControlReports";
             tabControlReports.SelectedIndex = 0;
-            tabControlReports.Size = new Size(1038, 486);
+            tabControlReports.Size = new Size(1184, 638);
             tabControlReports.TabIndex = 1;
             // 
             // tabPageRevenue
@@ -265,11 +293,10 @@
             tabPageRevenue.Controls.Add(panelRevenueSummary);
             tabPageRevenue.Controls.Add(dataGridViewRevenue);
             tabPageRevenue.Controls.Add(panelRevenueFilter);
-            tabPageRevenue.Location = new Point(4, 26);
-            tabPageRevenue.Margin = new Padding(3, 2, 3, 2);
+            tabPageRevenue.Location = new Point(4, 32);
             tabPageRevenue.Name = "tabPageRevenue";
-            tabPageRevenue.Padding = new Padding(3, 2, 3, 2);
-            tabPageRevenue.Size = new Size(1030, 456);
+            tabPageRevenue.Padding = new Padding(3);
+            tabPageRevenue.Size = new Size(1176, 602);
             tabPageRevenue.TabIndex = 0;
             tabPageRevenue.Text = "💰 Báo cáo doanh thu";
             // 
@@ -281,11 +308,10 @@
             panelRevenueSummary.Controls.Add(labelTotalOrders);
             panelRevenueSummary.Controls.Add(labelTotalRevenue);
             panelRevenueSummary.Dock = DockStyle.Bottom;
-            panelRevenueSummary.Location = new Point(3, 378);
-            panelRevenueSummary.Margin = new Padding(3, 2, 3, 2);
+            panelRevenueSummary.Location = new Point(3, 498);
             panelRevenueSummary.Name = "panelRevenueSummary";
-            panelRevenueSummary.Padding = new Padding(13, 11, 13, 11);
-            panelRevenueSummary.Size = new Size(1024, 76);
+            panelRevenueSummary.Padding = new Padding(15);
+            panelRevenueSummary.Size = new Size(1170, 101);
             panelRevenueSummary.TabIndex = 2;
             // 
             // labelAverageOrder
@@ -293,9 +319,9 @@
             labelAverageOrder.AutoSize = true;
             labelAverageOrder.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelAverageOrder.ForeColor = Color.FromArgb(230, 126, 34);
-            labelAverageOrder.Location = new Point(16, 41);
+            labelAverageOrder.Location = new Point(18, 55);
             labelAverageOrder.Name = "labelAverageOrder";
-            labelAverageOrder.Size = new Size(183, 21);
+            labelAverageOrder.Size = new Size(235, 28);
             labelAverageOrder.TabIndex = 2;
             labelAverageOrder.Text = "Giá trị đơn hàng TB: ₫0";
             // 
@@ -304,9 +330,9 @@
             labelTotalOrders.AutoSize = true;
             labelTotalOrders.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelTotalOrders.ForeColor = Color.FromArgb(74, 144, 226);
-            labelTotalOrders.Location = new Point(306, 19);
+            labelTotalOrders.Location = new Point(350, 25);
             labelTotalOrders.Name = "labelTotalOrders";
-            labelTotalOrders.Size = new Size(123, 21);
+            labelTotalOrders.Size = new Size(155, 28);
             labelTotalOrders.TabIndex = 1;
             labelTotalOrders.Text = "Số đơn hàng: 0";
             // 
@@ -315,9 +341,9 @@
             labelTotalRevenue.AutoSize = true;
             labelTotalRevenue.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             labelTotalRevenue.ForeColor = Color.FromArgb(39, 174, 96);
-            labelTotalRevenue.Location = new Point(16, 15);
+            labelTotalRevenue.Location = new Point(18, 20);
             labelTotalRevenue.Name = "labelTotalRevenue";
-            labelTotalRevenue.Size = new Size(189, 25);
+            labelTotalRevenue.Size = new Size(241, 32);
             labelTotalRevenue.TabIndex = 0;
             labelTotalRevenue.Text = "Tổng doanh thu: ₫0";
             // 
@@ -330,13 +356,12 @@
             dataGridViewRevenue.BorderStyle = BorderStyle.Fixed3D;
             dataGridViewRevenue.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewRevenue.Dock = DockStyle.Fill;
-            dataGridViewRevenue.Location = new Point(3, 78);
-            dataGridViewRevenue.Margin = new Padding(3, 2, 3, 2);
+            dataGridViewRevenue.Location = new Point(3, 104);
             dataGridViewRevenue.Name = "dataGridViewRevenue";
             dataGridViewRevenue.ReadOnly = true;
             dataGridViewRevenue.RowHeadersWidth = 51;
             dataGridViewRevenue.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewRevenue.Size = new Size(1024, 376);
+            dataGridViewRevenue.Size = new Size(1170, 495);
             dataGridViewRevenue.TabIndex = 1;
             // 
             // panelRevenueFilter
@@ -351,11 +376,10 @@
             panelRevenueFilter.Controls.Add(dateTimePickerRevenueFrom);
             panelRevenueFilter.Controls.Add(labelRevenueTitle);
             panelRevenueFilter.Dock = DockStyle.Top;
-            panelRevenueFilter.Location = new Point(3, 2);
-            panelRevenueFilter.Margin = new Padding(3, 2, 3, 2);
+            panelRevenueFilter.Location = new Point(3, 3);
             panelRevenueFilter.Name = "panelRevenueFilter";
-            panelRevenueFilter.Padding = new Padding(13, 11, 13, 11);
-            panelRevenueFilter.Size = new Size(1024, 76);
+            panelRevenueFilter.Padding = new Padding(15);
+            panelRevenueFilter.Size = new Size(1170, 101);
             panelRevenueFilter.TabIndex = 0;
             // 
             // buttonExportRevenuePDF
@@ -365,10 +389,9 @@
             buttonExportRevenuePDF.FlatStyle = FlatStyle.Flat;
             buttonExportRevenuePDF.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             buttonExportRevenuePDF.ForeColor = Color.White;
-            buttonExportRevenuePDF.Location = new Point(543, 34);
-            buttonExportRevenuePDF.Margin = new Padding(3, 2, 3, 2);
+            buttonExportRevenuePDF.Location = new Point(621, 45);
             buttonExportRevenuePDF.Name = "buttonExportRevenuePDF";
-            buttonExportRevenuePDF.Size = new Size(105, 30);
+            buttonExportRevenuePDF.Size = new Size(120, 40);
             buttonExportRevenuePDF.TabIndex = 7;
             buttonExportRevenuePDF.Text = "📑 Xuất PDF";
             buttonExportRevenuePDF.UseVisualStyleBackColor = false;
@@ -381,10 +404,9 @@
             buttonExportRevenueExcel.FlatStyle = FlatStyle.Flat;
             buttonExportRevenueExcel.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             buttonExportRevenueExcel.ForeColor = Color.White;
-            buttonExportRevenueExcel.Location = new Point(421, 34);
-            buttonExportRevenueExcel.Margin = new Padding(3, 2, 3, 2);
+            buttonExportRevenueExcel.Location = new Point(481, 45);
             buttonExportRevenueExcel.Name = "buttonExportRevenueExcel";
-            buttonExportRevenueExcel.Size = new Size(105, 30);
+            buttonExportRevenueExcel.Size = new Size(120, 40);
             buttonExportRevenueExcel.TabIndex = 6;
             buttonExportRevenueExcel.Text = "📄 Xuất Excel";
             buttonExportRevenueExcel.UseVisualStyleBackColor = false;
@@ -394,9 +416,9 @@
             // 
             labelRevenueTo.AutoSize = true;
             labelRevenueTo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            labelRevenueTo.Location = new Point(227, 40);
+            labelRevenueTo.Location = new Point(259, 53);
             labelRevenueTo.Name = "labelRevenueTo";
-            labelRevenueTo.Size = new Size(39, 19);
+            labelRevenueTo.Size = new Size(47, 23);
             labelRevenueTo.TabIndex = 4;
             labelRevenueTo.Text = "Đến:";
             // 
@@ -404,9 +426,9 @@
             // 
             labelRevenueFrom.AutoSize = true;
             labelRevenueFrom.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            labelRevenueFrom.Location = new Point(16, 40);
+            labelRevenueFrom.Location = new Point(18, 53);
             labelRevenueFrom.Name = "labelRevenueFrom";
-            labelRevenueFrom.Size = new Size(67, 19);
+            labelRevenueFrom.Size = new Size(80, 23);
             labelRevenueFrom.TabIndex = 3;
             labelRevenueFrom.Text = "Từ ngày:";
             // 
@@ -414,20 +436,18 @@
             // 
             dateTimePickerRevenueTo.Font = new Font("Segoe UI", 10F);
             dateTimePickerRevenueTo.Format = DateTimePickerFormat.Short;
-            dateTimePickerRevenueTo.Location = new Point(272, 38);
-            dateTimePickerRevenueTo.Margin = new Padding(3, 2, 3, 2);
+            dateTimePickerRevenueTo.Location = new Point(311, 51);
             dateTimePickerRevenueTo.Name = "dateTimePickerRevenueTo";
-            dateTimePickerRevenueTo.Size = new Size(132, 25);
+            dateTimePickerRevenueTo.Size = new Size(150, 30);
             dateTimePickerRevenueTo.TabIndex = 2;
             // 
             // dateTimePickerRevenueFrom
             // 
             dateTimePickerRevenueFrom.Font = new Font("Segoe UI", 10F);
             dateTimePickerRevenueFrom.Format = DateTimePickerFormat.Short;
-            dateTimePickerRevenueFrom.Location = new Point(89, 38);
-            dateTimePickerRevenueFrom.Margin = new Padding(3, 2, 3, 2);
+            dateTimePickerRevenueFrom.Location = new Point(102, 51);
             dateTimePickerRevenueFrom.Name = "dateTimePickerRevenueFrom";
-            dateTimePickerRevenueFrom.Size = new Size(132, 25);
+            dateTimePickerRevenueFrom.Size = new Size(150, 30);
             dateTimePickerRevenueFrom.TabIndex = 1;
             // 
             // labelRevenueTitle
@@ -435,9 +455,9 @@
             labelRevenueTitle.AutoSize = true;
             labelRevenueTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelRevenueTitle.ForeColor = Color.FromArgb(77, 58, 41);
-            labelRevenueTitle.Location = new Point(16, 11);
+            labelRevenueTitle.Location = new Point(18, 15);
             labelRevenueTitle.Name = "labelRevenueTitle";
-            labelRevenueTitle.Size = new Size(189, 21);
+            labelRevenueTitle.Size = new Size(233, 28);
             labelRevenueTitle.TabIndex = 0;
             labelRevenueTitle.Text = "Chọn khoảng thời gian:";
             // 
@@ -447,11 +467,10 @@
             tabPageProducts.Controls.Add(panelProductSummary);
             tabPageProducts.Controls.Add(dataGridViewProducts);
             tabPageProducts.Controls.Add(panelProductFilter);
-            tabPageProducts.Location = new Point(4, 26);
-            tabPageProducts.Margin = new Padding(3, 2, 3, 2);
+            tabPageProducts.Location = new Point(4, 32);
             tabPageProducts.Name = "tabPageProducts";
-            tabPageProducts.Padding = new Padding(3, 2, 3, 2);
-            tabPageProducts.Size = new Size(1030, 456);
+            tabPageProducts.Padding = new Padding(3);
+            tabPageProducts.Size = new Size(1176, 602);
             tabPageProducts.TabIndex = 1;
             tabPageProducts.Text = "📦 Thống kê sản phẩm";
             // 
@@ -463,11 +482,10 @@
             panelProductSummary.Controls.Add(labelLowStockProducts);
             panelProductSummary.Controls.Add(labelTotalProducts);
             panelProductSummary.Dock = DockStyle.Bottom;
-            panelProductSummary.Location = new Point(3, 378);
-            panelProductSummary.Margin = new Padding(3, 2, 3, 2);
+            panelProductSummary.Location = new Point(3, 498);
             panelProductSummary.Name = "panelProductSummary";
-            panelProductSummary.Padding = new Padding(13, 11, 13, 11);
-            panelProductSummary.Size = new Size(1024, 76);
+            panelProductSummary.Padding = new Padding(15);
+            panelProductSummary.Size = new Size(1170, 101);
             panelProductSummary.TabIndex = 2;
             // 
             // labelTopSellingProduct
@@ -475,9 +493,9 @@
             labelTopSellingProduct.AutoSize = true;
             labelTopSellingProduct.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelTopSellingProduct.ForeColor = Color.FromArgb(39, 174, 96);
-            labelTopSellingProduct.Location = new Point(16, 41);
+            labelTopSellingProduct.Location = new Point(18, 55);
             labelTopSellingProduct.Name = "labelTopSellingProduct";
-            labelTopSellingProduct.Size = new Size(206, 21);
+            labelTopSellingProduct.Size = new Size(256, 28);
             labelTopSellingProduct.TabIndex = 2;
             labelTopSellingProduct.Text = "Sản phẩm bán chạy nhất: ";
             // 
@@ -486,9 +504,9 @@
             labelLowStockProducts.AutoSize = true;
             labelLowStockProducts.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelLowStockProducts.ForeColor = Color.FromArgb(220, 53, 69);
-            labelLowStockProducts.Location = new Point(306, 19);
+            labelLowStockProducts.Location = new Point(350, 25);
             labelLowStockProducts.Name = "labelLowStockProducts";
-            labelLowStockProducts.Size = new Size(161, 21);
+            labelLowStockProducts.Size = new Size(201, 28);
             labelLowStockProducts.TabIndex = 1;
             labelLowStockProducts.Text = "Sản phẩm ít hàng: 0";
             // 
@@ -497,9 +515,9 @@
             labelTotalProducts.AutoSize = true;
             labelTotalProducts.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             labelTotalProducts.ForeColor = Color.FromArgb(74, 144, 226);
-            labelTotalProducts.Location = new Point(16, 15);
+            labelTotalProducts.Location = new Point(18, 20);
             labelTotalProducts.Name = "labelTotalProducts";
-            labelTotalProducts.Size = new Size(170, 25);
+            labelTotalProducts.Size = new Size(218, 32);
             labelTotalProducts.TabIndex = 0;
             labelTotalProducts.Text = "Tổng sản phẩm: 0";
             // 
@@ -512,13 +530,12 @@
             dataGridViewProducts.BorderStyle = BorderStyle.Fixed3D;
             dataGridViewProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewProducts.Dock = DockStyle.Fill;
-            dataGridViewProducts.Location = new Point(3, 78);
-            dataGridViewProducts.Margin = new Padding(3, 2, 3, 2);
+            dataGridViewProducts.Location = new Point(3, 104);
             dataGridViewProducts.Name = "dataGridViewProducts";
             dataGridViewProducts.ReadOnly = true;
             dataGridViewProducts.RowHeadersWidth = 51;
             dataGridViewProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewProducts.Size = new Size(1024, 376);
+            dataGridViewProducts.Size = new Size(1170, 495);
             dataGridViewProducts.TabIndex = 1;
             // 
             // panelProductFilter
@@ -531,11 +548,10 @@
             panelProductFilter.Controls.Add(comboBoxProductCategory);
             panelProductFilter.Controls.Add(labelProductTitle);
             panelProductFilter.Dock = DockStyle.Top;
-            panelProductFilter.Location = new Point(3, 2);
-            panelProductFilter.Margin = new Padding(3, 2, 3, 2);
+            panelProductFilter.Location = new Point(3, 3);
             panelProductFilter.Name = "panelProductFilter";
-            panelProductFilter.Padding = new Padding(13, 11, 13, 11);
-            panelProductFilter.Size = new Size(1024, 76);
+            panelProductFilter.Padding = new Padding(15);
+            panelProductFilter.Size = new Size(1170, 101);
             panelProductFilter.TabIndex = 0;
             // 
             // buttonExportProductPDF
@@ -545,10 +561,9 @@
             buttonExportProductPDF.FlatStyle = FlatStyle.Flat;
             buttonExportProductPDF.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             buttonExportProductPDF.ForeColor = Color.White;
-            buttonExportProductPDF.Location = new Point(429, 34);
-            buttonExportProductPDF.Margin = new Padding(3, 2, 3, 2);
+            buttonExportProductPDF.Location = new Point(490, 45);
             buttonExportProductPDF.Name = "buttonExportProductPDF";
-            buttonExportProductPDF.Size = new Size(105, 30);
+            buttonExportProductPDF.Size = new Size(120, 40);
             buttonExportProductPDF.TabIndex = 5;
             buttonExportProductPDF.Text = "📑 Xuất PDF";
             buttonExportProductPDF.UseVisualStyleBackColor = false;
@@ -561,10 +576,9 @@
             buttonExportProductExcel.FlatStyle = FlatStyle.Flat;
             buttonExportProductExcel.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             buttonExportProductExcel.ForeColor = Color.White;
-            buttonExportProductExcel.Location = new Point(306, 34);
-            buttonExportProductExcel.Margin = new Padding(3, 2, 3, 2);
+            buttonExportProductExcel.Location = new Point(350, 45);
             buttonExportProductExcel.Name = "buttonExportProductExcel";
-            buttonExportProductExcel.Size = new Size(105, 30);
+            buttonExportProductExcel.Size = new Size(120, 40);
             buttonExportProductExcel.TabIndex = 4;
             buttonExportProductExcel.Text = "📄 Xuất Excel";
             buttonExportProductExcel.UseVisualStyleBackColor = false;
@@ -574,9 +588,9 @@
             // 
             labelProductCategory.AutoSize = true;
             labelProductCategory.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            labelProductCategory.Location = new Point(16, 40);
+            labelProductCategory.Location = new Point(18, 53);
             labelProductCategory.Name = "labelProductCategory";
-            labelProductCategory.Size = new Size(79, 19);
+            labelProductCategory.Size = new Size(96, 23);
             labelProductCategory.TabIndex = 2;
             labelProductCategory.Text = "Danh mục:";
             // 
@@ -585,10 +599,9 @@
             comboBoxProductCategory.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxProductCategory.Font = new Font("Segoe UI", 10F);
             comboBoxProductCategory.FormattingEnabled = true;
-            comboBoxProductCategory.Location = new Point(105, 38);
-            comboBoxProductCategory.Margin = new Padding(3, 2, 3, 2);
+            comboBoxProductCategory.Location = new Point(120, 51);
             comboBoxProductCategory.Name = "comboBoxProductCategory";
-            comboBoxProductCategory.Size = new Size(176, 25);
+            comboBoxProductCategory.Size = new Size(201, 31);
             comboBoxProductCategory.TabIndex = 1;
             // 
             // labelProductTitle
@@ -596,9 +609,9 @@
             labelProductTitle.AutoSize = true;
             labelProductTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelProductTitle.ForeColor = Color.FromArgb(77, 58, 41);
-            labelProductTitle.Location = new Point(16, 11);
+            labelProductTitle.Location = new Point(18, 15);
             labelProductTitle.Name = "labelProductTitle";
-            labelProductTitle.Size = new Size(163, 21);
+            labelProductTitle.Size = new Size(202, 28);
             labelProductTitle.TabIndex = 0;
             labelProductTitle.Text = "Thống kê sản phẩm:";
             // 
@@ -608,11 +621,10 @@
             tabPageInventory.Controls.Add(panelInventorySummary);
             tabPageInventory.Controls.Add(dataGridViewInventory);
             tabPageInventory.Controls.Add(panelInventoryFilter);
-            tabPageInventory.Location = new Point(4, 26);
-            tabPageInventory.Margin = new Padding(3, 2, 3, 2);
+            tabPageInventory.Location = new Point(4, 32);
             tabPageInventory.Name = "tabPageInventory";
-            tabPageInventory.Padding = new Padding(3, 2, 3, 2);
-            tabPageInventory.Size = new Size(1030, 456);
+            tabPageInventory.Padding = new Padding(3);
+            tabPageInventory.Size = new Size(1176, 602);
             tabPageInventory.TabIndex = 2;
             tabPageInventory.Text = "📊 Báo cáo tồn kho";
             // 
@@ -624,11 +636,10 @@
             panelInventorySummary.Controls.Add(labelLowStockCount);
             panelInventorySummary.Controls.Add(labelTotalStockValue);
             panelInventorySummary.Dock = DockStyle.Bottom;
-            panelInventorySummary.Location = new Point(3, 378);
-            panelInventorySummary.Margin = new Padding(3, 2, 3, 2);
+            panelInventorySummary.Location = new Point(3, 498);
             panelInventorySummary.Name = "panelInventorySummary";
-            panelInventorySummary.Padding = new Padding(13, 11, 13, 11);
-            panelInventorySummary.Size = new Size(1024, 76);
+            panelInventorySummary.Padding = new Padding(15);
+            panelInventorySummary.Size = new Size(1170, 101);
             panelInventorySummary.TabIndex = 2;
             // 
             // labelOutOfStockCount
@@ -636,9 +647,9 @@
             labelOutOfStockCount.AutoSize = true;
             labelOutOfStockCount.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelOutOfStockCount.ForeColor = Color.FromArgb(220, 53, 69);
-            labelOutOfStockCount.Location = new Point(16, 41);
+            labelOutOfStockCount.Location = new Point(18, 55);
             labelOutOfStockCount.Name = "labelOutOfStockCount";
-            labelOutOfStockCount.Size = new Size(97, 21);
+            labelOutOfStockCount.Size = new Size(122, 28);
             labelOutOfStockCount.TabIndex = 2;
             labelOutOfStockCount.Text = "Hết hàng: 0";
             // 
@@ -647,9 +658,9 @@
             labelLowStockCount.AutoSize = true;
             labelLowStockCount.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelLowStockCount.ForeColor = Color.FromArgb(255, 193, 7);
-            labelLowStockCount.Location = new Point(306, 19);
+            labelLowStockCount.Location = new Point(350, 25);
             labelLowStockCount.Name = "labelLowStockCount";
-            labelLowStockCount.Size = new Size(127, 21);
+            labelLowStockCount.Size = new Size(159, 28);
             labelLowStockCount.TabIndex = 1;
             labelLowStockCount.Text = "Sắp hết hàng: 0";
             // 
@@ -658,9 +669,9 @@
             labelTotalStockValue.AutoSize = true;
             labelTotalStockValue.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             labelTotalStockValue.ForeColor = Color.FromArgb(39, 174, 96);
-            labelTotalStockValue.Location = new Point(16, 15);
+            labelTotalStockValue.Location = new Point(18, 20);
             labelTotalStockValue.Name = "labelTotalStockValue";
-            labelTotalStockValue.Size = new Size(188, 25);
+            labelTotalStockValue.Size = new Size(241, 32);
             labelTotalStockValue.TabIndex = 0;
             labelTotalStockValue.Text = "Tổng giá trị kho: ₫0";
             // 
@@ -673,13 +684,12 @@
             dataGridViewInventory.BorderStyle = BorderStyle.Fixed3D;
             dataGridViewInventory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewInventory.Dock = DockStyle.Fill;
-            dataGridViewInventory.Location = new Point(3, 78);
-            dataGridViewInventory.Margin = new Padding(3, 2, 3, 2);
+            dataGridViewInventory.Location = new Point(3, 104);
             dataGridViewInventory.Name = "dataGridViewInventory";
             dataGridViewInventory.ReadOnly = true;
             dataGridViewInventory.RowHeadersWidth = 51;
             dataGridViewInventory.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewInventory.Size = new Size(1024, 376);
+            dataGridViewInventory.Size = new Size(1170, 495);
             dataGridViewInventory.TabIndex = 1;
             // 
             // panelInventoryFilter
@@ -693,11 +703,10 @@
             panelInventoryFilter.Controls.Add(checkBoxShowLowStock);
             panelInventoryFilter.Controls.Add(labelInventoryTitle);
             panelInventoryFilter.Dock = DockStyle.Top;
-            panelInventoryFilter.Location = new Point(3, 2);
-            panelInventoryFilter.Margin = new Padding(3, 2, 3, 2);
+            panelInventoryFilter.Location = new Point(3, 3);
             panelInventoryFilter.Name = "panelInventoryFilter";
-            panelInventoryFilter.Padding = new Padding(13, 11, 13, 11);
-            panelInventoryFilter.Size = new Size(1024, 76);
+            panelInventoryFilter.Padding = new Padding(15);
+            panelInventoryFilter.Size = new Size(1170, 101);
             panelInventoryFilter.TabIndex = 0;
             // 
             // buttonExportInventoryPDF
@@ -707,10 +716,9 @@
             buttonExportInventoryPDF.FlatStyle = FlatStyle.Flat;
             buttonExportInventoryPDF.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             buttonExportInventoryPDF.ForeColor = Color.White;
-            buttonExportInventoryPDF.Location = new Point(593, 35);
-            buttonExportInventoryPDF.Margin = new Padding(3, 2, 3, 2);
+            buttonExportInventoryPDF.Location = new Point(678, 47);
             buttonExportInventoryPDF.Name = "buttonExportInventoryPDF";
-            buttonExportInventoryPDF.Size = new Size(105, 30);
+            buttonExportInventoryPDF.Size = new Size(120, 40);
             buttonExportInventoryPDF.TabIndex = 6;
             buttonExportInventoryPDF.Text = "📑 Xuất PDF";
             buttonExportInventoryPDF.UseVisualStyleBackColor = false;
@@ -723,10 +731,9 @@
             buttonExportInventoryExcel.FlatStyle = FlatStyle.Flat;
             buttonExportInventoryExcel.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             buttonExportInventoryExcel.ForeColor = Color.White;
-            buttonExportInventoryExcel.Location = new Point(471, 35);
-            buttonExportInventoryExcel.Margin = new Padding(3, 2, 3, 2);
+            buttonExportInventoryExcel.Location = new Point(538, 47);
             buttonExportInventoryExcel.Name = "buttonExportInventoryExcel";
-            buttonExportInventoryExcel.Size = new Size(105, 30);
+            buttonExportInventoryExcel.Size = new Size(120, 40);
             buttonExportInventoryExcel.TabIndex = 5;
             buttonExportInventoryExcel.Text = "📄 Xuất Excel";
             buttonExportInventoryExcel.UseVisualStyleBackColor = false;
@@ -736,20 +743,19 @@
             // 
             labelStockThreshold.AutoSize = true;
             labelStockThreshold.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            labelStockThreshold.Location = new Point(242, 41);
+            labelStockThreshold.Location = new Point(277, 55);
             labelStockThreshold.Name = "labelStockThreshold";
-            labelStockThreshold.Size = new Size(133, 19);
+            labelStockThreshold.Size = new Size(159, 23);
             labelStockThreshold.TabIndex = 3;
             labelStockThreshold.Text = "Ngưỡng cảnh báo:";
             // 
             // numericUpDownStockThreshold
             // 
             numericUpDownStockThreshold.Font = new Font("Segoe UI", 10F);
-            numericUpDownStockThreshold.Location = new Point(381, 41);
-            numericUpDownStockThreshold.Margin = new Padding(3, 2, 3, 2);
+            numericUpDownStockThreshold.Location = new Point(435, 55);
             numericUpDownStockThreshold.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericUpDownStockThreshold.Name = "numericUpDownStockThreshold";
-            numericUpDownStockThreshold.Size = new Size(70, 25);
+            numericUpDownStockThreshold.Size = new Size(80, 30);
             numericUpDownStockThreshold.TabIndex = 2;
             numericUpDownStockThreshold.Value = new decimal(new int[] { 10, 0, 0, 0 });
             // 
@@ -757,10 +763,9 @@
             // 
             checkBoxShowLowStock.AutoSize = true;
             checkBoxShowLowStock.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            checkBoxShowLowStock.Location = new Point(16, 40);
-            checkBoxShowLowStock.Margin = new Padding(3, 2, 3, 2);
+            checkBoxShowLowStock.Location = new Point(18, 53);
             checkBoxShowLowStock.Name = "checkBoxShowLowStock";
-            checkBoxShowLowStock.Size = new Size(220, 23);
+            checkBoxShowLowStock.Size = new Size(268, 27);
             checkBoxShowLowStock.TabIndex = 1;
             checkBoxShowLowStock.Text = "Chỉ hiển thị sản phẩm ít hàng";
             checkBoxShowLowStock.UseVisualStyleBackColor = true;
@@ -770,9 +775,9 @@
             labelInventoryTitle.AutoSize = true;
             labelInventoryTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelInventoryTitle.ForeColor = Color.FromArgb(77, 58, 41);
-            labelInventoryTitle.Location = new Point(16, 11);
+            labelInventoryTitle.Location = new Point(18, 15);
             labelInventoryTitle.Name = "labelInventoryTitle";
-            labelInventoryTitle.Size = new Size(137, 21);
+            labelInventoryTitle.Size = new Size(171, 28);
             labelInventoryTitle.TabIndex = 0;
             labelInventoryTitle.Text = "Báo cáo tồn kho:";
             // 
@@ -782,9 +787,8 @@
             panelHeader.Controls.Add(labelTitle);
             panelHeader.Dock = DockStyle.Top;
             panelHeader.Location = new Point(0, 0);
-            panelHeader.Margin = new Padding(3, 2, 3, 2);
             panelHeader.Name = "panelHeader";
-            panelHeader.Size = new Size(1038, 52);
+            panelHeader.Size = new Size(1184, 69);
             panelHeader.TabIndex = 0;
             // 
             // labelTitle
@@ -792,24 +796,23 @@
             labelTitle.AutoSize = true;
             labelTitle.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             labelTitle.ForeColor = Color.White;
-            labelTitle.Location = new Point(26, 15);
+            labelTitle.Location = new Point(30, 20);
             labelTitle.Name = "labelTitle";
-            labelTitle.Size = new Size(143, 32);
+            labelTitle.Size = new Size(177, 41);
             labelTitle.TabIndex = 1;
             labelTitle.Text = "📈 Báo cáo";
             // 
             // ReportsPage
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1230, 538);
+            ClientSize = new Size(1403, 707);
             Controls.Add(panelMain);
             Controls.Add(panelSidebar);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
-            MaximumSize = new Size(1246, 577);
-            MinimumSize = new Size(1246, 577);
+            MaximumSize = new Size(1421, 754);
+            MinimumSize = new Size(1421, 754);
             Name = "ReportsPage";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Báo cáo - HeartSteel Cosmetic";
@@ -894,5 +897,7 @@
         private Label labelLowStockCount;
         private Label labelOutOfStockCount;
         private Button buttonManageOrders;
+        private Button buttonAdminHome;
+        private Button buttonAdminCSKH;
     }
 }

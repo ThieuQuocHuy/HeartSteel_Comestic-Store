@@ -32,49 +32,68 @@ namespace Presentation.Pages.Admin
         {
             // Hiển thị tên admin đang đăng nhập
             labelAdminName.Text = $"Xin chào, {Presentation.Auth.UserSession.CurrentUser?.Fullname ?? "Admin"}! 👋";
-            
+
             // Cập nhật thời gian ngay lập tức
             labelCurrentTime.Text = DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
-            
-            // Load thống kê dashboard (giả lập dữ liệu)
-            LoadDashboardStats();
-            
+
             // Thêm hiệu ứng hover cho các button
             AddHoverEffects();
 
-            // Tự động chuyển đến trang quản lý sản phẩm
-            NavigateToProductManagement();
+            //Load ảnh logo và trang chủ
+            LoadImages();
         }
 
-        private void NavigateToProductManagement()
+        private void LoadImages()
         {
-            // Dừng timer trước khi chuyển trang
-            timeTimer?.Stop();
-            timeTimer?.Dispose();
-            
-            // Chuyển đến trang quản lý sản phẩm
-            Presentation.Navigation.Navigator.Navigate(new ProductManagementPage());
+            try
+            {
+                // Load logo
+                if (pictureBoxLogo != null)
+                {
+                    var logoImage = Presentation.Services.ResourceImageLoader.LoadByFileName("logoden.png");
+                    if (logoImage != null)
+                    {
+                        pictureBoxLogo.Image = logoImage;
+                        System.Diagnostics.Debug.WriteLine("Logo loaded successfully for HomePage");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Failed to load logo image for HomePage");
+                    }
+                }
+
+                // Load trangchu2.png vào pictureBox2
+                if (pictureBox2 != null)
+                {
+                    var trangchuImage = Presentation.Services.ResourceImageLoader.LoadByFileName("trangchu2.png");
+                    if (trangchuImage != null)
+                    {
+                        pictureBox2.Image = trangchuImage;
+                        System.Diagnostics.Debug.WriteLine("Trangchu2 image loaded successfully for HomePage");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Failed to load trangchu2 image for HomePage");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"LoadImages Error: {ex.Message}");
+            }
         }
 
-        private void LoadDashboardStats()
-        {
-            // TODO: Thay thế bằng dữ liệu thực từ database
-            labelProductCount.Text = "25";
-            labelOrderCount.Text = "150"; // Tồn kho (kg)
-            labelCategoryCount.Text = "8";
-            labelRevenueAmount.Text = "₫125,500,000";
-        }
 
         private void AddHoverEffects()
         {
             // Thêm hiệu ứng hover cho sidebar buttons
-            AddButtonHoverEffect(buttonManageProducts, Color.FromArgb(221, 207, 182), Color.FromArgb(241, 227, 202));
+            AddButtonHoverEffect(buttonManageProducts, Color.FromArgb(95, 76, 59), Color.FromArgb(115, 96, 79));
             AddButtonHoverEffect(buttonManageInventory, Color.FromArgb(95, 76, 59), Color.FromArgb(115, 96, 79));
             AddButtonHoverEffect(buttonManageCategories, Color.FromArgb(95, 76, 59), Color.FromArgb(115, 96, 79));
             AddButtonHoverEffect(buttonManageOrders, Color.FromArgb(95, 76, 59), Color.FromArgb(115, 96, 79));
             AddButtonHoverEffect(buttonReports, Color.FromArgb(95, 76, 59), Color.FromArgb(115, 96, 79));
             AddButtonHoverEffect(buttonLogout, Color.FromArgb(184, 84, 84), Color.FromArgb(204, 104, 104));
-            
+
             // Thêm hiệu ứng hover cho quick action buttons
             AddButtonHoverEffect(buttonQuickAddProduct, Color.FromArgb(74, 144, 226), Color.FromArgb(94, 164, 246));
             AddButtonHoverEffect(buttonQuickManageInventory, Color.FromArgb(39, 174, 96), Color.FromArgb(59, 194, 116));
@@ -118,10 +137,10 @@ namespace Presentation.Pages.Admin
             // Dừng timer
             timeTimer?.Stop();
             timeTimer?.Dispose();
-            
+
             // Clear session
             Presentation.Auth.UserSession.Clear();
-            
+
             // Navigate to login
             Presentation.Navigation.Navigator.Navigate(new Customer.LoginForm());
         }
@@ -135,6 +154,26 @@ namespace Presentation.Pages.Admin
                 components?.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private void panelSidebar_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBoxLogo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonManageProducts_Click_1(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new ProductManagementPage());
+        }
+
+        private void buttonAdminCSKH_Click(object sender, EventArgs e)
+        {
+            Presentation.Navigation.Navigator.Navigate(new CSKHAdminPage());
         }
     }
 }

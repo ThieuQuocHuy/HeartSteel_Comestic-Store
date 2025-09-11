@@ -1,6 +1,6 @@
-namespace Presentation.Pages.Customer
+﻿namespace Presentation.Pages.Customer
 {
-    partial class ProductPage
+    partial class CSKHPage
     {
         /// <summary>
         /// Required designer variable.
@@ -28,11 +28,6 @@ namespace Presentation.Pages.Customer
         /// </summary>
         private void InitializeComponent()
         {
-            label4 = new Label();
-            label3 = new Label();
-            label2 = new Label();
-            pictureBox1 = new PictureBox();
-            label1 = new Label();
             panelSidebar = new Panel();
             buttonCSKH = new Button();
             pictureBoxLogo = new PictureBox();
@@ -42,67 +37,22 @@ namespace Presentation.Pages.Customer
             buttonOrders = new Button();
             buttonLogout = new Button();
             pictureBoxMain = new PictureBox();
-            flowLayoutPanelProducts = new FlowLayoutPanel();
-            textSearch = new TextBox();
-            comboCategory = new ComboBox();
-            comboSortPrice = new ComboBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            label1 = new Label();
+            pictureBox1 = new PictureBox();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            labelTitle = new Label();
+            dataGridRequests = new DataGridView();
+            labelSendTitle = new Label();
+            textSupportContent = new TextBox();
+            buttonSend = new Button();
             panelSidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxMain).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridRequests).BeginInit();
             SuspendLayout();
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(377, 105);
-            label4.Name = "label4";
-            label4.Size = new Size(155, 25);
-            label4.TabIndex = 22;
-            label4.Text = "Thiều Quốc Huy";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(237, 105);
-            label3.Name = "label3";
-            label3.Size = new Size(124, 25);
-            label3.TabIndex = 21;
-            label3.Text = "Khách hàng:";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(237, 59);
-            label2.Name = "label2";
-            label2.Size = new Size(460, 25);
-            label2.TabIndex = 20;
-            label2.Text = "Chào mừng bạn đã đến với cửa hàng của chúng tôi!";
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.BackColor = Color.FromArgb(237, 224, 207);
-            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox1.Location = new Point(200, 45);
-            pictureBox1.Margin = new Padding(0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(963, 105);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 19;
-            pictureBox1.TabStop = false;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(237, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(277, 25);
-            label1.TabIndex = 18;
-            label1.Text = "Cửa hàng HeartSteelComestic";
             // 
             // panelSidebar
             // 
@@ -117,13 +67,12 @@ namespace Presentation.Pages.Customer
             panelSidebar.Dock = DockStyle.Left;
             panelSidebar.Location = new Point(0, 0);
             panelSidebar.Name = "panelSidebar";
-            panelSidebar.Size = new Size(200, 553);
-            panelSidebar.TabIndex = 16;
+            panelSidebar.Size = new Size(200, 593);
+            panelSidebar.TabIndex = 0;
             // 
             // buttonCSKH
             // 
-            buttonCSKH.BackColor = Color.FromArgb(77, 58, 41);
-            buttonCSKH.FlatAppearance.BorderSize = 0;
+            buttonCSKH.BackColor = Color.FromArgb(221, 207, 182);
             buttonCSKH.FlatStyle = FlatStyle.Flat;
             buttonCSKH.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             buttonCSKH.ForeColor = Color.White;
@@ -135,7 +84,6 @@ namespace Presentation.Pages.Customer
             buttonCSKH.Text = "CSKH";
             buttonCSKH.TextAlign = ContentAlignment.MiddleLeft;
             buttonCSKH.UseVisualStyleBackColor = false;
-            buttonCSKH.Click += buttonCSKH_Click;
             // 
             // pictureBoxLogo
             // 
@@ -161,11 +109,10 @@ namespace Presentation.Pages.Customer
             buttonHome.Text = "Trang chủ";
             buttonHome.TextAlign = ContentAlignment.MiddleLeft;
             buttonHome.UseVisualStyleBackColor = false;
-            buttonHome.Click += buttonHome_Click;
             // 
             // buttonProducts
             // 
-            buttonProducts.BackColor = Color.FromArgb(221, 207, 182);
+            buttonProducts.BackColor = Color.FromArgb(77, 58, 41);
             buttonProducts.FlatAppearance.BorderSize = 0;
             buttonProducts.FlatStyle = FlatStyle.Flat;
             buttonProducts.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
@@ -194,7 +141,6 @@ namespace Presentation.Pages.Customer
             buttonCart.Text = "Giỏ hàng";
             buttonCart.TextAlign = ContentAlignment.MiddleLeft;
             buttonCart.UseVisualStyleBackColor = false;
-            buttonCart.Click += buttonCart_Click;
             // 
             // buttonOrders
             // 
@@ -236,92 +182,172 @@ namespace Presentation.Pages.Customer
             pictureBoxMain.Name = "pictureBoxMain";
             pictureBoxMain.Size = new Size(963, 46);
             pictureBoxMain.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBoxMain.TabIndex = 17;
+            pictureBoxMain.TabIndex = 1;
             pictureBoxMain.TabStop = false;
             // 
-            // flowLayoutPanelProducts
+            // label1
             // 
-            flowLayoutPanelProducts.AutoScroll = true;
-            flowLayoutPanelProducts.BackColor = Color.FromArgb(255, 255, 255);
-            flowLayoutPanelProducts.Location = new Point(200, 200);
-            flowLayoutPanelProducts.Name = "flowLayoutPanelProducts";
-            flowLayoutPanelProducts.Size = new Size(938, 344);
-            flowLayoutPanelProducts.TabIndex = 23;
+            label1.AutoSize = true;
+            label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(237, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(277, 25);
+            label1.TabIndex = 2;
+            label1.Text = "Cửa hàng HeartSteelComestic";
             // 
-            // textSearch
+            // pictureBox1
             // 
-            textSearch.Location = new Point(200, 160);
-            textSearch.Name = "textSearch";
-            textSearch.PlaceholderText = "tìm sản phẩm";
-            textSearch.Size = new Size(280, 27);
-            textSearch.TabIndex = 24;
+            pictureBox1.BackColor = Color.FromArgb(237, 224, 207);
+            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
+            pictureBox1.Location = new Point(200, 45);
+            pictureBox1.Margin = new Padding(0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(963, 105);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 3;
+            pictureBox1.TabStop = false;
             // 
-            // comboCategory
+            // label2
             // 
-            comboCategory.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboCategory.Location = new Point(490, 160);
-            comboCategory.Name = "comboCategory";
-            comboCategory.Size = new Size(220, 28);
-            comboCategory.TabIndex = 25;
+            label2.AutoSize = true;
+            label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(237, 59);
+            label2.Name = "label2";
+            label2.Size = new Size(460, 25);
+            label2.TabIndex = 4;
+            label2.Text = "Chào mừng bạn đã đến với cửa hàng của chúng tôi!";
             // 
-            // comboSortPrice
+            // label3
             // 
-            comboSortPrice.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboSortPrice.Location = new Point(720, 160);
-            comboSortPrice.Name = "comboSortPrice";
-            comboSortPrice.Size = new Size(220, 28);
-            comboSortPrice.TabIndex = 26;
+            label3.AutoSize = true;
+            label3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(237, 105);
+            label3.Name = "label3";
+            label3.Size = new Size(124, 25);
+            label3.TabIndex = 5;
+            label3.Text = "Khách hàng:";
             // 
-            // ProductPage
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(377, 105);
+            label4.Name = "label4";
+            label4.Size = new Size(155, 25);
+            label4.TabIndex = 6;
+            label4.Text = "Thiều Quốc Huy";
+            // 
+            // labelTitle
+            // 
+            labelTitle.AutoSize = true;
+            labelTitle.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelTitle.ForeColor = Color.FromArgb(77, 58, 41);
+            labelTitle.Location = new Point(210, 168);
+            labelTitle.Name = "labelTitle";
+            labelTitle.Size = new Size(304, 29);
+            labelTitle.TabIndex = 7;
+            labelTitle.Text = "Danh sách yêu cầu hỗ trợ";
+            labelTitle.Click += labelTitle_Click;
+            // 
+            // dataGridRequests
+            // 
+            dataGridRequests.AllowUserToAddRows = false;
+            dataGridRequests.AllowUserToDeleteRows = false;
+            dataGridRequests.BackgroundColor = Color.White;
+            dataGridRequests.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridRequests.Location = new Point(217, 200);
+            dataGridRequests.Name = "dataGridRequests";
+            dataGridRequests.ReadOnly = true;
+            dataGridRequests.RowHeadersVisible = false;
+            dataGridRequests.RowHeadersWidth = 51;
+            dataGridRequests.Size = new Size(882, 141);
+            dataGridRequests.TabIndex = 8;
+            dataGridRequests.CellContentClick += dataGridRequests_CellContentClick;
+            // 
+            // labelSendTitle
+            // 
+            labelSendTitle.AutoSize = true;
+            labelSendTitle.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelSendTitle.ForeColor = Color.FromArgb(77, 58, 41);
+            labelSendTitle.Location = new Point(217, 355);
+            labelSendTitle.Name = "labelSendTitle";
+            labelSendTitle.Size = new Size(188, 25);
+            labelSendTitle.TabIndex = 9;
+            labelSendTitle.Text = "Gửi yêu cầu hỗ trợ";
+            // 
+            // textSupportContent
+            // 
+            textSupportContent.Location = new Point(217, 394);
+            textSupportContent.Multiline = true;
+            textSupportContent.Name = "textSupportContent";
+            textSupportContent.Size = new Size(869, 100);
+            textSupportContent.TabIndex = 10;
+            // 
+            // buttonSend
+            // 
+            buttonSend.BackColor = Color.FromArgb(95, 76, 59);
+            buttonSend.FlatAppearance.BorderSize = 0;
+            buttonSend.FlatStyle = FlatStyle.Flat;
+            buttonSend.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            buttonSend.ForeColor = Color.White;
+            buttonSend.Location = new Point(923, 522);
+            buttonSend.Name = "buttonSend";
+            buttonSend.Size = new Size(195, 47);
+            buttonSend.TabIndex = 11;
+            buttonSend.Text = "📩 Gửi yêu cầu";
+            buttonSend.UseVisualStyleBackColor = false;
+            // 
+            // CSKHPage
             // 
             BackColor = Color.FromArgb(237, 224, 207);
-            ClientSize = new Size(1142, 553);
-            Controls.Add(flowLayoutPanelProducts);
-            Controls.Add(comboSortPrice);
-            Controls.Add(comboCategory);
-            Controls.Add(textSearch);
+            ClientSize = new Size(1142, 593);
+            Controls.Add(buttonSend);
+            Controls.Add(textSupportContent);
+            Controls.Add(labelSendTitle);
+            Controls.Add(dataGridRequests);
+            Controls.Add(labelTitle);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(pictureBox1);
             Controls.Add(label1);
-            Controls.Add(panelSidebar);
             Controls.Add(pictureBoxMain);
+            Controls.Add(panelSidebar);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
-            MaximumSize = new Size(1160, 600);
-            MinimumSize = new Size(1160, 600);
-            Name = "ProductPage";
+            MaximumSize = new Size(1160, 640);
+            MinimumSize = new Size(1160, 640);
+            Name = "CSKHPage";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Sản phẩm";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            Text = "CSKH";
             panelSidebar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxMain).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridRequests).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private Label label4;
-        private Label label3;
-        private Label label2;
-        private PictureBox pictureBox1;
-        private Label label1;
         private Panel panelSidebar;
-        private PictureBox pictureBoxLogo;
-        private Button buttonHome;
-        private Button buttonProducts;
-        private Button buttonCart;
-        private Button buttonOrders;
-        private PictureBox pictureBoxMain;
-        private FlowLayoutPanel flowLayoutPanelProducts;
-        private Button buttonLogout;
-        private TextBox textSearch;
-        private ComboBox comboCategory;
-        private ComboBox comboSortPrice;
-        private Button buttonCSKH;
+		private PictureBox pictureBoxLogo;
+		private Button buttonHome;
+		private Button buttonProducts;
+		private Button buttonCart;
+		private Button buttonOrders;
+		private Button buttonLogout;
+		private Button buttonCSKH;
+		private PictureBox pictureBoxMain;
+		private Label label1;
+		private PictureBox pictureBox1;
+		private Label label2;
+		private Label label3;
+		private Label label4;
+		private Label labelTitle;
+		private DataGridView dataGridRequests;
+		private Label labelSendTitle;
+		private TextBox textSupportContent;
+		private Button buttonSend;
     }
 }
-
-

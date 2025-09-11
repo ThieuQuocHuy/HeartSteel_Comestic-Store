@@ -29,16 +29,16 @@ namespace Presentation.Pages.Customer
         private void InitializeComponent()
         {
             panelHeader = new Panel();
-            labelTitle = new Label();
             buttonCancel = new Button();
+            labelTitle = new Label();
             panelOrderSummary = new Panel();
-            labelOrderSummary = new Label();
             flowLayoutPanelOrderItems = new FlowLayoutPanel();
+            labelOrderSummary = new Label();
             panelOrderForm = new Panel();
-            labelShippingAddress = new Label();
-            textBoxShippingAddress = new TextBox();
-            labelTotalAmount = new Label();
             buttonPlaceOrder = new Button();
+            labelTotalAmount = new Label();
+            textBoxShippingAddress = new TextBox();
+            labelShippingAddress = new Label();
             panelHeader.SuspendLayout();
             panelOrderSummary.SuspendLayout();
             panelOrderForm.SuspendLayout();
@@ -52,19 +52,8 @@ namespace Presentation.Pages.Customer
             panelHeader.Dock = DockStyle.Top;
             panelHeader.Location = new Point(0, 0);
             panelHeader.Name = "panelHeader";
-            panelHeader.Size = new Size(800, 80);
+            panelHeader.Size = new Size(1025, 80);
             panelHeader.TabIndex = 0;
-            // 
-            // labelTitle
-            // 
-            labelTitle.AutoSize = true;
-            labelTitle.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            labelTitle.ForeColor = Color.White;
-            labelTitle.Location = new Point(300, 25);
-            labelTitle.Name = "labelTitle";
-            labelTitle.Size = new Size(200, 32);
-            labelTitle.TabIndex = 0;
-            labelTitle.Text = "ĐẶT HÀNG";
             // 
             // buttonCancel
             // 
@@ -81,6 +70,17 @@ namespace Presentation.Pages.Customer
             buttonCancel.UseVisualStyleBackColor = false;
             buttonCancel.Click += buttonCancel_Click;
             // 
+            // labelTitle
+            // 
+            labelTitle.AutoSize = true;
+            labelTitle.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            labelTitle.ForeColor = Color.White;
+            labelTitle.Location = new Point(300, 25);
+            labelTitle.Name = "labelTitle";
+            labelTitle.Size = new Size(176, 41);
+            labelTitle.TabIndex = 0;
+            labelTitle.Text = "ĐẶT HÀNG";
+            // 
             // panelOrderSummary
             // 
             panelOrderSummary.BackColor = Color.FromArgb(255, 255, 255);
@@ -88,8 +88,16 @@ namespace Presentation.Pages.Customer
             panelOrderSummary.Controls.Add(labelOrderSummary);
             panelOrderSummary.Location = new Point(20, 100);
             panelOrderSummary.Name = "panelOrderSummary";
-            panelOrderSummary.Size = new Size(450, 400);
+            panelOrderSummary.Size = new Size(632, 400);
             panelOrderSummary.TabIndex = 1;
+            // 
+            // flowLayoutPanelOrderItems
+            // 
+            flowLayoutPanelOrderItems.AutoScroll = true;
+            flowLayoutPanelOrderItems.Location = new Point(15, 50);
+            flowLayoutPanelOrderItems.Name = "flowLayoutPanelOrderItems";
+            flowLayoutPanelOrderItems.Size = new Size(591, 330);
+            flowLayoutPanelOrderItems.TabIndex = 1;
             // 
             // labelOrderSummary
             // 
@@ -98,17 +106,9 @@ namespace Presentation.Pages.Customer
             labelOrderSummary.ForeColor = Color.FromArgb(77, 58, 41);
             labelOrderSummary.Location = new Point(15, 15);
             labelOrderSummary.Name = "labelOrderSummary";
-            labelOrderSummary.Size = new Size(200, 25);
+            labelOrderSummary.Size = new Size(224, 32);
             labelOrderSummary.TabIndex = 0;
             labelOrderSummary.Text = "Tóm tắt đơn hàng:";
-            // 
-            // flowLayoutPanelOrderItems
-            // 
-            flowLayoutPanelOrderItems.AutoScroll = true;
-            flowLayoutPanelOrderItems.Location = new Point(15, 50);
-            flowLayoutPanelOrderItems.Name = "flowLayoutPanelOrderItems";
-            flowLayoutPanelOrderItems.Size = new Size(420, 330);
-            flowLayoutPanelOrderItems.TabIndex = 1;
             // 
             // panelOrderForm
             // 
@@ -117,41 +117,10 @@ namespace Presentation.Pages.Customer
             panelOrderForm.Controls.Add(labelTotalAmount);
             panelOrderForm.Controls.Add(textBoxShippingAddress);
             panelOrderForm.Controls.Add(labelShippingAddress);
-            panelOrderForm.Location = new Point(490, 100);
+            panelOrderForm.Location = new Point(690, 100);
             panelOrderForm.Name = "panelOrderForm";
             panelOrderForm.Size = new Size(290, 400);
             panelOrderForm.TabIndex = 2;
-            // 
-            // labelShippingAddress
-            // 
-            labelShippingAddress.AutoSize = true;
-            labelShippingAddress.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            labelShippingAddress.ForeColor = Color.FromArgb(77, 58, 41);
-            labelShippingAddress.Location = new Point(15, 15);
-            labelShippingAddress.Name = "labelShippingAddress";
-            labelShippingAddress.Size = new Size(150, 21);
-            labelShippingAddress.TabIndex = 0;
-            labelShippingAddress.Text = "Địa chỉ giao hàng:";
-            // 
-            // textBoxShippingAddress
-            // 
-            textBoxShippingAddress.Font = new Font("Segoe UI", 10F);
-            textBoxShippingAddress.Location = new Point(15, 45);
-            textBoxShippingAddress.Multiline = true;
-            textBoxShippingAddress.Name = "textBoxShippingAddress";
-            textBoxShippingAddress.Size = new Size(260, 120);
-            textBoxShippingAddress.TabIndex = 1;
-            // 
-            // labelTotalAmount
-            // 
-            labelTotalAmount.AutoSize = true;
-            labelTotalAmount.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            labelTotalAmount.ForeColor = Color.FromArgb(77, 58, 41);
-            labelTotalAmount.Location = new Point(15, 180);
-            labelTotalAmount.Name = "labelTotalAmount";
-            labelTotalAmount.Size = new Size(200, 30);
-            labelTotalAmount.TabIndex = 4;
-            labelTotalAmount.Text = "Tổng tiền: 0 ₫";
             // 
             // buttonPlaceOrder
             // 
@@ -168,12 +137,43 @@ namespace Presentation.Pages.Customer
             buttonPlaceOrder.UseVisualStyleBackColor = false;
             buttonPlaceOrder.Click += buttonPlaceOrder_Click;
             // 
+            // labelTotalAmount
+            // 
+            labelTotalAmount.AutoSize = true;
+            labelTotalAmount.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            labelTotalAmount.ForeColor = Color.FromArgb(77, 58, 41);
+            labelTotalAmount.Location = new Point(15, 180);
+            labelTotalAmount.Name = "labelTotalAmount";
+            labelTotalAmount.Size = new Size(194, 37);
+            labelTotalAmount.TabIndex = 4;
+            labelTotalAmount.Text = "Tổng tiền: 0 ₫";
+            // 
+            // textBoxShippingAddress
+            // 
+            textBoxShippingAddress.Font = new Font("Segoe UI", 10F);
+            textBoxShippingAddress.Location = new Point(15, 45);
+            textBoxShippingAddress.Multiline = true;
+            textBoxShippingAddress.Name = "textBoxShippingAddress";
+            textBoxShippingAddress.Size = new Size(260, 120);
+            textBoxShippingAddress.TabIndex = 1;
+            // 
+            // labelShippingAddress
+            // 
+            labelShippingAddress.AutoSize = true;
+            labelShippingAddress.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            labelShippingAddress.ForeColor = Color.FromArgb(77, 58, 41);
+            labelShippingAddress.Location = new Point(15, 15);
+            labelShippingAddress.Name = "labelShippingAddress";
+            labelShippingAddress.Size = new Size(183, 28);
+            labelShippingAddress.TabIndex = 0;
+            labelShippingAddress.Text = "Địa chỉ giao hàng:";
+            // 
             // OrderPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(255, 255, 255);
-            ClientSize = new Size(800, 520);
+            ClientSize = new Size(1025, 553);
             Controls.Add(panelOrderForm);
             Controls.Add(panelOrderSummary);
             Controls.Add(panelHeader);

@@ -28,8 +28,8 @@ namespace Presentation.Pages.Customer
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CartPage));
             panelSidebar = new Panel();
+            buttonCSKH = new Button();
             pictureBoxLogo = new PictureBox();
             buttonHome = new Button();
             buttonProducts = new Button();
@@ -59,6 +59,7 @@ namespace Presentation.Pages.Customer
             // panelSidebar
             // 
             panelSidebar.BackColor = Color.FromArgb(77, 58, 41);
+            panelSidebar.Controls.Add(buttonCSKH);
             panelSidebar.Controls.Add(pictureBoxLogo);
             panelSidebar.Controls.Add(buttonHome);
             panelSidebar.Controls.Add(buttonProducts);
@@ -68,12 +69,28 @@ namespace Presentation.Pages.Customer
             panelSidebar.Dock = DockStyle.Left;
             panelSidebar.Location = new Point(0, 0);
             panelSidebar.Name = "panelSidebar";
-            panelSidebar.Size = new Size(200, 544);
+            panelSidebar.Size = new Size(200, 553);
             panelSidebar.TabIndex = 0;
+            // 
+            // buttonCSKH
+            // 
+            buttonCSKH.BackColor = Color.FromArgb(77, 58, 41);
+            buttonCSKH.FlatAppearance.BorderSize = 0;
+            buttonCSKH.FlatStyle = FlatStyle.Flat;
+            buttonCSKH.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            buttonCSKH.ForeColor = Color.White;
+            buttonCSKH.Location = new Point(0, 380);
+            buttonCSKH.Name = "buttonCSKH";
+            buttonCSKH.Padding = new Padding(30, 0, 0, 0);
+            buttonCSKH.Size = new Size(200, 50);
+            buttonCSKH.TabIndex = 6;
+            buttonCSKH.Text = "CSKH";
+            buttonCSKH.TextAlign = ContentAlignment.MiddleLeft;
+            buttonCSKH.UseVisualStyleBackColor = false;
+            buttonCSKH.Click += buttonCSKH_Click;
             // 
             // pictureBoxLogo
             // 
-            pictureBoxLogo.Image = (Image)resources.GetObject("pictureBoxLogo.Image");
             pictureBoxLogo.Location = new Point(0, 0);
             pictureBoxLogo.Name = "pictureBoxLogo";
             pictureBoxLogo.Size = new Size(200, 182);
@@ -146,6 +163,7 @@ namespace Presentation.Pages.Customer
             buttonOrders.Text = "Đơn mua";
             buttonOrders.TextAlign = ContentAlignment.MiddleLeft;
             buttonOrders.UseVisualStyleBackColor = false;
+            buttonOrders.Click += buttonOrders_Click;
             // 
             // buttonLogout
             // 
@@ -154,7 +172,7 @@ namespace Presentation.Pages.Customer
             buttonLogout.FlatStyle = FlatStyle.Flat;
             buttonLogout.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             buttonLogout.ForeColor = Color.White;
-            buttonLogout.Location = new Point(0, 380);
+            buttonLogout.Location = new Point(0, 430);
             buttonLogout.Name = "buttonLogout";
             buttonLogout.Padding = new Padding(30, 0, 0, 0);
             buttonLogout.Size = new Size(200, 50);
@@ -162,7 +180,6 @@ namespace Presentation.Pages.Customer
             buttonLogout.Text = "Đăng xuất";
             buttonLogout.TextAlign = ContentAlignment.MiddleLeft;
             buttonLogout.UseVisualStyleBackColor = false;
-            buttonOrders.Click += buttonOrders_Click;
             // 
             // pictureBoxMain
             // 
@@ -181,7 +198,7 @@ namespace Presentation.Pages.Customer
             label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.Location = new Point(237, 9);
             label1.Name = "label1";
-            label1.Size = new Size(336, 29);
+            label1.Size = new Size(277, 25);
             label1.TabIndex = 10;
             label1.Text = "Cửa hàng HeartSteelComestic";
             // 
@@ -203,7 +220,7 @@ namespace Presentation.Pages.Customer
             label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.Location = new Point(237, 59);
             label2.Name = "label2";
-            label2.Size = new Size(555, 29);
+            label2.Size = new Size(460, 25);
             label2.TabIndex = 12;
             label2.Text = "Chào mừng bạn đã đến với cửa hàng của chúng tôi!";
             // 
@@ -213,7 +230,7 @@ namespace Presentation.Pages.Customer
             label3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.Location = new Point(237, 105);
             label3.Name = "label3";
-            label3.Size = new Size(145, 29);
+            label3.Size = new Size(124, 25);
             label3.TabIndex = 13;
             label3.Text = "Khách hàng:";
             // 
@@ -223,7 +240,7 @@ namespace Presentation.Pages.Customer
             label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.Location = new Point(377, 105);
             label4.Name = "label4";
-            label4.Size = new Size(186, 29);
+            label4.Size = new Size(155, 25);
             label4.TabIndex = 14;
             label4.Text = "Thiều Quốc Huy";
             // 
@@ -243,7 +260,7 @@ namespace Presentation.Pages.Customer
             labelCartItemsTitle.ForeColor = Color.FromArgb(77, 58, 41);
             labelCartItemsTitle.Location = new Point(200, 160);
             labelCartItemsTitle.Name = "labelCartItemsTitle";
-            labelCartItemsTitle.Size = new Size(288, 32);
+            labelCartItemsTitle.Size = new Size(247, 29);
             labelCartItemsTitle.TabIndex = 16;
             labelCartItemsTitle.Text = "Sản phẩm trong giỏ:";
             // 
@@ -256,7 +273,7 @@ namespace Presentation.Pages.Customer
             panelSummary.Controls.Add(labelTotalItems);
             panelSummary.Location = new Point(862, 200);
             panelSummary.Name = "panelSummary";
-            panelSummary.Size = new Size(259, 344);
+            panelSummary.Size = new Size(268, 344);
             panelSummary.TabIndex = 17;
             // 
             // buttonClearCart
@@ -292,11 +309,11 @@ namespace Presentation.Pages.Customer
             // labelTotalAmount
             // 
             labelTotalAmount.AutoSize = true;
-            labelTotalAmount.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelTotalAmount.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labelTotalAmount.ForeColor = Color.FromArgb(77, 58, 41);
-            labelTotalAmount.Location = new Point(20, 80);
+            labelTotalAmount.Location = new Point(11, 80);
             labelTotalAmount.Name = "labelTotalAmount";
-            labelTotalAmount.Size = new Size(201, 38);
+            labelTotalAmount.Size = new Size(145, 28);
             labelTotalAmount.TabIndex = 1;
             labelTotalAmount.Text = "Tổng tiền: 0 ₫";
             labelTotalAmount.Click += labelTotalAmount_Click;
@@ -306,18 +323,16 @@ namespace Presentation.Pages.Customer
             labelTotalItems.AutoSize = true;
             labelTotalItems.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelTotalItems.ForeColor = Color.FromArgb(77, 58, 41);
-            labelTotalItems.Location = new Point(20, 40);
+            labelTotalItems.Location = new Point(11, 40);
             labelTotalItems.Name = "labelTotalItems";
-            labelTotalItems.Size = new Size(205, 32);
+            labelTotalItems.Size = new Size(166, 28);
             labelTotalItems.TabIndex = 0;
             labelTotalItems.Text = "Tổng sản phẩm: 0";
-            // 
-
             // 
             // CartPage
             // 
             BackColor = Color.FromArgb(237, 224, 207);
-            ClientSize = new Size(1138, 544);
+            ClientSize = new Size(1142, 553);
             Controls.Add(panelSummary);
             Controls.Add(labelCartItemsTitle);
             Controls.Add(flowLayoutPanelCartItems);
@@ -367,6 +382,6 @@ namespace Presentation.Pages.Customer
         private Label labelTotalItems;
         private Button buttonCheckout;
         private Button buttonClearCart;
-
+        private Button buttonCSKH;
     }
 }
